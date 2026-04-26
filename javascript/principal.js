@@ -1,0 +1,253 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const navItems = document.querySelectorAll('.nav-item');
+    const tabContents = document.querySelectorAll('.tab-content');
+    const pageTitle = document.getElementById('pageTitle');
+    const pageSubtitle = document.getElementById('pageSubtitle');
+
+    const sectionData = {
+    inicio: { 
+        title: '¿QUIÉNES SOMOS?', 
+        subtitle: 'AMIZTLI: APOYO INTEGRAL HECHO CON AMOR Y PATITAS' 
+    },
+    chats: { 
+        title: 'CHATS', 
+        subtitle: 'Conéctate con otros padres y especialistas de la comunidad' 
+    },
+    foro: { 
+        title: 'FORO COMUNITARIO', 
+        subtitle: 'Comparte experiencias, consejos y redes de apoyo' 
+    },
+    notas: { 
+        title: 'NOTAS / DIARIO', 
+        subtitle: 'Lleva el registro del progreso y actividades diarias' 
+    },
+    materiales: { 
+        title: 'MATERIALES', 
+        subtitle: 'Recursos educativos y herramientas para el desarrollo' 
+    },
+    directorio: { 
+        title: 'DIRECTORIO', 
+        subtitle: 'Encuentra especialistas, escuelas y asociaciones cercanas' 
+    },
+    perfil: { 
+        title: 'MI PERFIL', 
+        subtitle: 'Gestiona tu información personal y preferencias de la cuenta' 
+    },
+    configuracion: { 
+        title: 'CONFIGURACIÓN', 
+        subtitle: 'Ajustes de accesibilidad y del sistema' 
+    }
+};
+
+    // --- LÓGICA DE PESTAÑAS ---
+    navItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const tabId = item.getAttribute('data-tab');
+
+            // Quitar clases previas
+            navItems.forEach(nav => nav.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            // Activar nueva pestaña
+            item.classList.add('active');
+            const target = document.getElementById(`${tabId}-content`);
+            if (target) target.classList.add('active');
+
+            // Cambiar textos
+            if (sectionData[tabId]) {
+                pageTitle.textContent = sectionData[tabId].title;
+                pageSubtitle.textContent = sectionData[tabId].subtitle;
+            }
+        });
+    });
+
+    // --- LÓGICA DEL CARRUSEL (Misión/Visión/Valores) ---
+    const track = document.getElementById('carouselTrack');
+    const slides = document.querySelectorAll('.carousel-slide');
+    const nextBtn = document.getElementById('nextBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    
+    let index = 0;
+
+    function moveCarousel() {
+        if (index >= slides.length) index = 0;
+        if (index < 0) index = slides.length - 1;
+        track.style.transform = `translateX(-${index * 100}%)`;
+    }
+
+    nextBtn.addEventListener('click', () => {
+        index++;
+        moveCarousel();
+    });
+
+    prevBtn.addEventListener('click', () => {
+        index--;
+        moveCarousel();
+    });
+
+    // --- FECHA ACTUAL ---
+    function updateDate() {
+        const dateElement = document.getElementById('currentDate');
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        dateElement.textContent = new Date().toLocaleDateString('es-ES', options);
+    }
+    updateDate();
+
+    const btnMenu = document.getElementById('btn-menu');
+    const sidebar = document.querySelector('.sidebar');
+
+    btnMenu.addEventListener('click', () => {
+        sidebar.classList.toggle('active'); // Esto "prende y apaga" la visibilidad
+    });
+
+
+});
+
+
+const themeSelector = document.getElementById('themeSelector');
+        const body = document.body;
+
+        // Función para cambiar el tema
+        themeSelector.addEventListener('change', function() {
+            const selectedTheme = this.value;
+            
+            // Limpiar clases previas
+            body.classList.remove('dark-mode', 'high-contrast');
+
+            if (selectedTheme === 'dark') {
+                body.classList.add('dark-mode');
+            } else if (selectedTheme === 'high-contrast') {
+                body.classList.add('high-contrast');
+            }
+        });
+
+        // Función para simular guardado y persistencia
+        function saveConfig() {
+            const currentTheme = themeSelector.value;
+            localStorage.setItem('amiztli-theme', currentTheme);
+            alert('Configuración guardada 🐾 - El tema se aplicará en tu próxima sesión.');
+        }
+
+        function logout() {
+              window.location.href = "log_in.html";
+          }
+
+
+        // Cargar tema guardado al iniciar
+        window.onload = () => {
+            const savedTheme = localStorage.getItem('amiztli-theme');
+            if (savedTheme) {
+                themeSelector.value = savedTheme;
+                themeSelector.dispatchEvent(new Event('change'));
+            }
+        };
+
+
+         const fileInput = document.getElementById('fileInput');
+        const profileImage = document.getElementById('profileImage');
+
+        fileInput.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                // Crea una URL temporal para la imagen seleccionada
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    profileImage.setAttribute('src', e.target.result);
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+
+       document.addEventListener('DOMContentLoaded', () => {
+    // 1. PESTAÑAS PRINCIPALES (Sidebar)
+    const navItems = document.querySelectorAll('.nav-item');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    navItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const tabId = item.getAttribute('data-tab');
+            navItems.forEach(nav => nav.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            item.classList.add('active');
+            const target = document.getElementById(`${tabId}-content`);
+            if (target) target.classList.add('active');
+        });
+    });
+
+    // 2. SUB-PESTAÑAS DEL DIRECTORIO (Especialistas / Escuelas)
+    const subTabs = document.querySelectorAll('.tab-btn');
+    const subContents = document.querySelectorAll('.directory-tab');
+
+    subTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            subTabs.forEach(t => t.classList.remove('active'));
+            subContents.forEach(c => c.classList.remove('active'));
+
+            tab.classList.add('active');
+            const targetId = tab.getAttribute('data-tab');
+            const targetContent = document.getElementById(targetId);
+            
+            if (targetContent) {
+                targetContent.classList.add('active');
+                sortAlphabetically(`grid-${targetId}`);
+            }
+        });
+    });
+
+    // 3. BUSCADOR FILTRADO
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+        searchInput.addEventListener('keyup', () => {
+            const filter = searchInput.value.toLowerCase();
+            const activeSubTab = document.querySelector('.directory-tab.active');
+            if (activeSubTab) {
+                const cards = activeSubTab.getElementsByClassName('card');
+                Array.from(cards).forEach(card => {
+                    const text = card.innerText.toLowerCase();
+                    card.style.display = text.includes(filter) ? "" : "none";
+                });
+            }
+        });
+    }
+});
+
+// Función de Ordenar (Fuera del DOMContentLoaded para que sea global)
+function sortAlphabetically(gridId) {
+    const grid = document.getElementById(gridId);
+    if (!grid) return;
+    const cards = Array.from(grid.getElementsByClassName('card'));
+    cards.sort((a, b) => {
+        const titleA = a.querySelector('.card-title').innerText;
+        const titleB = b.querySelector('.card-title').innerText;
+        return titleA.localeCompare(titleB);
+    });
+    cards.forEach(card => grid.appendChild(card));
+}
+
+// Función Logout
+function logout() {
+    window.location.href = "log_in.html";
+}
+
+document.getElementById('searchInput').addEventListener('keyup', function() {
+            const searchTerm = this.value.toLowerCase();
+            const cards = document.querySelectorAll('.material-card');
+            const noResults = document.getElementById('noResults');
+            let hasVisibleCards = false;
+
+            cards.forEach(card => {
+                const title = card.getAttribute('data-title');
+                const tag = card.getAttribute('data-tag');
+
+                if (title.includes(searchTerm) || tag.includes(searchTerm)) {
+                    card.style.display = 'flex';
+                    hasVisibleCards = true;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            noResults.style.display = hasVisibleCards ? 'none' : 'block';
+        });

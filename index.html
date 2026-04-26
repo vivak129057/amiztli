@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Amiztli</title>
+    <link rel="stylesheet" href="css/log_in.css">
+</head>
+<body>
+
+    <div class="login-card">
+        <div class="illustration-container">
+            <video src="imagenes/videonutrias.webm" alt="Ilustración Amiztli" autoplay muted loop>
+            </video>
+        </div>
+
+        <h1>Iniciar Sesión</h1>
+
+        <form id="login-form" class="form-content">
+            
+            <div class="input-group">
+                <label for="email">Usuario</label>
+                <input type="text" id="email" placeholder="Ingresa tu usuario" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" placeholder="Ingresa tu contraseña" required>
+            </div>
+
+            <p id="error-email" style="color: #d93025; font-size: 14px; display: none; text-align: left; margin-top: -10px; font-weight: 600;">
+                Acceso denegado. Correo o contraseña incorrectos.
+            </p>
+
+            <button type="submit" class="btn-enter">Entrar</button>
+
+                <label style="margin-top: 10px; display: block; text-align: center;">¿Aún no tienes una cuenta? <a href="HTML/registro.html" style="color: #e1dd19;">Registrarse</a></label>
+
+        </form>
+    </div>
+
+    <script src="javascript/log_in.js"></script>
+
+</body>
+</html>

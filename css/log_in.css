@@ -1,0 +1,155 @@
+ /* 1. Reset y Fondo General */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #fdf6e3; /* Fondo crema suave Amiztli */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* 2. Tarjeta de Login */
+        .login-card {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 420px;
+            padding: 40px;
+            border-radius: 30px; /* Bordes muy redondeados */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* 3. Animación de Nutrias (Corregida) */
+        .illustration-container {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: visible;
+            position: relative;
+        }
+
+        .illustration-container img, .illustration-container video {
+            max-width: 130%; /* Para que luzca el movimiento */
+            height: auto;
+            animation: rotacion 20s linear infinite; /* Rotación fluida */
+            mix-blend-mode: multiply; /* Elimina fondos blancos accidentales */
+        }
+
+        @keyframes rotacion {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* 4. Título */
+        h1 {
+            color: #d4a017; /* Dorado Amiztli */
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        /* 5. Mensaje de Éxito (Para cuando vienen del Registro) */
+        #successMessage {
+            display: none;
+            background: #f0fff4;
+            color: #2f855a;
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid #c6f6d5;
+            margin-bottom: 10px;
+            font-size: 14px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 6. Inputs y Formulario */
+        .form-content {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            text-align: left;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .input-group label {
+            color: #b08d1a; /* Café/Dorado suave */
+            font-size: 14px;
+            font-weight: 600;
+            margin-left: 5px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ffecb3; /* Amarillo claro */
+            border-radius: 15px;
+            outline: none;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #ffcc00;
+            background-color: #fffdf7;
+        }
+
+        /* 7. Botón Entrar */
+        .btn-enter {
+            width: 100%;
+            padding: 16px;
+            background: #ffbf00; /* Amarillo vibrante */
+            border: none;
+            border-radius: 15px;
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(255, 191, 0, 0.3);
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .btn-enter:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 191, 0, 0.4);
+            filter: brightness(1.05);
+        }
+
+        /* 8. Links inferiores */
+        .footer-links {
+            font-size: 14px;
+            margin-top: 10px;
+            color: #4a4a4a;
+        }
+
+        .footer-links a {
+            color: #ffbf00;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }

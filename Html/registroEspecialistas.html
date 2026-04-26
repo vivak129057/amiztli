@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro Especialista - AMIZTLI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/registroEspecialistas.css">
+</head>
+<body>
+
+    <div class="form-container">
+        <div class="form-card">
+            <div class="logo-mini">
+                <img src="../imagenes/logo.jpeg" alt="Amiztli">
+            </div>
+
+            <h1 class="form-title">Perfil Profesional</h1>
+            <p class="form-subtitle">Únete a nuestra red de especialistas certificados</p>
+
+            <form action="log_in.html" method="GET">
+                
+                <div class="input-group">
+                    <label>Nombre Completo</label>
+                    <input type="text" placeholder="Nombre y apellidos" required>
+                </div>
+
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>Especialidad</label>
+                        <select required>
+                            <option value="">Selecciona...</option>
+                            <option value="psicologia">Psicología</option>
+                            <option value="terapia_lenguaje">Terapia de Lenguaje</option>
+                            <option value="neuropediatria">Neuropediatría</option>
+                            <option value="psicopedagogia">Psicopedagogía</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Cédula Profesional</label>
+                        <input type="text" placeholder="Número de cédula" required>
+                    </div>
+                </div>
+
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>Ciudad</label>
+                        <input type="text" placeholder="Ej. Nuevo Laredo" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Teléfono Celular</label>
+                        <input type="tel" placeholder="867..." required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Dirección del Consultorio (Opcional)</label>
+                    <input type="text" placeholder="Calle, número y colonia">
+                </div>
+
+                <div class="input-group">
+                    <label>Breve descripción de tu experiencia</label>
+                    <textarea placeholder="Cuéntanos sobre tu enfoque y años de práctica..."></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label>Correo Electrónico Profesional</label>
+                    <input type="email" placeholder="ejemplo@doctor.com" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Contraseña</label>
+                    <input type="password" placeholder="Crea una contraseña segura" required>
+                </div>
+
+                <div style="display: flex; align-items: flex-start; gap: 10px; margin: 20px 0; text-align: left;">
+                    <input type="checkbox" id="privacy" required style="margin-top: 4px; accent-color: #ffbf00;">
+                    <label for="privacy" style="font-size: 12px; color: #4a4a4a;">
+                        He leído y acepto el 
+                        <a href="javascript:void(0)" onclick="openPrivacy()" style="color: #b08d1a; font-weight: bold; text-decoration: underline;">
+                            Aviso de Privacidad
+                        </a> de Amiztli.
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-entrar">Crear Perfil Profesional 🐾</button>
+            </form>
+
+            <p class="footer-link"><a href="registro.html">Volver a selección de rol</a></p>
+        </div>
+    </div>
+
+    <div id="privacyModal" class="modal-overlay">
+        <div class="modal-card">
+            <span class="close-modal" onclick="closePrivacy()">&times;</span>
+            <h2 class="modal-title">Aviso de Privacidad - AMIZTLI</h2>
+            <p class="modal-date">Última actualización: 25 de abril de 2026</p>
+            
+            <div class="modal-body">
+                <p>En <strong>Amiztli</strong>, valoramos y protegemos la privacidad de nuestros usuarios.</p>
+
+                <p>El presente Aviso de Privacidad tiene como finalidad informar cómo recopilamos, utilizamos, almacenamos y protegemos los datos personales proporcionados por padres de familia, docentes, especialistas y usuarios de la plataforma.</p>
+                
+                <h3>1. Datos que recopilamos</h3>
+                <h5>Podriamos solicitar la siguiente información:</h5>
+
+                <ul>
+                    <li>Nombre completo</li><br>
+                    <li>Correo electrónico</li><br>
+                    <li>Teléfono</li><br>
+                    <li>Información académica del menor</li><br>
+                    <li>Credenciales de acceso</li>
+                </ul>
+
+                <h3>2. Finalidad del uso de datos</h3>
+                <h5>La información solicitada es utilizada para:</h5>
+
+                <p>Brindar acceso y funcionamiento de la plataforma
+                    Facilitar comunicación entre padres, docentes y especialistas
+                    Dar seguimiento personalizado al desarrollo del menor
+                    Mejorar la experiencia de uso y servicios ofrecidos
+                    Cumplir obligaciones legales aplicables</p>
+
+                <h3>3. Protección de la información</h3>
+                <p>Amiztli implementa medidas de seguridad administrativas, técnicas y digitales para proteger la información contra pérdida, uso indebido, acceso no autorizado o divulgación.</p>
+
+                <h3>4. Confidencialidad</h3>
+                <p>La información registrada será tratada de forma confidencial y únicamente será compartida con usuarios autorizados dentro de la plataforma o cuando la ley lo requiera.</p>
+
+                <h3>5. Derechos del usuario</h3>
+                <h5>Como usuario, tienes derecho a:</h5>
+
+                <ul>
+                    <li>Acceso a los datos</li><br>
+                    <li>Corrección de datos</li><br>
+                    <li>Cancelación de cuenta</li><br>
+                    <li>Oposición al uso de datos</li>
+                </ul>
+
+                <h3>6. Cambios al aviso</h3>
+                <p>Nos reservamos el derecho a modificar este Aviso de Privacidad en cualquier momento. Las modificaciones serán publicadas dentro de la plataforma y entrarán en vigor inmediatamente después de su publicación.</p>
+
+                <h3>7. Contacto</h3>
+                <div style="background: #fdf6e3; padding: 10px; border-radius: 10px; margin-top: 5px;">
+                    <h4>Para dudas o solicitudes relacionadas con tu privacidad:</h4>
+                    <p>📧 <strong>contacto@amiztli.com</strong></p>
+                    <p>📞 <strong>+52 867 ### ## ##</strong></p>
+                </div>
+            </div>
+
+            <button type="button" class="btn-entrar" onclick="closePrivacy()" style="margin-top: 20px;">Cerrar y continuar 🐾</button>
+        </div>
+    </div>
+
+    <script>
+         function openPrivacy() {
+            document.getElementById('privacyModal').style.display = 'block';
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closePrivacy() {
+            document.getElementById('privacyModal').style.display = 'none';
+            document.body.style.overflow = 'auto'; 
+        }
+
+        window.onclick = function(event) {
+            let modal = document.getElementById('privacyModal');
+            if (event.target == modal) {
+                closePrivacy();
+            }
+        }
+    </script>
+
+</body>
+</html>

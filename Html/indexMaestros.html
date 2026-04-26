@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AMIZTLI</title>
+  <link rel="stylesheet" href="../css/pincipal.css">
+</head>
+<body>
+
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="../imagenes/logo.jpeg" alt="AMIZTLI" class="sidebar-logo">
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-tab="inicio">
+          <img class="nav-icon" src="../imagenes/inicio.png" alt="Inicio" width="24" height="24">
+          <span class="nav-text">Inicio</span>
+          <span class="nav-arrow">›</span>
+        </button>
+        
+        <button class="nav-item" data-tab="chats">
+          <img class="nav-icon" src="../imagenes/chat.png" alt="Chats" width="24" height="24">
+          <span class="nav-text">Chats</span>
+          <span class="nav-arrow">›</span>
+        </button>
+
+        <button class="nav-item" data-tab="foro">
+          <img class="nav-icon" src="../imagenes/foro.png" alt="Foro" width="24" height="24">
+          <span class="nav-text">Foro</span>
+          <span class="nav-arrow">›</span>
+        </button>
+
+        <button class="nav-item" data-tab="notas">
+          <img class="nav-icon" src="../imagenes/notas.png" alt="Notas" width="24" height="24">
+          <span class="nav-text">Notas/Diario</span>
+          <span class="nav-arrow">›</span>
+        </button>
+
+         <button class="nav-item" data-tab="materiales">
+          <img class="nav-icon" src="../imagenes/materiales.png" alt="Materiales" width="24" height="24">
+          <span class="nav-text">Materiales</span>
+          <span class="nav-arrow">›</span>
+        </button>
+        
+
+          <button class="nav-item" data-tab="directorio">
+          <img class="nav-icon" src="../imagenes/directorio.png" alt="Directorio" width="24" height="24">
+          <span class="nav-text">Directorio</span>
+          <span class="nav-arrow">›</span>
+         </button>
+
+        <button class="nav-item" data-tab="perfil">
+          <img class="nav-icon" src="../imagenes/perfil.png" alt="Perfil" width="24" height="24">
+          <span class="nav-text">Perfil</span>
+          <span class="nav-arrow">›</span>
+        </button>
+
+        <button class="nav-item" data-tab="configuracion">
+          <img class="nav-icon" src="../imagenes/configuracion.png" alt="Configuración" width="24" height="24">
+          <span class="nav-text">Configuración</span>
+          <span class="nav-arrow">›</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <p><strong>AMIZTLI</strong></p>
+        <p style="font-size: 11px; opacity: 0.7; margin-top: 4px;">HECHO CON AMOR Y PATITAS
+        </p>
+        <p style="font-size: 11px; opacity: 0.7; margin-top: 4px;">INNOVATEC-2026</p>
+      </div>
+
+    </aside>
+
+    <main class="main-content"> 
+      <button id="btn-menu" class="menu-toggle">☰</button> <!--☺☺☺☺☺☺W☺☺☺☺☺☺☺1☺♂oWg•GÃÃÃÃö §▬↨▬-->
+      <header class="content-header">
+        <div class="header-info">
+          <h1 class="content-title" id="pageTitle">¿QUIÉNES SOMOS?</h1>
+          <p class="content-subtitle" id="pageSubtitle">AMIZTLI: HECHO CON AMOR Y PATITAS</p>
+        </div>
+        <div class="header-date" id="currentDate"></div>
+      </header>
+
+      <div class="tab-content active" id="inicio-content">
+        <div class="carousel-container">
+          <button class="carousel-btn prev" id="prevBtn">&#10094;</button>
+          <div class="carousel-window">
+            <div class="carousel-track" id="carouselTrack">
+              <div class="carousel-slide">
+                <img src="../imagenes/MISION.png" alt="Misión">
+              </div>
+              <div class="carousel-slide">
+                <img src="../imagenes/VISION.png" alt="Visión">
+              </div>
+              <div class="carousel-slide">
+                <img src="../imagenes/VALORES.png" alt="Valores">
+              </div>
+            </div>
+          </div>
+          <button class="carousel-btn next" id="nextBtn">&#10095;</button>
+        </div>
+      </div>
+
+      <div class="tab-content" id="chats-content">
+        <div class="iframe-container">
+          <iframe src="../iframes/chat1.html" frameborder="0" class="page-iframe"></iframe>
+        </div>
+      </div>
+
+      <div class="tab-content" id="foro-content">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Foro Comunitario - AMIZTLI</title>
+            <link rel="stylesheet" href="C:\Users\Gabo\Downloads\innovatec\web - copia\iframes\cssiframes\foro.css">
+        </head>
+        <body>
+
+            <div class="forum-container">
+                <header class="forum-header">
+                    <input type="text" class="search-forum" placeholder="🔍 Buscar temas, consejos o dudas...">
+                    <button class="btn-post">Nueva Publicación 🐾</button>
+                </header>
+
+            </div>
+
+            <div id="modal-post" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Crear publicación</h3>
+                    <span class="close-modal">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div class="user-info-modal">
+                        <div class="user-avatar">KV</div>
+                        <div class="user-name-modal">
+                            <strong>Karla Villa</strong>
+                            <select class="privacy-select">
+                                <option>👥 Amigos</option>
+                                <option>🌎 Público</option>
+                            </select>
+                        </div>
+                    </div>
+                    <input type="text" id="post-title-input" placeholder="Título de tu publicación...">
+                    <textarea id="post-content-input" placeholder="¿Qué estás pensando, Karla?"></textarea>
+                    
+                    <div class="add-to-post">
+                        <span>Agregar a tu publicación</span>
+                        <div class="post-icons">
+                            <span title="Foto/video">🖼️</span>
+                            <span title="Etiquetar">👤</span>
+                            <span title="Sentimiento">😊</span>
+                            <span title="Ubicación">📍</span>
+                            <span title="GIF">🎬</span>
+                        </div>
+                    </div>
+                </div>
+                <button id="btn-publish-final" class="btn-publish-active">Publicar</button>
+            </div>
+        </div>
+
+
+            <script src="C:\Users\Gabo\Downloads\innovatec\web - copia\iframes\jsiframes\foro.js"></script>
+
+
+        </body>
+      </div>
+
+      <div class="tab-content" id="notas-content">
+        <div class="iframe-container">
+          <iframe src="../iframes/notas.html" frameborder="0" class="page-iframe"></iframe>
+        </div>
+      </div>
+
+      <div class="tab-content" id="materiales-content">
+        <div class="iframe-container">
+          <iframe src="../iframes/materiales.html" frameborder="0" class="page-iframe"></iframe>
+        </div>
+      </div>
+
+      <div class="tab-content" id="directorio-content">
+        <div class="iframe-container">
+          <iframe src="../iframes/directorio.html" frameborder="0" class="page-iframe"></iframe>
+        </div>
+      </div>
+
+      <div class="tab-content" id="perfil-content">
+        <div class="iframe-container">
+          <iframe src="../iframes/perfil.html" frameborder="0" class="page-iframe"></iframe>
+        </div>
+      </div>
+
+      <div class="tab-content" id="configuracion-content">
+        <div class="iframe-container">
+          <iframe src="../iframes/config.html" frameborder="0" class="page-iframe"></iframe>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="../javascript/principal.js"></script>
+</body>
+</html>

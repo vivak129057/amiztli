@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - AMIZTLI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/registro.css">
+</head>
+<body>
+
+    <div class="register-container">
+        <header class="register-header">
+            <img src="../imagenes/logo.jpeg" alt="Logo Amiztli" class="reg-logo">
+            <h1>¡Únete a nuestra comunidad!</h1>
+            <p>Selecciona el perfil que mejor te describa para comenzar 🐾</p>
+        </header>
+
+        <div class="role-grid">
+            <div class="role-card" onclick="selectRole('padre')">
+                <div class="role-icon">🏠</div>
+                <h3>Padre / Tutor</h3>
+                <p>Busco apoyo, recursos y comunidad para mi hijo.</p>
+            </div>
+
+            <div class="role-card" onclick="selectRole('maestro')">
+                <div class="role-icon">🍎</div>
+                <h3>Maestro</h3>
+                <p>Deseo herramientas pedagógicas e inclusión escolar.</p>
+            </div>
+
+            <div class="role-card" onclick="selectRole('especialista')">
+                <div class="role-icon">🩺</div>
+                <h3>Especialista</h3>
+                <p>Quiero ofrecer mis servicios y orientar a familias.</p>
+            </div>
+
+            <div class="role-card" onclick="selectRole('institucion')">
+                <div class="role-icon">🏫</div>
+                <h3>Institución</h3>
+                <p>Represento a una escuela o asociación de apoyo.</p>
+            </div>
+        </div>
+
+        <footer class="register-footer">
+            <p>¿Ya tienes cuenta? <a href="log_in.html">Inicia sesión aquí</a></p>
+        </footer>
+    </div>
+
+    <script>
+        function selectRole(role) {
+            // 1. Guardamos el rol por si lo necesitas dentro de las páginas
+            localStorage.setItem('selectedRole', role);
+
+            // 2. Definimos a dónde va cada quién
+            let destino = "";
+
+            switch (role) {
+                case 'padre':
+                    destino = "registroPadres.html";
+                    break;
+                case 'maestro':
+                    destino = "registroMaestros.html";
+                    break;
+                case 'especialista':
+                    destino = "registroEspecialistas.html";
+                    break;
+                case 'institucion':
+                    destino = "registroInstituciones.html";
+                    break;
+                default:
+                    destino = "registro_general.html"; // Por si algo falla
+            }
+
+            // 3. ¡A volar!
+            window.location.href = destino;
+        }
+    </script>
+</body>
+</html>
