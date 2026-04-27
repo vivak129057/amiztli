@@ -5,39 +5,39 @@ document.addEventListener('DOMContentLoaded', () => {
     const pageSubtitle = document.getElementById('pageSubtitle');
 
     const sectionData = {
-    inicio: { 
-        title: '¿QUIÉNES SOMOS?', 
-        subtitle: 'AMIZTLI: APOYO INTEGRAL HECHO CON AMOR Y PATITAS' 
-    },
-    chats: { 
-        title: 'CHATS', 
-        subtitle: 'Conéctate con otros padres y especialistas de la comunidad' 
-    },
-    foro: { 
-        title: 'FORO COMUNITARIO', 
-        subtitle: 'Comparte experiencias, consejos y redes de apoyo' 
-    },
-    notas: { 
-        title: 'NOTAS / DIARIO', 
-        subtitle: 'Lleva el registro del progreso y actividades diarias' 
-    },
-    materiales: { 
-        title: 'MATERIALES', 
-        subtitle: 'Recursos educativos y herramientas para el desarrollo' 
-    },
-    directorio: { 
-        title: 'DIRECTORIO', 
-        subtitle: 'Encuentra especialistas, escuelas y asociaciones cercanas' 
-    },
-    perfil: { 
-        title: 'MI PERFIL', 
-        subtitle: 'Gestiona tu información personal y preferencias de la cuenta' 
-    },
-    configuracion: { 
-        title: 'CONFIGURACIÓN', 
-        subtitle: 'Ajustes de accesibilidad y del sistema' 
-    }
-};
+        inicio: { 
+            title: '¿QUIÉNES SOMOS?', 
+            subtitle: 'AMIZTLI: APOYO INTEGRAL HECHO CON AMOR Y PATITAS' 
+        },
+        chats: { 
+            title: 'CHATS', 
+            subtitle: 'Conéctate con otros padres y especialistas de la comunidad' 
+        },
+        foro: { 
+            title: 'FORO COMUNITARIO', 
+            subtitle: 'Comparte experiencias, consejos y redes de apoyo' 
+        },
+        notas: { 
+            title: 'NOTAS / DIARIO', 
+            subtitle: 'Lleva el registro del progreso y actividades diarias' 
+        },
+        materiales: { 
+            title: 'MATERIALES', 
+            subtitle: 'Recursos educativos y herramientas para el desarrollo' 
+        },
+        directorio: { 
+            title: 'DIRECTORIO', 
+            subtitle: 'Encuentra especialistas, escuelas y asociaciones cercanas' 
+        },
+        perfil: { 
+            title: 'MI PERFIL', 
+            subtitle: 'Gestiona tu información personal y preferencias de la cuenta' 
+        },
+        configuracion: { 
+            title: 'CONFIGURACIÓN', 
+            subtitle: 'Ajustes de accesibilidad y del sistema' 
+        }
+  };
 
     // --- LÓGICA DE PESTAÑAS ---
     navItems.forEach(item => {
