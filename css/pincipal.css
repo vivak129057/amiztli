@@ -1060,18 +1060,19 @@ body {
     transform: scale(1.1);
 }
 
-/* ACTIVADOR DE LAYOUT PARA EL CHAT */
-#chats-content.active {
-    display: flex; /* Esto obliga a que Aside y Main se pongan laterales */
-    flex-direction: row;
+/* Cambia la regla que te di antes por esta versión más segura */
+.tab-content {
+    display: none !important; /* Esconde todo por defecto */
 }
 
-/* Ajuste de padding para las burbujas dentro del área de mensajes */
-#chatBox {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+.tab-content.active {
+    display: block !important; /* Muestra la pestaña activa */
+}
+
+/* Solo si es la pestaña de chats Y está activa, usa Flexbox */
+#chats-content.active {
+    display: flex !important;
+    flex-direction: row !important;
 }
 
 /* RESPONSIVO */
