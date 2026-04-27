@@ -348,105 +348,93 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ==========================================
-   LÓGICA DEL DIARIO / NOTAS AMIZTLI 🐾
+   LÓGICA AVANZADA DE NOTAS AMIZTLI 🐾
    ========================================== */
+
+// 1. Simulación de Base de Datos por hijo
+const notasPorHijo = {
+    "1": [ // Notas de Juanito
+        { fecha: "18 DE ABRIL, 2026", titulo: "Logros en casa hoy", contenido: "Juanito logró vestirse solo.", modo: "compartido" },
+        { fecha: "16 DE ABRIL, 2026", titulo: "Sentimientos sobre terapia", contenido: "Se sintió un poco cansado.", modo: "personal" }
+    ],
+    "2": [ // Notas de María
+        { fecha: "20 DE ABRIL, 2026", titulo: "Primera palabra", contenido: "María dijo 'Amiztli' hoy.", modo: "personal" }
+    ]
+};
+
 document.addEventListener('DOMContentLoaded', () => {
+    const childSelector = document.getElementById('childSelector');
     const notesList = document.getElementById('notesList');
     const editorTitle = document.querySelector('.editor-title');
-    const editorBody = document.querySelector('.editor-body');
+    const editorBody = document.getElementById('editorBody');
     const btnNewNote = document.querySelector('.btn-new-note');
-    const btnSave = document.querySelector('.btn-save');
-    const btnDelete = document.querySelector('.btn-delete');
-    const badge = document.getElementById('badge');
 
-    // 1. Cambiar entre notas existentes
-    if (notesList) {
-        notesList.addEventListener('click', (e) => {
-            const item = e.target.closest('.note-item');
-            if (!item) return;
+    // --- FUNCIÓN: Renderizar lista de notas según el hijo ---
+    function renderNotes(childId) {
+        notesList.innerHTML = ""; // Limpiamos la lateral
+        const notas = notasPorHijo[childId] || [];
 
-            // Quitar clase activa a todas y ponerla a la seleccionada
-            document.querySelectorAll('.note-item').forEach(i => i.classList.remove('active'));
-            item.classList.add('active');
-
-            // "Cargar" el contenido en el editor (Simulado)
-            const title = item.querySelector('.title').innerText;
-            editorTitle.value = title;
-            
-            // Aquí podrías cargar texto diferente según la nota
-            if(title.includes("Logros")) {
-                editorBody.value = "Hoy Juanito logró vestirse solo por primera vez. ¡Estamos muy orgullosos!";
-            } else {
-                editorBody.value = "Siento que la terapia está dando frutos, aunque hay días difíciles...";
-            }
+        notas.forEach((nota, index) => {
+            const div = document.createElement('div');
+            div.className = 'note-item';
+            div.innerHTML = `
+                <p class="date">${nota.fecha}</p>
+                <p class="title">${nota.titulo}</p>
+            `;
+            div.onclick = () => loadNote(nota);
+            notesList.appendChild(div);
         });
+        
+        // Limpiar editor al cambiar de hijo
+        editorTitle.value = "";
+        editorBody.value = "";
+        editorBody.readOnly = false;
     }
 
-    // 2. Botón de "Escribir algo nuevo"
-    if (btnNewNote) {
-        btnNewNote.onclick = () => {
-            // Limpiar editor
-            editorTitle.value = "Nueva Nota";
-            editorBody.value = "";
-            editorBody.placeholder = "Querido diario, hoy...";
-            
-            // Desmarcar notas de la lista
-            document.querySelectorAll('.note-item').forEach(i => i.classList.remove('active'));
-            
-            editorTitle.focus();
-        };
+    // --- FUNCIÓN: Cargar nota en el editor y bloquear si es compartida ---
+    function loadNote(nota) {
+        editorTitle.value = nota.titulo;
+        editorBody.value = nota.contenido;
+        
+        const badge = document.getElementById('badge');
+
+        if (nota.modo === 'compartido') {
+            editorBody.readOnly = true; // BLOQUEO DE EDICIÓN
+            editorBody.style.opacity = "0.7";
+            badge.innerText = "👥 Observación del Especialista (Solo lectura)";
+            badge.style.background = "#fff8e7";
+            document.querySelector('.btn-save').style.display = "none"; // Escondemos guardar
+        } else {
+            editorBody.readOnly = false; // PERMITIR EDICIÓN
+            editorBody.style.opacity = "1";
+            badge.innerText = "🔒 Solo para mí (Privado)";
+            badge.style.background = "#e2e8f0";
+            document.querySelector('.btn-save').style.display = "block";
+        }
     }
 
-    // 3. Botón de Guardar (Simulación de guardado)
-    if (btnSave) {
-        btnSave.onclick = () => {
-            const title = editorTitle.value;
-            if (title.trim() === "") {
-                alert("¡Ponle un título a tu nota, Karla! 🐾");
-                return;
-            }
-            
-            // Aquí podrías agregar la lógica para guardar en una base de datos
-            alert("¡Nota guardada con éxito en Amiztli! ✨");
-            
-            // Actualizar el título en la lista de la izquierda si es una nota activa
-            const activeNote = document.querySelector('.note-item.active');
-            if (activeNote) {
-                activeNote.querySelector('.title').innerText = title;
-            }
-        };
-    }
+    // --- EVENTO: Cambiar de hijo ---
+    childSelector.addEventListener('change', (e) => {
+        renderNotes(e.target.value);
+    });
 
-    // 4. Botón de Eliminar
-    if (btnDelete) {
-        btnDelete.onclick = () => {
-            if (confirm("¿Estás segura de que quieres borrar esta nota? Esta acción no se puede deshacer.")) {
-                const activeNote = document.querySelector('.note-item.active');
-                if (activeNote) {
-                    activeNote.remove();
-                    editorTitle.value = "";
-                    editorBody.value = "";
-                }
-            }
+    // --- EVENTO: Nueva Nota ---
+    btnNewNote.onclick = () => {
+        const selectedChild = childSelector.value;
+        const nuevaNota = {
+            fecha: "HOY",
+            titulo: "Nueva Nota",
+            contenido: "",
+            modo: "personal"
         };
-    }
+        
+        // Agregar a nuestra "DB"
+        notasPorHijo[selectedChild].unshift(nuevaNota);
+        renderNotes(selectedChild); // Refrescar lateral
+        loadNote(nuevaNota); // Cargar en editor
+        editorTitle.focus();
+    };
+
+    // Inicializar con el primer hijo
+    renderNotes("1");
 });
-
-// 5. Función para cambiar entre Mío y Compartido (Fuera del DOMContentLoaded)
-function setMode(mode) {
-    const btnPersonal = document.getElementById('btnPersonal');
-    const btnCompartido = document.getElementById('btnCompartido');
-    const badge = document.getElementById('badge');
-
-    if (mode === 'personal') {
-        btnPersonal.classList.add('active');
-        btnCompartido.classList.remove('active');
-        badge.innerText = "🔒 Solo para mí";
-        badge.style.background = "#e2e8f0";
-    } else {
-        btnCompartido.classList.add('active');
-        btnPersonal.classList.remove('active');
-        badge.innerText = "👥 Compartido con especialista";
-        badge.style.background = "#fff8e7"; // Amarillo suave de Amiztli
-    }
-}
