@@ -438,3 +438,69 @@ document.addEventListener('DOMContentLoaded', () => {
     // Inicializar con el primer hijo
     renderNotes("1");
 });
+
+/* ==========================================
+   ACCIONES DE NOTAS (GUARDAR Y ELIMINAR)
+   ========================================== */
+
+document.addEventListener('DOMContentLoaded', () => {
+    // ... (Mantén tu lógica de renderNotes y childSelector de arriba) ...
+
+    const btnSave = document.querySelector('.btn-save');
+    const btnDelete = document.querySelector('.btn-delete');
+    const editorTitle = document.querySelector('.editor-title');
+    const editorBody = document.getElementById('editorBody');
+    const childSelector = document.getElementById('childSelector');
+
+    // --- ACCIÓN: GUARDAR CAMBIOS ---
+    if (btnSave) {
+        btnSave.onclick = () => {
+            const currentChild = childSelector.value;
+            const activeNote = document.querySelector('.note-item.active');
+            
+            if (!activeNote && editorTitle.value !== "") {
+                // Si es una nota nueva que no estaba en la lista, la creamos
+                const nueva = {
+                    fecha: new Date().toLocaleDateString('es-MX', { day:'numeric', month:'short' }).toUpperCase(),
+                    titulo: editorTitle.value,
+                    contenido: editorBody.value,
+                    modo: "personal"
+                };
+                notasPorHijo[currentChild].unshift(nueva);
+            } else if (activeNote) {
+                // Si ya existe, buscamos en nuestra "DB" y actualizamos
+                const index = Array.from(activeNote.parentNode.children).indexOf(activeNote);
+                notasPorHijo[currentChild][index].titulo = editorTitle.value;
+                notasPorHijo[currentChild][index].contenido = editorBody.value;
+            }
+
+            alert("¡Cambios guardados en el diario! 🐾");
+            renderNotes(currentChild); // Refrescamos la lista lateral
+        };
+    }
+
+    // --- ACCIÓN: ELIMINAR NOTA ---
+    if (btnDelete) {
+        btnDelete.onclick = () => {
+            const activeNote = document.querySelector('.note-item.active');
+            if (!activeNote) {
+                alert("Selecciona una nota para eliminar.");
+                return;
+            }
+
+            if (confirm("¿Estás segura de eliminar esta nota? Karla, recuerda que esto no se puede deshacer.")) {
+                const currentChild = childSelector.value;
+                const index = Array.from(activeNote.parentNode.children).indexOf(activeNote);
+                
+                // Borramos del arreglo
+                notasPorHijo[currentChild].splice(index, 1);
+                
+                // Limpiamos editor
+                editorTitle.value = "";
+                editorBody.value = "";
+                
+                renderNotes(currentChild); // Refrescamos lista
+            }
+        };
+    }
+});
