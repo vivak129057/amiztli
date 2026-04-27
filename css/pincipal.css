@@ -1208,67 +1208,77 @@ body {
 .action-btn:hover { color: var(--text-primary); }
 
 /* ==========================================
-   EL DISEÑO FINAL "VAINILLA" DEL FORO 🐾
+   ESTILOS DEL MODAL DE PUBLICACIÓN (ESTILO VAINILLA)
    ========================================== */
 
 #modal-post .modal-content {
-    background-color: #FFFDF0 !important; /* El color vainilla de tu captura */
-    border-radius: 25px;
-    padding: 30px;
-    border: 2px solid #FDF2B5; /* Borde amarillo pastel */
-    box-shadow: 0 10px 30px rgba(212, 197, 141, 0.2);
-    width: 90%;
-    max-width: 550px;
-    color: #5D542B; /* Café suave para el texto */
-}
-
-.modal-header h3 {
-    color: #8B7A2B !important; /* Dorado oscuro */
-    font-weight: 800;
-    font-size: 22px;
-}
-
-/* Estilo de los inputs color crema */
-#post-title-input, #post-content-input {
-    background-color: #FEF9D9 !important;
-    border: 1px solid #F3E7A1 !important;
-    border-radius: 10px;
-    padding: 12px;
-    color: #8B7A2B;
-    margin-bottom: 15px;
-    font-family: inherit;
-}
-
-/* RE-ESTILIZANDO EL BOTÓN (Para que no salga gris) */
-.btn-publish-active {
-    background: #ffd300 !important;
-    color: white !important;
+    background-color: #ffffff !important; /* Blanco sólido como tu captura */
+    opacity: 1 !important;
+    border-radius: 30px; /* Bordes más redondeados y suaves */
+    padding: 35px;
     border: none;
-    padding: 14px 25px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15); /* Sombra suave pero profunda */
+    position: relative;
+    z-index: 1001; 
+    color: #4a4a4a;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1.5px solid #f1f5f9;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+/* Título en Amarillo Amiztli brillante */
+.modal-header h3 { 
+    margin: 0; 
+    color: #ffd300 !important; 
+    font-size: 22px;
+    font-weight: 800;
+}
+
+/* Inputs con fondo grisáceo muy tenue */
+#post-title-input, #post-content-input {
+    width: 100%;
+    padding: 14px;
     border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    background: #f8fafc; /* Color del input de tu captura */
+    color: #1a202c;
+    margin-bottom: 15px;
+    font-size: 15px;
+    outline: none;
+}
+
+/* Botón Publicar idéntico al de Privacidad */
+.btn-publish-active {
+    width: 100%;
+    background: #ffd300 !important;
+    color: #ffffff !important; /* Texto blanco con sombra para que resalte */
+    text-shadow: 0px 1px 2px rgba(0,0,0,0.1);
+    border: none;
+    padding: 15px;
+    border-radius: 15px;
     font-weight: bold;
     font-size: 16px;
     cursor: pointer;
-    width: 100%; /* Para que ocupe todo el ancho como el de Privacidad */
-    box-shadow: 0 4px 10px rgba(255, 211, 0, 0.3);
-    transition: transform 0.2s;
-    margin-top: 10px;
+    box-shadow: 0 4px 15px rgba(255, 211, 0, 0.4);
+    transition: transform 0.2s, background 0.2s;
 }
 
 .btn-publish-active:hover {
-    transform: scale(1.02);
-    filter: brightness(1.05);
+    transform: translateY(-2px);
+    background: #ffcc00 !important;
 }
 
-/* Los iconos de emojis */
-.post-icons span {
-    font-size: 20px;
-    cursor: pointer;
-    margin-right: 10px;
-    transition: transform 0.2s;
-    display: inline-block;
-}
-
-.post-icons span:hover {
-    transform: scale(1.3);
+.privacy-select {
+    background: #f8fafc;
+    color: #718096;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 12px;
+    padding: 5px 10px;
 }
