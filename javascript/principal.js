@@ -281,7 +281,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const forumContainer = document.querySelector('.forum-container');
     
     // --- NUEVO: Selección del input de búsqueda ---
-    const searchInput = document.querySelector('.search-forum');
+    // --- LÓGICA DEL BUSCADOR (FILTRA TODO) ---
+    if (searchInput) {
+        searchInput.addEventListener('input', () => {
+            const term = searchInput.value.toLowerCase().trim();
+            // Buscamos absolutamente todas las tarjetas que tengan contenido
+            const allPosts = document.querySelectorAll('.post-card'); 
+
+            allPosts.forEach(post => {
+                // Obtenemos TODO el texto de la tarjeta, sin importar qué etiquetas use
+                // Esto incluye nombre del autor, título y contenido
+                const fullText = post.innerText.toLowerCase();
+                
+                if (fullText.includes(term)) {
+                    post.style.display = "block";
+                    post.style.animation = "fadeIn 0.3s";
+                } else {
+                    post.style.display = "none";
+                }
+            });
+        });
+    }
 
     // Abrir modal
     btnOpen.onclick = () => modal.style.display = "block";
