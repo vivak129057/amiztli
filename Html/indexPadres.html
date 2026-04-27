@@ -104,6 +104,59 @@
         </div>
       </div>
 
+      <div class="tab-content" id="notas-content">
+        <div class="notas-layout-wrapper">
+            
+            <aside class="family-sidebar">
+                <div class="child-profile-selector">
+                    <p style="font-size: 10px; font-weight: 800; color: var(--text-secondary); margin-bottom: 10px; letter-spacing: 1px;">DIARIO DE MI HIJO(A)</p>
+                    <select class="child-select" id="childSelector">
+                        <option value="1">👦 Juanito Pérez</option>
+                        <option value="2">👧 María López</option>
+                    </select>
+                </div>
+
+                <div class="tabs-row">
+                    <button class="tab-btn active" id="btnPersonal" onclick="setMode('personal')">Mío (Privado)</button>
+                    <button class="tab-btn" id="btnCompartido" onclick="setMode('compartido')">Compartido</button>
+                </div>
+
+                <button class="btn-new-note">
+                    + Escribir algo nuevo 🐾
+                </button>
+
+                <div class="notes-list" id="notesList">
+                    <div class="note-item active">
+                        <p class="date">18 DE ABRIL, 2026</p>
+                        <p class="title">Logros en casa hoy</p>
+                    </div>
+                    <div class="note-item">
+                        <p class="date">16 DE ABRIL, 2026</p>
+                        <p class="title">Sentimientos sobre la terapia</p>
+                    </div>
+                </div>
+            </aside>
+
+            <main class="editor-main">
+                <div class="editor-top">
+                    <input type="text" class="editor-title" value="Logros en casa hoy">
+                    <p class="editor-meta">
+                        📅 Sábado, 18 de Abril | 
+                        <span id="badge" class="badge-status">🔒 Solo para mí</span>
+                    </p>
+                </div>
+
+                <textarea class="editor-body" placeholder="Querido diario, hoy mi hijo logró..."></textarea>
+
+                <div class="editor-footer">
+                    <button class="btn-action btn-delete">Eliminar nota</button>
+                    <button class="btn-action btn-save">Guardar Cambios 🐾</button>
+                </div>
+            </main>
+
+        </div>
+      </div>
+
       <div class="tab-content" id="foro-content">
             <div class="forum-container">
                 <header class="forum-header">

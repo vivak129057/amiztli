@@ -346,3 +346,107 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+/* ==========================================
+   LÓGICA DEL DIARIO / NOTAS AMIZTLI 🐾
+   ========================================== */
+document.addEventListener('DOMContentLoaded', () => {
+    const notesList = document.getElementById('notesList');
+    const editorTitle = document.querySelector('.editor-title');
+    const editorBody = document.querySelector('.editor-body');
+    const btnNewNote = document.querySelector('.btn-new-note');
+    const btnSave = document.querySelector('.btn-save');
+    const btnDelete = document.querySelector('.btn-delete');
+    const badge = document.getElementById('badge');
+
+    // 1. Cambiar entre notas existentes
+    if (notesList) {
+        notesList.addEventListener('click', (e) => {
+            const item = e.target.closest('.note-item');
+            if (!item) return;
+
+            // Quitar clase activa a todas y ponerla a la seleccionada
+            document.querySelectorAll('.note-item').forEach(i => i.classList.remove('active'));
+            item.classList.add('active');
+
+            // "Cargar" el contenido en el editor (Simulado)
+            const title = item.querySelector('.title').innerText;
+            editorTitle.value = title;
+            
+            // Aquí podrías cargar texto diferente según la nota
+            if(title.includes("Logros")) {
+                editorBody.value = "Hoy Juanito logró vestirse solo por primera vez. ¡Estamos muy orgullosos!";
+            } else {
+                editorBody.value = "Siento que la terapia está dando frutos, aunque hay días difíciles...";
+            }
+        });
+    }
+
+    // 2. Botón de "Escribir algo nuevo"
+    if (btnNewNote) {
+        btnNewNote.onclick = () => {
+            // Limpiar editor
+            editorTitle.value = "Nueva Nota";
+            editorBody.value = "";
+            editorBody.placeholder = "Querido diario, hoy...";
+            
+            // Desmarcar notas de la lista
+            document.querySelectorAll('.note-item').forEach(i => i.classList.remove('active'));
+            
+            editorTitle.focus();
+        };
+    }
+
+    // 3. Botón de Guardar (Simulación de guardado)
+    if (btnSave) {
+        btnSave.onclick = () => {
+            const title = editorTitle.value;
+            if (title.trim() === "") {
+                alert("¡Ponle un título a tu nota, Karla! 🐾");
+                return;
+            }
+            
+            // Aquí podrías agregar la lógica para guardar en una base de datos
+            alert("¡Nota guardada con éxito en Amiztli! ✨");
+            
+            // Actualizar el título en la lista de la izquierda si es una nota activa
+            const activeNote = document.querySelector('.note-item.active');
+            if (activeNote) {
+                activeNote.querySelector('.title').innerText = title;
+            }
+        };
+    }
+
+    // 4. Botón de Eliminar
+    if (btnDelete) {
+        btnDelete.onclick = () => {
+            if (confirm("¿Estás segura de que quieres borrar esta nota? Esta acción no se puede deshacer.")) {
+                const activeNote = document.querySelector('.note-item.active');
+                if (activeNote) {
+                    activeNote.remove();
+                    editorTitle.value = "";
+                    editorBody.value = "";
+                }
+            }
+        };
+    }
+});
+
+// 5. Función para cambiar entre Mío y Compartido (Fuera del DOMContentLoaded)
+function setMode(mode) {
+    const btnPersonal = document.getElementById('btnPersonal');
+    const btnCompartido = document.getElementById('btnCompartido');
+    const badge = document.getElementById('badge');
+
+    if (mode === 'personal') {
+        btnPersonal.classList.add('active');
+        btnCompartido.classList.remove('active');
+        badge.innerText = "🔒 Solo para mí";
+        badge.style.background = "#e2e8f0";
+    } else {
+        btnCompartido.classList.add('active');
+        btnPersonal.classList.remove('active');
+        badge.innerText = "👥 Compartido con especialista";
+        badge.style.background = "#fff8e7"; // Amarillo suave de Amiztli
+    }
+}
