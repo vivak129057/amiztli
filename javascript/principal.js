@@ -103,6 +103,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
+/* ==========================================
+   LÓGICA DE CONFIGURACIÓN Y TEMAS
+   ========================================== */
 
 const themeSelector = document.getElementById('themeSelector');
         const body = document.body;
@@ -142,6 +145,10 @@ const themeSelector = document.getElementById('themeSelector');
             }
         };
 
+/* ==========================================
+   LÓGICA DE SUBIR IMAGEN DE PERFIL
+   ========================================== */
+
 
          const fileInput = document.getElementById('fileInput');
         const profileImage = document.getElementById('profileImage');
@@ -157,6 +164,10 @@ const themeSelector = document.getElementById('themeSelector');
                 reader.readAsDataURL(file);
             }
         });
+
+/* ==========================================
+   LÓGICA DE DIRECTORIO Y BUSCADOR
+   ========================================== */
 
 
        document.addEventListener('DOMContentLoaded', () => {
@@ -231,6 +242,10 @@ function logout() {
     window.location.href = "log_in.html";
 }
 
+/* ==========================================
+   LÓGICA DE BUSQUEDA EN MATERIALES
+   ========================================== */
+
 document.getElementById('searchInput').addEventListener('keyup', function() {
             const searchTerm = this.value.toLowerCase();
             const cards = document.querySelectorAll('.material-card');
@@ -252,6 +267,10 @@ document.getElementById('searchInput').addEventListener('keyup', function() {
             noResults.style.display = hasVisibleCards ? 'none' : 'block';
         });
 
+/* ==========================================
+   LÓGICA DE CHAT SIMULADO
+   ========================================== */
+
  const chatForm = document.getElementById('chatForm');
         const chatBox = document.getElementById('chatBox');
         const msgInput = document.getElementById('msgInput');
@@ -272,6 +291,10 @@ document.getElementById('searchInput').addEventListener('keyup', function() {
             
             msgInput.value = "";
         };
+
+/* ==========================================
+   LÓGICA DE PUBLICACIÓN EN FORO
+   ========================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('modal-post');
