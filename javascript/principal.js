@@ -463,67 +463,160 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ==========================================
-   ACCIONES DE NOTAS (GUARDAR Y ELIMINAR)
+   LÓGICA UNIFICADA DE NOTAS AMIZTLI 🐾
    ========================================== */
 
-document.addEventListener('DOMContentLoaded', () => {
-    // ... (Mantén tu lógica de renderNotes y childSelector de arriba) ...
+const notasPorHijo = {
+    "1": [ // Juanito
+        { fecha: "18 ABR", titulo: "Logros en casa hoy", contenido: "Juanito logró vestirse solo.", modo: "compartido" },
+        { fecha: "16 ABR", titulo: "Sentimientos sobre terapia", contenido: "Se sintió un poco cansado.", modo: "personal" }
+    ],
+    "2": [ // María
+        { fecha: "20 ABR", titulo: "Primera palabra", contenido: "María dijo 'Amiztli' hoy.", modo: "personal" }
+    ]
+};
 
-    const btnSave = document.querySelector('.btn-save');
-    const btnDelete = document.querySelector('.btn-delete');
+// Variable para saber qué filtro está activo (personal o compartido)
+let filtroActual = 'personal'; 
+
+document.addEventListener('DOMContentLoaded', () => {
+    const childSelector = document.getElementById('childSelector');
+    const notesList = document.getElementById('notesList');
     const editorTitle = document.querySelector('.editor-title');
     const editorBody = document.getElementById('editorBody');
-    const childSelector = document.getElementById('childSelector');
+    const btnNewNote = document.querySelector('.btn-new-note');
+    const btnSave = document.querySelector('.btn-save');
+    const btnDelete = document.querySelector('.btn-delete');
+    const badge = document.getElementById('badge');
 
-    // --- ACCIÓN: GUARDAR CAMBIOS ---
-    if (btnSave) {
-        btnSave.onclick = () => {
-            const currentChild = childSelector.value;
-            const activeNote = document.querySelector('.note-item.active');
+    // --- FUNCIÓN: RENDERIZAR (FILTRADO POR HIJO Y POR MODO) ---
+    function renderNotes() {
+        const childId = childSelector.value;
+        notesList.innerHTML = ""; 
+        
+        // Obtenemos notas del hijo y filtramos por el modo activo (Personal/Compartido)
+        const notasFiltradas = (notasPorHijo[childId] || []).filter(n => n.modo === filtroActual);
+
+        notasFiltradas.forEach((nota) => {
+            const div = document.createElement('div');
+            div.className = 'note-item';
+            div.innerHTML = `
+                <p class="date">${nota.fecha}</p>
+                <p class="title">${nota.titulo}</p>
+            `;
+            div.onclick = () => {
+                // Quitar clase activa a otros y poner a este
+                document.querySelectorAll('.note-item').forEach(i => i.classList.remove('active'));
+                div.classList.add('active');
+                loadNote(nota);
+            };
+            notesList.appendChild(div);
+        });
+    }
+
+    // --- FUNCIÓN: CARGAR EN EDITOR ---
+    function loadNote(nota) {
+        editorTitle.value = nota.titulo;
+        editorBody.value = nota.contenido;
+
+        if (nota.modo === 'compartido') {
+            editorBody.readOnly = true;
+            editorBody.style.opacity = "0.7";
+            badge.innerText = "👥 Observación del Especialista (Lectura)";
+            btnSave.style.display = "none"; 
+            btnDelete.style.display = "none"; // El padre no borra lo del maestro
+        } else {
+            editorBody.readOnly = false;
+            editorBody.style.opacity = "1";
+            badge.innerText = "🔒 Solo para mí (Privado)";
+            btnSave.style.display = "block";
+            btnDelete.style.display = "block";
+        }
+    }
+
+    // --- CAMBIO DE HIJO ---
+    childSelector.onchange = () => {
+        limpiarEditor();
+        renderNotes();
+    };
+
+    // --- CAMBIO DE MODO (PRIVADO / COMPARTIDO) ---
+    window.setMode = (mode) => {
+        filtroActual = mode;
+        // Cambiar clases visuales de los botones
+        document.getElementById('btnPersonal').classList.toggle('active', mode === 'personal');
+        document.getElementById('btnCompartido').classList.toggle('active', mode === 'compartido');
+        
+        limpiarEditor();
+        renderNotes();
+    };
+
+    // --- GUARDAR CAMBIOS ---
+    btnSave.onclick = () => {
+        const childId = childSelector.value;
+        const activeNote = document.querySelector('.note-item.active');
+        
+        if (editorTitle.value.trim() === "") return alert("¡Ponle un título! 🐾");
+
+        if (activeNote) {
+            // Buscamos la nota en el array original para actualizarla
+            const tituloViejo = activeNote.querySelector('.title').innerText;
+            const notaOriginal = notasPorHijo[childId].find(n => n.titulo === tituloViejo);
             
-            if (!activeNote && editorTitle.value !== "") {
-                // Si es una nota nueva que no estaba en la lista, la creamos
-                const nueva = {
-                    fecha: new Date().toLocaleDateString('es-MX', { day:'numeric', month:'short' }).toUpperCase(),
-                    titulo: editorTitle.value,
-                    contenido: editorBody.value,
-                    modo: "personal"
-                };
-                notasPorHijo[currentChild].unshift(nueva);
-            } else if (activeNote) {
-                // Si ya existe, buscamos en nuestra "DB" y actualizamos
-                const index = Array.from(activeNote.parentNode.children).indexOf(activeNote);
-                notasPorHijo[currentChild][index].titulo = editorTitle.value;
-                notasPorHijo[currentChild][index].contenido = editorBody.value;
+            if (notaOriginal) {
+                notaOriginal.titulo = editorTitle.value;
+                notaOriginal.contenido = editorBody.value;
             }
+        } else {
+            // Es una nota nueva
+            const nueva = {
+                fecha: new Date().toLocaleDateString('es-MX', { day:'numeric', month:'short' }).toUpperCase(),
+                titulo: editorTitle.value,
+                contenido: editorBody.value,
+                modo: 'personal'
+            };
+            notasPorHijo[childId].unshift(nueva);
+        }
 
-            alert("¡Cambios guardados en el diario! 🐾");
-            renderNotes(currentChild); // Refrescamos la lista lateral
-        };
+        alert("¡Guardado! ✨");
+        renderNotes();
+    };
+
+    // --- ELIMINAR ---
+    btnDelete.onclick = () => {
+        const activeNote = document.querySelector('.note-item.active');
+        if (!activeNote) return alert("Selecciona una nota");
+
+        if (confirm("¿Borrar esta nota, Karla?")) {
+            const childId = childSelector.value;
+            const titulo = activeNote.querySelector('.title').innerText;
+            
+            // Filtramos el array para quitar esa nota
+            notasPorHijo[childId] = notasPorHijo[childId].filter(n => n.titulo !== titulo);
+            
+            limpiarEditor();
+            renderNotes();
+        }
+    };
+
+    // --- NUEVA NOTA ---
+    btnNewNote.onclick = () => {
+        if (filtroActual === 'compartido') {
+            alert("Las notas compartidas solo las genera el especialista. Cambia a 'Mío' para escribir. 🐾");
+            return;
+        }
+        limpiarEditor();
+        editorTitle.focus();
+    };
+
+    function limpiarEditor() {
+        editorTitle.value = "";
+        editorBody.value = "";
+        editorBody.readOnly = false;
+        editorBody.style.opacity = "1";
+        document.querySelectorAll('.note-item').forEach(i => i.classList.remove('active'));
     }
 
-    // --- ACCIÓN: ELIMINAR NOTA ---
-    if (btnDelete) {
-        btnDelete.onclick = () => {
-            const activeNote = document.querySelector('.note-item.active');
-            if (!activeNote) {
-                alert("Selecciona una nota para eliminar.");
-                return;
-            }
-
-            if (confirm("¿Estás segura de eliminar esta nota? Karla, recuerda que esto no se puede deshacer.")) {
-                const currentChild = childSelector.value;
-                const index = Array.from(activeNote.parentNode.children).indexOf(activeNote);
-                
-                // Borramos del arreglo
-                notasPorHijo[currentChild].splice(index, 1);
-                
-                // Limpiamos editor
-                editorTitle.value = "";
-                editorBody.value = "";
-                
-                renderNotes(currentChild); // Refrescamos lista
-            }
-        };
-    }
+    // Arrancar con Juanito
+    renderNotes();
 });
