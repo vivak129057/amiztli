@@ -1062,8 +1062,8 @@ body {
 
 /* ACTIVADOR DE LAYOUT PARA EL CHAT */
 #chats-content.active {
-    display: flex !important; /* Esto obliga a que Aside y Main se pongan laterales */
-    flex-direction: row !important;
+    display: flex; /* Esto obliga a que Aside y Main se pongan laterales */
+    flex-direction: row;
 }
 
 /* Ajuste de padding para las burbujas dentro del área de mensajes */
