@@ -273,97 +273,78 @@ document.getElementById('searchInput').addEventListener('keyup', function() {
             msgInput.value = "";
         };
 
-/* ==========================================
-   LÓGICA FORO 🐾
-   ========================================== */
-
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('modal-post');
     const btnOpen = document.querySelector('.btn-post');
     const btnClose = document.querySelector('.close-modal');
     const btnPublish = document.getElementById('btn-publish-final');
+    const forumContainer = document.querySelector('.forum-container');
+    
+    // --- NUEVO: Selección del input de búsqueda ---
     const searchInput = document.querySelector('.search-forum');
 
-    // --- ABRIR/CERRAR MODAL ---
-    if (btnOpen) {
-        btnOpen.onclick = () => {
-            modal.style.display = "block";
-            document.body.style.overflow = "hidden";
-        };
-    }
+    // Abrir modal
+    btnOpen.onclick = () => modal.style.display = "block";
 
-    if (btnClose) {
-        btnClose.onclick = () => {
-            modal.style.display = "none";
-            document.body.style.overflow = "auto";
-        };
-    }
+    // Cerrar modal
+    btnClose.onclick = () => modal.style.display = "none";
+    window.onclick = (event) => { if (event.target == modal) modal.style.display = "none"; }
 
-    // --- LÓGICA DE PUBLICAR ---
-    if (btnPublish) {
-        btnPublish.onclick = () => {
-            const titleInput = document.getElementById('post-title-input');
-            const contentInput = document.getElementById('post-content-input');
+    // Función para publicar
+    btnPublish.onclick = () => {
+        const title = document.getElementById('post-title-input').value;
+        const content = document.getElementById('post-content-input').value;
+
+        if (title && content) {
+            const newCard = document.createElement('article');
+            newCard.classList.add('post-card');
             
-            if (titleInput.value.trim() && contentInput.value.trim()) {
-                const newCard = document.createElement('article');
-                newCard.classList.add('post-card');
-                
-                newCard.innerHTML = `
-                    <div class="post-user-info">
-                        <div class="user-avatar">KV</div>
-                        <div>
-                            <span class="post-user-name">Karla Villa</span>
-                            <div class="post-meta">Publicado ahora mismo</div>
-                        </div>
+            newCard.innerHTML = `
+                <div class="post-user-info">
+                    <div class="user-avatar">KV</div>
+                    <div>
+                        <span class="post-user-name">Karla Villa</span>
+                        <div class="post-meta">Publicado ahora mismo</div>
                     </div>
-                    <h2 class="post-title">${titleInput.value}</h2>
-                    <p class="post-content">${contentInput.value}</p>
-                    <div class="post-actions">
-                        <button class="action-btn like">❤️ 0</button>
-                        <button class="action-btn">💬 0 Comentarios</button>
-                        <button class="action-btn">🔗 Compartir</button>
-                    </div>
-                `;
+                </div>
+                <h2 class="post-title">${title}</h2>
+                <p class="post-content">${content}</p>
+                <div class="post-actions">
+                    <button class="action-btn like">❤️ 0</button>
+                    <button class="action-btn">💬 0 Comentarios</button>
+                    <button class="action-btn">🔗 Compartir</button>
+                </div>
+            `;
 
-                // Insertar después del header
-                document.querySelector('.forum-header').after(newCard);
+            document.querySelector('.forum-header').after(newCard);
 
-                // Limpiar
-                titleInput.value = "";
-                contentInput.value = "";
-                modal.style.display = "none";
-                document.body.style.overflow = "auto";
+            document.getElementById('post-title-input').value = "";
+            document.getElementById('post-content-input').value = "";
+            modal.style.display = "none";
+        } else {
+            alert("¡Escribe algo primero, Karla! ");
+        }
+    };
+
+    // --- NUEVO: Lógica del Buscador ---
+    searchInput.addEventListener('input', (e) => {
+        const term = e.target.value.toLowerCase(); // Lo que el usuario escribe
+        const allPosts = document.querySelectorAll('.post-card'); // Todas las publicaciones
+
+        allPosts.forEach(post => {
+            // Obtenemos el texto del título y el contenido de esta card específica
+            const titleText = post.querySelector('.post-title').innerText.toLowerCase();
+            const contentText = post.querySelector('.post-content').innerText.toLowerCase();
+
+            // Si el término de búsqueda está en el título o en el contenido...
+            if (titleText.includes(term) || contentText.includes(term)) {
+                post.style.display = "block"; // Se muestra
+                post.style.animation = "fadeIn 0.3s"; // Opcional: un efecto suave
             } else {
-                alert("¡Escribe algo primero, Karla! 🐾");
+                post.style.display = "none"; // Se oculta
             }
-        };
-    }
-
-    // --- LÓGICA DEL BUSCADOR (CORREGIDA) ---
-    if (searchInput) {
-        searchInput.addEventListener('input', () => {
-            const term = searchInput.value.toLowerCase().trim();
-            // Buscamos las cards CADA VEZ que escribes (por si hay nuevas)
-            const allPosts = document.querySelectorAll('.post-card'); 
-
-            allPosts.forEach(post => {
-                const title = post.querySelector('.post-title');
-                const content = post.querySelector('.post-content');
-
-                // Verificamos que existan los elementos dentro de la card
-                if (title && content) {
-                    const textContent = (title.innerText + " " + content.innerText).toLowerCase();
-                    
-                    if (textContent.includes(term)) {
-                        post.style.display = "block";
-                    } else {
-                        post.style.display = "none";
-                    }
-                }
-            });
         });
-    }
+    });
 });
 
 /* ==========================================
