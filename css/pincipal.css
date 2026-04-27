@@ -1303,112 +1303,67 @@ body {
 }
 
 /* ==========================================
-   ESTILO NOTAS / DIARIO (PAPEL CON LÍNEAS) 🐾
+   DISEÑO LIMPIO AMIZTLI (DIARIO) 🐾
    ========================================== */
 
-/* Esto activa el diseño de dos columnas solo cuando la pestaña de notas está activa */
 #notas-content.active .notas-layout-wrapper {
     display: flex !important;
     height: calc(100vh - 180px);
-    background: var(--white);
+    background: #ffffff; /* Blanco puro como la captura */
     border-radius: 20px;
     overflow: hidden;
     border: 1px solid var(--border);
-    box-shadow: var(--shadow);
 }
 
-/* --- LISTA DE NOTAS (Izquierda) --- */
-.family-sidebar {
-    width: 300px;
-    background: var(--white);
-    border-right: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-}
-
-.note-item {
-    padding: 15px 20px;
-    border-bottom: 1px solid #f1f5f9;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.note-item:hover { background: var(--accent-soft); }
-.note-item.active { 
-    background: var(--accent-soft); 
-    border-left: 4px solid var(--accent); 
-}
-
-.note-item .date { font-size: 11px; color: var(--text-muted); font-weight: bold; }
-.note-item .title { font-size: 14px; font-weight: 600; margin-top: 5px; display: block; }
-
-/* --- ÁREA DE EDICIÓN (Derecha) --- */
 .editor-main {
     flex: 1;
-    background: var(--white);
     display: flex;
     flex-direction: column;
     padding: 40px;
-    position: relative;
-    overflow: hidden;
+    background: #ffffff; /* Sin patrones de fondo */
 }
 
-/* Efecto de papel con líneas que pediste */
 .editor-body {
     flex: 1;
-    background: white;
-    background-image: linear-gradient(#e5e7eb 1px, transparent 1px);
-    background-size: 100% 2rem;
-    line-height: 2rem;
-    padding: 0 20px;
+    background: transparent;
     border: none;
     outline: none;
-    font-size: 16px;
-    color: #334155;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #4a5568;
     resize: none;
     font-family: 'Inter', sans-serif;
+    margin-top: 20px;
 }
 
-.editor-top {
-    margin-bottom: 20px;
-}
-
-.editor-title {
-    width: 100%;
-    font-size: 28px;
-    font-weight: 700;
-    border: none;
-    outline: none;
-    color: var(--text-main);
-    margin-bottom: 10px;
-    background: transparent;
-}
-
-.editor-footer {
-    padding-top: 20px;
-    display: flex;
-    justify-content: flex-end;
-    gap: 15px;
-    z-index: 5;
-}
-
-.btn-action {
-    padding: 10px 20px;
-    border-radius: 8px;
+/* Badge de Privacidad Estilo Captura */
+.badge-status {
+    background: #e2e8f0;
+    padding: 4px 10px;
+    border-radius: 6px;
     font-weight: 600;
-    cursor: pointer;
-    border: none;
+    font-size: 13px;
+    color: #4a5568;
 }
 
-.btn-save { background: var(--accent); color: var(--text-main); }
-.btn-delete { background: #fee2e2; color: #ef4444; }
+/* Botones Inferiores */
+.btn-save {
+    background: #ffd300 !important;
+    color: #000 !important;
+    font-weight: bold;
+    border-radius: 12px;
+    padding: 12px 25px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(255, 211, 0, 0.3);
+}
 
-/* Fondo de patitas sutil para el editor */
-.editor-main::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    opacity: 0.03;
-    pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath d='M20 10a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm4.5 2a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm-9 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4zM20 18c-3 0-5-2-5-5 0-1 1-2 2-2s2 1 3 1 1-1 3-1 2 1 2 2c0 3-2 5-5 5z' fill='%23000' /%3E%3C/svg%3E");
+.btn-delete {
+    background: #fff5f5 !important;
+    color: #f56565 !important;
+    font-weight: bold;
+    border-radius: 12px;
+    padding: 12px 25px;
+    border: none;
+    cursor: pointer;
 }
