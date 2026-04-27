@@ -176,27 +176,199 @@
       </div>
 
       <div class="tab-content" id="materiales-content">
-        <div class="iframe-container">
-          <iframe src="../iframes/materiales.html" frameborder="0" class="page-iframe"></iframe>
-        </div>
+            <div class="materials-header">
+                <h2>Materiales Educativos</h2>
+                <div class="search-container">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Buscar por título o discapacidad...">
+                </div>
+            </div>
+
+            <div class="materials-list" id="materialsList">
+                <div class="material-card" data-title="guía de apoyo visual" data-tag="tea autismo">
+                    <div class="material-info">
+                        <h4>Guía de Apoyo Visual</h4>
+                        <p>Métodos prácticos para la organización diaria en casa.</p>
+                        <span class="condition-tag">TEA (Autismo)</span>
+                    </div>
+                    <button class="btn-download">Descargar 📥</button>
+                </div>
+
+                <div class="material-card" data-title="ejercicios de psicomotricidad" data-tag="discapacidad motriz">
+                    <div class="material-info">
+                        <h4>Ejercicios de Psicomotricidad</h4>
+                        <p>Actividades lúdicas para mejorar la coordinación fina.</p>
+                        <span class="condition-tag">Discapacidad Motriz</span>
+                    </div>
+                    <button class="btn-download">Descargar 📥</button>
+                </div>
+
+                <div class="material-card" data-title="lectura fácil cuentos" data-tag="discapacidad intelectual">
+                    <div class="material-info">
+                        <h4>Lectura Fácil: Cuentos</h4>
+                        <p>Textos adaptados para facilitar la comprensión lectora.</p>
+                        <span class="condition-tag">Discapacidad Intelectual</span>
+                    </div>
+                    <button class="btn-download">Descargar 📥</button>
+                </div>
+            </div>
+
+            <div id="noResults" class="no-results">
+                <p>No se encontraron materiales que coincidan con tu búsqueda.</p>
+            </div>
       </div>
 
       <div class="tab-content" id="directorio-content">
-        <div class="iframe-container">
-          <iframe src="../iframes/directorio.html" frameborder="0" class="page-iframe"></iframe>
+       <div class="tabs-container">
+            <button class="tab-btn active" data-tab="especialistas">Especialistas</button>
+            <button class="tab-btn" data-tab="escuelas">Escuelas / Asociaciones</button>
+        </div>
+
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="Buscar por nombre, trastorno o ciudad...">
+        </div>
+
+        <div id="especialistas" class="directory-tab active">
+            <div class="directory-grid" id="grid-especialistas">
+                <div class="card">
+                    <div class="card-icon">👨‍⚕️</div>
+                    <p class="card-title">Alonso, Beatriz</p>
+                    <p class="card-sub">Neuropediatra</p>
+                    <span class="card-tag">Epilepsia / Retraso Psicomotriz</span>
+                    <p class="card-location">📍 Ciudad Victoria, Tam.</p>
+                    <button class="btn-view">Ver Detalles 🐾</button>
+                </div>
+                <div class="card">
+                    <div class="card-icon">👩‍⚕️</div>
+                    <p class="card-title">García, Elena</p>
+                    <p class="card-sub">Terapeuta de Lenguaje</p>
+                    <span class="card-tag">Autismo (TEA)</span>
+                    <p class="card-location">📍 Nuevo Laredo, Tam.</p>
+                    <button class="btn-view">Ver Detalles 🐾</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="escuelas" class="directory-tab">
+            <div class="directory-grid" id="grid-escuelas">
+                <div class="card">
+                    <div class="card-icon">🏫</div>
+                    <p class="card-title">CAM No. 1</p>
+                    <p class="card-sub">Centro de Atención Múltiple</p>
+                    <span class="card-tag">Discapacidad Múltiple</span>
+                    <p class="card-location">📍 Nuevo Laredo, Tam.</p>
+                    <button class="btn-view">Más información 🐾</button>
+                </div>
+            </div>
         </div>
       </div>
 
       <div class="tab-content" id="perfil-content">
-        <div class="iframe-container">
-          <iframe src="../iframes/perfil.html" frameborder="0" class="page-iframe"></iframe>
+        <div class="profile-card">
+        <div class="profile-header">
+            <label for="fileInput" class="avatar-container">
+                <img id="profileImage" src="imagenes/logo.jpeg" alt="Foto de Perfil" class="profile-avatar">
+                <div class="camera-overlay">📷</div>
+                <input type="file" id="fileInput" accept="image/*">
+            </label>
+        </div>
+
+        <div class="profile-body">
+            <h2 class="user-name">NOMBRE DE USUARIO</h2>
+            <span class="user-role">descripción</span>
+
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="info-label">Correo Electrónico</span>
+                    <span class="info-value">1234@gmail.com</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">ROL</span>
+                    <span class="info-value">(padre de familia, administrador, profesor)</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">CIUDAD</span>
+                    <span class="info-value">Nuevo Laredo, Tamaulipas</span>
+                </div>
+
+            <button class="edit-btn">Guardar Cambios</button>
+        </div>
+        </div>
         </div>
       </div>
 
       <div class="tab-content" id="configuracion-content">
-        <div class="iframe-container">
-          <iframe src="../iframes/config.html" frameborder="0" class="page-iframe"></iframe>
-        </div>
+        
+        <section class="config-section">
+            <div class="section-title">👤 Cuenta y Seguridad</div>
+            <div class="config-row">
+                <div class="row-info">
+                    <h4>Verificación en dos pasos</h4>
+                    <p>Aumenta la seguridad de tu cuenta Amiztli.</p>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div class="config-row">
+                <div class="row-info">
+                    <h4>Cambiar Contraseña</h4>
+                    <p>Actualizada hace 3 meses.</p>
+                </div>
+                <button class="config-select" style="cursor: pointer;">Actualizar</button>
+            </div>
+        </section>
+
+        <section class="config-section">
+            <div class="section-title">🔔 Notificaciones</div>
+            <div class="config-row">
+                <div class="row-info">
+                    <h4>Alertas de Chats</h4>
+                    <p>Recibir sonidos al llegar un nuevo mensaje.</p>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </section>
+
+        <section class="config-section">
+            <div class="section-title">🎨 Apariencia</div>
+            <div class="config-row">
+                <div class="row-info">
+                    <h4>Tema del Sistema</h4>
+                    <p>Personaliza cómo se ve tu dashboard.</p>
+                </div>
+                <select class="config-select" id="themeSelector">
+                    <option value="light">Modo Claro (Default)</option>
+                    <option value="dark">Modo Oscuro</option>
+                    <option value="high-contrast">Alto Contraste</option>
+                </select>
+            </div>
+        </section>
+
+        <section class="config-section" style="border-color: #fecaca;">
+            <div class="section-title" style="color: var(--danger);">⚠️ Zona de Peligro</div>
+            <div class="config-row">
+                <div class="row-info">
+                    <h4>Cerrar Sesión</h4>
+                    <p>Salir de la cuenta en este dispositivo.</p>
+                </div>
+                <button class="btn-danger" onclick='logout()'>Cerrar Sesión</button>
+            </div>
+            <div class="config-row">
+                <div class="row-info">
+                    <h4>Eliminar Cuenta</h4>
+                    <p>Esta acción es irreversible.</p>
+                </div>
+                <button class="btn-danger" style="background:#ef4444; color:white;">Eliminar</button>
+            </div>
+        </section>
+
+        <button class="btn-save-all" onclick="saveConfig()">Guardar Cambios 🐾</button>
+        
       </div>
 
     </main>

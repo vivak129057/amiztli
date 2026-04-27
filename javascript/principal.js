@@ -251,3 +251,24 @@ document.getElementById('searchInput').addEventListener('keyup', function() {
 
             noResults.style.display = hasVisibleCards ? 'none' : 'block';
         });
+
+ const chatForm = document.getElementById('chatForm');
+        const chatBox = document.getElementById('chatBox');
+        const msgInput = document.getElementById('msgInput');
+
+        chatForm.onsubmit = (e) => {
+            e.preventDefault();
+            if(msgInput.value.trim() === "") return;
+
+            // Crear burbuja de enviado
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble sent';
+            bubble.innerText = msgInput.value;
+            
+            chatBox.appendChild(bubble);
+            
+            // Scroll automático al final
+            chatBox.scrollTop = chatBox.scrollHeight;
+            
+            msgInput.value = "";
+        };
