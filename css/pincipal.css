@@ -1211,74 +1211,93 @@ body {
    ESTILOS DEL MODAL DE PUBLICACIÓN (ESTILO VAINILLA)
    ========================================== */
 
+#modal-post {
+    display: none; 
+    position: fixed;
+    z-index: 2000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro para que resalte el modal */
+    backdrop-filter: blur(5px);
+}
+
 #modal-post .modal-content {
-    background-color: #ffffff !important; /* Blanco sólido como tu captura */
-    opacity: 1 !important;
-    border-radius: 30px; /* Bordes más redondeados y suaves */
-    padding: 35px;
-    border: none;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.15); /* Sombra suave pero profunda */
+    background-color: #FFFDF0 !important; /* El color vainilla de tu captura */
+    margin: 5% auto;
+    padding: 30px;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 25px;
+    color: #5D542B; /* Café suave para el texto */
+    box-shadow: 0 15px 35px rgba(212, 197, 141, 0.3);
+    border: 2px solid #FDF2B5; /* Borde amarillo pastel */
     position: relative;
-    z-index: 1001; 
-    color: #4a4a4a;
 }
 
 .modal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1.5px solid #f1f5f9;
+    border-bottom: 1.5px solid #FDF2B5;
     padding-bottom: 15px;
     margin-bottom: 20px;
 }
 
-/* Título en Amarillo Amiztli brillante */
-.modal-header h3 { 
-    margin: 0; 
-    color: #ffd300 !important; 
-    font-size: 22px;
-    font-weight: 800;
+.modal-header h3 {
+    margin: 0;
+    font-size: 1.3rem;
+    color: #8B7A2B; /* Dorado oscuro */
 }
 
-/* Inputs con fondo grisáceo muy tenue */
+.close-modal { 
+    color: #D4C58D; 
+    font-size: 28px; 
+    cursor: pointer; 
+}
+
+.close-modal:hover { color: #8B7A2B; }
+
+/* Inputs dentro del modal */
 #post-title-input, #post-content-input {
     width: 100%;
-    padding: 14px;
-    border-radius: 12px;
-    border: 1px solid #e2e8f0;
-    background: #f8fafc; /* Color del input de tu captura */
-    color: #1a202c;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #F3E7A1;
+    background: #FEF9D9;
+    color: #8B7A2B;
     margin-bottom: 15px;
-    font-size: 15px;
+    font-size: 14px;
     outline: none;
 }
 
-/* Botón Publicar idéntico al de Privacidad */
+/* El botón de publicar (corregido para que no salga gris) */
 .btn-publish-active {
     width: 100%;
     background: #ffd300 !important;
-    color: #ffffff !important; /* Texto blanco con sombra para que resalte */
-    text-shadow: 0px 1px 2px rgba(0,0,0,0.1);
+    color: white !important;
     border: none;
-    padding: 15px;
-    border-radius: 15px;
+    padding: 14px;
+    border-radius: 12px;
     font-weight: bold;
     font-size: 16px;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(255, 211, 0, 0.4);
-    transition: transform 0.2s, background 0.2s;
+    box-shadow: 0 4px 10px rgba(255, 211, 0, 0.3);
+    transition: transform 0.2s;
+    margin-top: 10px;
 }
 
 .btn-publish-active:hover {
-    transform: translateY(-2px);
-    background: #ffcc00 !important;
+    transform: scale(1.02);
 }
 
+/* Info del usuario y selectores */
+.user-info-modal { display: flex; align-items: center; margin-bottom: 20px; gap: 10px; }
+
 .privacy-select {
-    background: #f8fafc;
-    color: #718096;
-    border: 1px solid #e2e8f0;
+    background: #FEF9D9;
+    color: #8B7A2B;
+    border: 1px solid #F3E7A1;
     border-radius: 8px;
     font-size: 12px;
-    padding: 5px 10px;
+    padding: 4px 8px;
 }
