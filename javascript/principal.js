@@ -272,3 +272,77 @@ document.getElementById('searchInput').addEventListener('keyup', function() {
             
             msgInput.value = "";
         };
+
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('modal-post');
+    const btnOpen = document.querySelector('.btn-post');
+    const btnClose = document.querySelector('.close-modal');
+    const btnPublish = document.getElementById('btn-publish-final');
+    const forumContainer = document.querySelector('.forum-container');
+    
+    // --- NUEVO: Selección del input de búsqueda ---
+    const searchInput = document.querySelector('.search-forum');
+
+    // Abrir modal
+    btnOpen.onclick = () => modal.style.display = "block";
+
+    // Cerrar modal
+    btnClose.onclick = () => modal.style.display = "none";
+    window.onclick = (event) => { if (event.target == modal) modal.style.display = "none"; }
+
+    // Función para publicar
+    btnPublish.onclick = () => {
+        const title = document.getElementById('post-title-input').value;
+        const content = document.getElementById('post-content-input').value;
+
+        if (title && content) {
+            const newCard = document.createElement('article');
+            newCard.classList.add('post-card');
+            
+            newCard.innerHTML = `
+                <div class="post-user-info">
+                    <div class="user-avatar">KV</div>
+                    <div>
+                        <span class="post-user-name">Karla Villa</span>
+                        <div class="post-meta">Publicado ahora mismo</div>
+                    </div>
+                </div>
+                <h2 class="post-title">${title}</h2>
+                <p class="post-content">${content}</p>
+                <div class="post-actions">
+                    <button class="action-btn like">❤️ 0</button>
+                    <button class="action-btn">💬 0 Comentarios</button>
+                    <button class="action-btn">🔗 Compartir</button>
+                </div>
+            `;
+
+            document.querySelector('.forum-header').after(newCard);
+
+            document.getElementById('post-title-input').value = "";
+            document.getElementById('post-content-input').value = "";
+            modal.style.display = "none";
+        } else {
+            alert("¡Escribe algo primero, Karla! ");
+        }
+    };
+
+    // --- NUEVO: Lógica del Buscador ---
+    searchInput.addEventListener('input', (e) => {
+        const term = e.target.value.toLowerCase(); // Lo que el usuario escribe
+        const allPosts = document.querySelectorAll('.post-card'); // Todas las publicaciones
+
+        allPosts.forEach(post => {
+            // Obtenemos el texto del título y el contenido de esta card específica
+            const titleText = post.querySelector('.post-title').innerText.toLowerCase();
+            const contentText = post.querySelector('.post-content').innerText.toLowerCase();
+
+            // Si el término de búsqueda está en el título o en el contenido...
+            if (titleText.includes(term) || contentText.includes(term)) {
+                post.style.display = "block"; // Se muestra
+                post.style.animation = "fadeIn 0.3s"; // Opcional: un efecto suave
+            } else {
+                post.style.display = "none"; // Se oculta
+            }
+        });
+    });
+});

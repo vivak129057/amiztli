@@ -104,6 +104,64 @@
         </div>
       </div>
 
+      <div class="tab-content" id="foro-content">
+            <div class="forum-container">
+                <header class="forum-header">
+                    <input type="text" class="search-forum" placeholder="🔍 Buscar temas, consejos o dudas...">
+                    <button class="btn-post" onclick="openPostModal()">Nueva Publicación 🐾</button>
+                </header>
+
+                <div id="posts-feed" class="forum-feed">
+                    <div class="post-card">
+                        <div class="user-info-modal">
+                            <div class="user-avatar">EN</div>
+                            <div>
+                                <strong>Elena García</strong>
+                                <p style="font-size: 11px; color: var(--text-secondary);">Hace 2 horas</p>
+                            </div>
+                        </div>
+                        <h4 style="margin-top: 10px;">Consejos para el lenguaje en casa</h4>
+                        <p style="font-size: 14px; margin-top: 5px;">¿Alguien tiene estrategias nuevas para usar pictogramas durante la cena?</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="modal-post" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Crear publicación</h3>
+                        <span class="close-modal" onclick="closePostModal()">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="user-info-modal">
+                            <div class="user-avatar">KV</div>
+                            <div class="user-name-modal">
+                                <strong>Karla Villa</strong>
+                                <select class="privacy-select">
+                                    <option>👥 Amigos</option>
+                                    <option>🌎 Público</option>
+                                </select>
+                            </div>
+                        </div>
+                        <input type="text" id="post-title-input" placeholder="Título de tu publicación...">
+                        <textarea id="post-content-input" placeholder="¿Qué estás pensando, Karla?"></textarea>
+                        
+                        <div class="add-to-post">
+                            <span>Agregar a tu publicación</span>
+                            <div class="post-icons">
+                                <span title="Foto/video">🖼️</span>
+                                <span title="Etiquetar">👤</span>
+                                <span title="Sentimiento">😊</span>
+                                <span title="Ubicación">📍</span>
+                                <span title="GIF">🎬</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="btn-publish-final" class="btn-publish-active">Publicar</button>
+                </div>
+            </div>
+      </div>
+
       <div class="tab-content chat-container-layout" id="chats-content">
             <aside class="chat-sidebar">
                 <div class="sidebar-header">
