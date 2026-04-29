@@ -1514,3 +1514,102 @@ body {
 }
 
 .btn-delete:hover { background: #ffe4e6 !important; }
+
+/* 1. El contenedor principal del Modal (Fondo oscuro) */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; 
+    z-index: 1000; /* Asegura que esté por encima de todo */
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo negro con transparencia */
+    backdrop-filter: blur(4px); /* Efecto de desenfoque de fondo */
+}
+
+/* 2. La "Caja" blanca donde va el formulario */
+.modal-content {
+    background-color: #FFFBEB; /* Tu color Crema Base */
+    margin: 5% auto; /* 5% de la parte superior y centrado */
+    padding: 30px;
+    border: 2px solid #CA8A04; /* Tu Ocre Amiztli */
+    border-radius: 20px;
+    width: 90%;
+    max-width: 600px; /* Tamaño máximo para que no se vea gigante */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    position: relative;
+    animation: slideDown 0.3s ease-out; /* Animación de entrada */
+}
+
+/* 3. Animación de entrada para que no aparezca de golpe */
+@keyframes slideDown {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* 4. Botón de cerrar (X) */
+.close-modal, .close-btn {
+    color: #CA8A04;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.close-modal:hover, .close-btn:hover {
+    color: #854D0E; /* Un ocre más oscuro al pasar el mouse */
+    transform: scale(1.1);
+}
+
+/* 5. Estilos para los formularios dentro del modal */
+#materialForm, #contactForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: #854D0E;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+input[type="text"], 
+input[type="email"], 
+input[type="tel"], 
+select, 
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #FEF9C3;
+    border-radius: 8px;
+    background-color: #ffffff;
+    font-family: inherit;
+}
+
+input:focus, textarea:focus {
+    outline: 2px solid #FACC15; /* Amarillo vibrante al escribir */
+    border-color: transparent;
+}
+
+/* 6. Botón de Publicar ✨ */
+.btn-submit {
+    background-color: #CA8A04;
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-size: 1rem;
+}
+
+.btn-submit:hover {
+    background-color: #854D0E;
+}
