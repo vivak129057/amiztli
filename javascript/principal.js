@@ -373,27 +373,72 @@ document.addEventListener('DOMContentLoaded', () => {
 /* ==========================================
     LÓGICA DE MODALES (MATERIALES Y DIRECTORIO)
     ========================================== */
+        const modal = document.getElementById("modalContainer");
+        const btnOpen = document.getElementById("btnOpen");
+        const btnClose = document.querySelector(".close-modal");
 
-    // Variables para Materiales
-    const modalMaterial = document.getElementById("modalContainer");
-    const btnMaterial = document.getElementById("btnAbrirMaterial");
-    const spanMaterial = document.querySelector(".close-modal");
+        btnOpen.onclick = () => modal.style.display = "block";
 
-    // Variables para Directorio
-    const modalDirectorio = document.getElementById("contactModal");
-    const btnDirectorio = document.getElementById("btnAbrirDirectorio");
-    const spanDirectorio = document.querySelector(".close-btn");
+        // Cerrar ventana
+        btnClose.onclick = () => modal.style.display = "none";
 
-    // Lógica para Materiales
-    btnMaterial.onclick = () => modalMaterial.style.display = "block";
-    spanMaterial.onclick = () => modalMaterial.style.display = "none";
+        // Cerrar si hace clic fuera del cuadro blanco
+        window.onclick = (event) => {
+            if (event.target == modal) modal.style.display = "none";
+        }
 
-    // Lógica para Directorio
-    btnDirectorio.onclick = () => modalDirectorio.style.display = "block";
-    spanDirectorio.onclick = () => modalDirectorio.style.display = "none";
+        // Manejo del formulario
+        document.getElementById("materialForm").onsubmit = (e) => {
+            e.preventDefault();
+            alert("¡Material enviado con éxito! (Aquí conectarás tu lógica de Flask)");
+            modal.style.display = "none";
+        };
 
-    // Cerrar si hacen clic fuera de la caja blanca
-    window.onclick = (event) => {
-        if (event.target == modalMaterial) modalMaterial.style.display = "none";
-        if (event.target == modalDirectorio) modalDirectorio.style.display = "none";
-    }
+        const tabs = document.querySelectorAll('.tab-btn');
+        const contents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
+                sortAlphabetically(`grid-${tab.dataset.tab}`);
+                filterCards();
+            });
+        });
+
+        // Orden Alfabético
+        function sortAlphabetically(gridId) {
+            const grid = document.getElementById(gridId);
+            const cards = Array.from(grid.getElementsByClassName('card'));
+            cards.sort((a, b) => {
+                return a.querySelector('.card-title').innerText.localeCompare(b.querySelector('.card-title').innerText);
+            });
+            cards.forEach(card => grid.appendChild(card));
+        }
+
+        // Buscador
+        const searchInput = document.getElementById('searchInput');
+        function filterCards() {
+            const filter = searchInput.value.toLowerCase();
+            const activeTab = document.querySelector('.tab-content.active');
+            const cards = activeTab.getElementsByClassName('card');
+            Array.from(cards).forEach(card => {
+                card.style.display = card.innerText.toLowerCase().includes(filter) ? "" : "none";
+            });
+        }
+        searchInput.addEventListener('keyup', filterCards);
+
+        // Modal
+        const modal = document.getElementById("contactModal");
+        const btnOpen = document.getElementById("openModal");
+        const btnClose = document.querySelector(".close-btn");
+
+        btnOpen.onclick = () => modal.style.display = "block";
+        btnClose.onclick = () => modal.style.display = "none";
+        window.onclick = (e) => { if (e.target == modal) modal.style.display = "none"; }
+
+        // Inicializar
+        sortAlphabetically('grid-especialistas');
+        sortAlphabetically('grid-escuelas');
