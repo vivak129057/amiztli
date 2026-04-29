@@ -294,19 +294,19 @@
 
         <div id="modalContainer" class="modal">
             <div class="modal-content">
-                    <span class="close-modal">&times;</span>
-                    <h3>Subir Recurso Educativo</h3>
-                    <form id="materialForm">
-                        <input type="text" id="titulo" placeholder="Título del material" required>
-                        
-                        <textarea id="descripcion" placeholder="¿De qué trata este recurso?"></textarea>
-                        
-                        <input type="text" id="condicion" placeholder="Trastorno o condición (ej. TDAH, Síndrome de Down)">
-                        
-                        <div class="file-input-wrapper" id="dropArea">
-                            <span id="fileNameDisplay">Seleccionar archivo o PDF 📎</span>
-                            <input type="file" id="archivo" style="display: none;" onchange="actualizarNombre()">
-                        </div>
+                        <span class="close-modal">&times;</span>
+                        <h3>Subir Recurso Educativo</h3>
+                        <form id="materialForm">
+                            <input type="text" id="titulo" placeholder="Título del material" required>
+                            
+                            <textarea id="descripcion" placeholder="¿De qué trata este recurso?"></textarea>
+                            
+                            <input type="text" id="condicion" placeholder="Trastorno o condición (ej. TDAH, Síndrome de Down)">
+                            
+                            <div class="file-input-wrapper" onclick="document.getElementById('archivo').click()">
+                                <span>Seleccionar archivo o PDF 📎</span>
+                                <input type="file" id="archivo" style="display: none;">
+                            </div>
 
                         <button type="submit" class="btn-submit">Publicar en Amiztli 🐾</button>
                     </form>
