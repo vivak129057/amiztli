@@ -303,9 +303,9 @@
                         
                         <input type="text" id="condicion" placeholder="Trastorno o condición (ej. TDAH, Síndrome de Down)">
                         
-                        <div class="file-input-wrapper" onclick="document.getElementById('archivo').click()">
-                            <span>Seleccionar archivo o PDF 📎</span>
-                            <input type="file" id="archivo" style="display: none;">
+                        <div class="file-input-wrapper" id="dropArea">
+                            <span id="fileNameDisplay">Seleccionar archivo o PDF 📎</span>
+                            <input type="file" id="archivo" style="display: none;" onchange="actualizarNombre()">
                         </div>
 
                         <button type="submit" class="btn-submit">Publicar en Amiztli 🐾</button>
