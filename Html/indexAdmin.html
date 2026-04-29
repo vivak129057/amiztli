@@ -104,9 +104,167 @@
         </div>
       </div>
 
-     
+      <div class="tab-content" id="notas-content">
+        <div class="notas-layout-wrapper">
+            
+            <aside class="family-sidebar">
+                <div class="child-profile-selector">
+                    <p style="font-size: 10px; font-weight: 800; color: var(--text-secondary); margin-bottom: 10px; letter-spacing: 1px;">DIARIO DE MI HIJO(A)</p>
+                    <select class="child-select" id="childSelector">
+                        <option value="1">👦 Juanito Pérez</option>
+                        <option value="2">👧 María López</option>
+                    </select>
+                </div>
 
-      
+                <div class="tabs-row">
+                    <button class="tab-btn active" id="btnPersonal" onclick="setMode('personal')">Mío (Privado)</button>
+                    <button class="tab-btn" id="btnCompartido" onclick="setMode('compartido')">Compartido</button>
+                </div>
+
+                <button class="btn-new-note">
+                    + Escribir algo nuevo 🐾
+                </button>
+
+                <div class="notes-list" id="notesList">
+                    <div class="note-item active">
+                        <p class="date">18 DE ABRIL, 2026</p>
+                        <p class="title">Logros en casa hoy</p>
+                    </div>
+                    <div class="note-item">
+                        <p class="date">16 DE ABRIL, 2026</p>
+                        <p class="title">Sentimientos sobre la terapia</p>
+                    </div>
+                </div>
+            </aside>
+
+            <main class="editor-main">
+                <div class="editor-top">
+                    <input type="text" class="editor-title" value="Logros en casa hoy">
+                    <p class="editor-meta">
+                        📅 Sábado, 18 de Abril | 
+                        <span id="badge" class="badge-status">🔒 Solo para mí</span>
+                    </p>
+                </div>
+
+                <textarea class="editor-body" id="editorBody" placeholder="Querido diario, hoy mi hijo logró..."></textarea>
+
+                <div class="editor-footer">
+                    <button class="btn-action btn-delete">Eliminar nota</button>
+                    <button class="btn-action btn-save">Guardar Cambios 🐾</button>
+                </div>
+            </main>
+
+        </div>
+      </div>
+
+      <div class="tab-content" id="foro-content">
+            <div class="forum-container">
+                <header class="forum-header">
+                    <input type="text" class="search-forum" placeholder="🔍 Buscar temas, consejos o dudas...">
+                    <button class="btn-post" onclick="openPostModal()">Nueva Publicación 🐾</button>
+                </header>
+
+                <div id="posts-feed" class="forum-feed">
+                    <div class="post-card">
+                        <div class="user-info-modal">
+                            <div class="user-avatar">EN</div>
+                            <div>
+                                <strong>Elena García</strong>
+                                <p style="font-size: 11px; color: var(--text-secondary);">Hace 2 horas</p>
+                            </div>
+                        </div>
+                        <h4 style="margin-top: 10px;">Consejos para el lenguaje en casa</h4>
+                        <p style="font-size: 14px; margin-top: 5px;">¿Alguien tiene estrategias nuevas para usar pictogramas durante la cena?</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="modal-post" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Crear publicación</h3>
+                        <span class="close-modal" onclick="closePostModal()">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="user-info-modal">
+                            <div class="user-avatar">KV</div>
+                            <div class="user-name-modal">
+                                <strong>Karla Villa</strong>
+                                <select class="privacy-select">
+                                    <option>👥 Amigos</option>
+                                    <option>🌎 Público</option>
+                                </select>
+                            </div>
+                        </div>
+                        <input type="text" id="post-title-input" placeholder="Título de tu publicación...">
+                        <textarea id="post-content-input" placeholder="¿Qué estás pensando, Karla?"></textarea>
+                        
+                        <div class="add-to-post">
+                            <span>Agregar a tu publicación</span>
+                            <div class="post-icons">
+                                <span title="Foto/video">🖼️</span>
+                                <span title="Etiquetar">👤</span>
+                                <span title="Sentimiento">😊</span>
+                                <span title="Ubicación">📍</span>
+                                <span title="GIF">🎬</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="btn-publish-final" class="btn-publish-active">Publicar</button>
+                </div>
+            </div>
+      </div>
+
+      <div class="tab-content chat-container-layout" id="chats-content">
+            <aside class="chat-sidebar">
+                <div class="sidebar-header">
+                    <h2>Mensajes</h2>
+                    <input type="text" class="search-chat" placeholder="Buscar contacto...">
+                </div>
+                <div class="conversations-list">
+                    <div class="conv-item active">
+                        <div class="avatar">👩‍🏫</div>
+                        <div class="conv-info">
+                            <p class="name">Maestra Elena (Lenguaje)</p>
+                            <p class="last-msg">¡Hola! Juanito progresó mucho hoy...</p>
+                        </div>
+                    </div>
+                    <div class="conv-item">
+                        <div class="avatar">👨‍⚕️</div>
+                        <div class="conv-info">
+                            <p class="name">Dr. Julián Rivera</p>
+                            <p class="last-msg">Le envié la nueva rutina por correo.</p>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <main class="chat-main">
+                <header class="chat-header">
+                    <div class="header-user">
+                        <div class="avatar" style="width: 40px; height: 40px; font-size: 20px;">👩‍🏫</div>
+                        <div>
+                            <p style="font-weight: bold; font-size: 15px; margin:0;">Maestra Elena</p>
+                            <p style="font-size: 11px; color: #48bb78; font-weight: bold; margin:0;">En línea</p>
+                        </div>
+                    </div>
+                    <div class="status-dot"></div>
+                </header>
+
+                <div class="messages-area" id="chatBox">
+                    <div class="bubble received">¡Hola! Quería comentarte que Juanito estuvo muy participativo hoy en la sesión de pictogramas.</div>
+                    <div class="bubble sent">¡Qué alegría escuchar eso, maestra! ¿Hubo algo en específico que le facilitara la actividad?</div>
+                    <div class="bubble received">Sí, usamos los nuevos materiales de apoyo visual que subimos a la plataforma.</div>
+                </div>
+
+                <form class="chat-input-area" id="chatForm">
+                    <button type="button" style="background: none; border: none; font-size: 20px; cursor: pointer;">📎</button>
+                    <input type="text" id="msgInput" class="chat-input" placeholder="Escribe un mensaje..." autocomplete="off">
+                    <button type="submit" class="btn-send">🐾</button>
+                </form>
+            </main>
+      </div>
+
       <div class="tab-content" id="materiales-content">
             <div class="materials-header">
                 <h2>Materiales Educativos</h2>
@@ -135,7 +293,28 @@
                     <button class="btn-download">Descargar 📥</button>
                 </div>
 
-                <div class="material-card" data-title="lectura fácil cuentos" data-tag="discapacidad intelectual">
+                <div id="modalContainer" class="modal">
+                    <div class="modal-content">
+                        <span class="close-modal">&times;</span>
+                        <h3>Subir Recurso Educativo</h3>
+                        <form id="materialForm">
+                            <input type="text" id="titulo" placeholder="Título del material" required>
+                            
+                            <textarea id="descripcion" placeholder="¿De qué trata este recurso?"></textarea>
+                            
+                            <input type="text" id="condicion" placeholder="Trastorno o condición (ej. TDAH, Síndrome de Down)">
+                            
+                            <div class="file-input-wrapper" onclick="document.getElementById('archivo').click()">
+                                <span>Seleccionar archivo o PDF 📎</span>
+                                <input type="file" id="archivo" style="display: none;">
+                            </div>
+
+                            <button type="submit" class="btn-submit">Publicar en Amiztli 🐾</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="material-card" data-title="lectura fácil cuentos"        data-tag="discapacidad intelectual">
                     <div class="material-info">
                         <h4>Lectura Fácil: Cuentos</h4>
                         <p>Textos adaptados para facilitar la comprensión lectora.</p>
@@ -151,48 +330,95 @@
       </div>
 
       <div class="tab-content" id="directorio-content">
-       <div class="tabs-container">
-            <button class="tab-btn active" data-tab="especialistas">Especialistas</button>
-            <button class="tab-btn" data-tab="escuelas">Escuelas / Asociaciones</button>
-        </div>
+            <div class="tabs-container">
+              <button class="tab-btn active" data-tab="especialistas">Especialistas</button>
+              <button class="tab-btn" data-tab="escuelas">Escuelas / Asociaciones</button>
+            </div>
 
-        <div class="search-container">
-            <input type="text" id="searchInput" class="search-input" placeholder="Buscar por nombre, trastorno o ciudad...">
-        </div>
+            <div class="search-container">
+              <input type="text" id="searchInput" class="search-input" placeholder="Buscar por nombre, trastorno o ciudad...">
+            </div>
 
-        <div id="especialistas" class="directory-tab active">
-            <div class="directory-grid" id="grid-especialistas">
-                <div class="card">
-                    <div class="card-icon">👨‍⚕️</div>
-                    <p class="card-title">Alonso, Beatriz</p>
-                    <p class="card-sub">Neuropediatra</p>
-                    <span class="card-tag">Epilepsia / Retraso Psicomotriz</span>
-                    <p class="card-location">📍 Ciudad Victoria, Tam.</p>
-                    <button class="btn-view">Ver Detalles 🐾</button>
-                </div>
-                <div class="card">
-                    <div class="card-icon">👩‍⚕️</div>
-                    <p class="card-title">García, Elena</p>
-                    <p class="card-sub">Terapeuta de Lenguaje</p>
-                    <span class="card-tag">Autismo (TEA)</span>
-                    <p class="card-location">📍 Nuevo Laredo, Tam.</p>
-                    <button class="btn-view">Ver Detalles 🐾</button>
+            <div id="especialistas" class="directory-tab active">
+              <div class="directory-grid" id="grid-especialistas">
+                  <div class="card">
+                      <div class="card-icon">👨‍⚕️</div>
+                      <p class="card-title">Alonso, Beatriz</p>
+                      <p class="card-sub">Neuropediatra</p>
+                      <span class="card-tag">Epilepsia / Retraso Psicomotriz</span>
+                      <p class="card-location">📍 Ciudad Victoria, Tam.</p>
+                      <button class="btn-view">Ver Detalles 🐾</button>
+                  </div>
+                  <div class="card">
+                      <div class="card-icon">👩‍⚕️</div>
+                      <p class="card-title">García, Elena</p>
+                      <p class="card-sub">Terapeuta de Lenguaje</p>
+                      <span class="card-tag">Autismo (TEA)</span>
+                      <p class="card-location">📍 Nuevo Laredo, Tam.</p>
+                      <button class="btn-view">Ver Detalles 🐾</button>
+                  </div>
+              </div>
+            </div>
+
+            <div id="escuelas" class="directory-tab">
+                <div class="directory-grid" id="grid-escuelas">
+                    <div class="card">
+                        <div class="card-icon">🏫</div>
+                        <p class="card-title">CAM No. 1</p>
+                        <p class="card-sub">Centro de Atención Múltiple</p>
+                        <span class="card-tag">Discapacidad Múltiple</span>
+                        <p class="card-location">📍 Nuevo Laredo, Tam.</p>
+                        <button class="btn-view">Más información 🐾</button>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div id="escuelas" class="directory-tab">
-            <div class="directory-grid" id="grid-escuelas">
-                <div class="card">
-                    <div class="card-icon">🏫</div>
-                    <p class="card-title">CAM No. 1</p>
-                    <p class="card-sub">Centro de Atención Múltiple</p>
-                    <span class="card-tag">Discapacidad Múltiple</span>
-                    <p class="card-location">📍 Nuevo Laredo, Tam.</p>
-                    <button class="btn-view">Más información 🐾</button>
-                </div>
-            </div>
-        </div>
+             
+            <div id="contactModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-btn">&times;</span>
+                        <h2>🐾 Nuevo Registro</h2>
+                        <form id="contactForm">
+                            <div class="form-grid">
+                                <div class="form-group full">
+                                    <label>Nombre Completo / Institución</label>
+                                    <input type="text" placeholder="Ej. Dr. Juan Pérez" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Categoría</label>
+                                    <select>
+                                        <option>Especialista</option>
+                                        <option>Escuela / Asociación</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Especialidad / Giro</label>
+                                    <input type="text" placeholder="Ej. Psicología">
+                                </div>
+                                <div class="form-group">
+                                    <label>Trastornos que trata</label>
+                                    <input type="text" placeholder="Ej. TDAH, TEA, Down">
+                                </div>
+                                <div class="form-group">
+                                    <label>Ubicación</label>
+                                    <input type="text" placeholder="Ciudad y Estado">
+                                </div>
+                                <div class="form-group">
+                                    <label>Teléfono de Contacto</label>
+                                    <input type="tel" placeholder="867 000 0000">
+                                </div>
+                                <div class="form-group">
+                                    <label>Correo Electrónico</label>
+                                    <input type="email" placeholder="ejemplo@correo.com">
+                                </div>
+                                <div class="form-group full">
+                                    <label>Descripción / Detalles Adicionales</label>
+                                    <textarea placeholder="Cuéntanos más sobre tu experiencia o servicios..."></textarea>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-submit">Publicar en Amiztli 🐾</button>
+                        </form>
+                    </div>
+            </div>    
       </div>
 
       <div class="tab-content" id="perfil-content">
@@ -302,6 +528,7 @@
         <button class="btn-save-all" onclick="saveConfig()">Guardar Cambios 🐾</button>
         
       </div>
+
 
   <script src="../javascript/principal.js"></script>
 </body>
