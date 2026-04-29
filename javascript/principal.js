@@ -397,3 +397,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const tabs = document.querySelectorAll('.tab-btn');
         const contents = document.querySelectorAll('.tab-content');
 
+/*  =======================================================
+    botón de archivos para subir materiales (en desarrollo)
+    ======================================================= */   
+
+    function actualizarNombre() {
+    const input = document.getElementById('archivo');
+    const display = document.getElementById('fileNameDisplay');
+    
+    if (input.files.length > 0) {
+        display.innerText = "Archivo: " + input.files[0].name;
+        display.style.color = "#34495E"; 
+        display.style.fontWeight = "bold";
+    } else {
+        
+        display.innerText = "Seleccionar archivo o PDF 📎";
+    }
+}
