@@ -370,3 +370,30 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+/* ==========================================
+    LÓGICA DE MODALES (MATERIALES Y DIRECTORIO)
+    ========================================== */
+
+    // Variables para Materiales
+    const modalMaterial = document.getElementById("modalContainer");
+    const btnMaterial = document.getElementById("btnAbrirMaterial");
+    const spanMaterial = document.querySelector(".close-modal");
+
+    // Variables para Directorio
+    const modalDirectorio = document.getElementById("contactModal");
+    const btnDirectorio = document.getElementById("btnAbrirDirectorio");
+    const spanDirectorio = document.querySelector(".close-btn");
+
+    // Lógica para Materiales
+    btnMaterial.onclick = () => modalMaterial.style.display = "block";
+    spanMaterial.onclick = () => modalMaterial.style.display = "none";
+
+    // Lógica para Directorio
+    btnDirectorio.onclick = () => modalDirectorio.style.display = "block";
+    spanDirectorio.onclick = () => modalDirectorio.style.display = "none";
+
+    // Cerrar si hacen clic fuera de la caja blanca
+    window.onclick = (event) => {
+        if (event.target == modalMaterial) modalMaterial.style.display = "none";
+        if (event.target == modalDirectorio) modalDirectorio.style.display = "none";
+    }
