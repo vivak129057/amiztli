@@ -415,34 +415,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 }
 
-// --- Funciones Globales del Diario / Notas ---
-function setMode(mode) {
-    const btnPersonal = document.getElementById('btnPersonal');
-    const btnCompartido = document.getElementById('btnCompartido');
-    const badge = document.getElementById('badge');
-
-    if (mode === 'personal') {
-        btnPersonal.classList.add('active');
-        btnCompartido.classList.remove('active');
-        badge.textContent = "🔒 Solo para mí";
-    } else {
-        btnCompartido.classList.add('active');
-        btnPersonal.classList.remove('active');
-        badge.textContent = "👥 Compartido con terapeutas";
-    }
-}
-
-// --- Funciones Globales del Foro ---
-function openPostModal() {
-    const modal = document.getElementById('modal-post');
-    if (modal) {
-        modal.style.display = "block";
-    }
-}
-
-function closePostModal() {
-    const modal = document.getElementById('modal-post');
-    if (modal) {
-        modal.style.display = "none";
-    }
-}
