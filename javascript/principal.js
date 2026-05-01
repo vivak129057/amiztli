@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
    LÓGICA DE CONFIGURACIÓN Y TEMAS
    ========================================== */
 
-const themeSelector = document.getElementById('themeSelector');
+        const themeSelector = document.getElementById('themeSelector');
         const body = document.body;
 
         // Función para cambiar el tema
@@ -148,22 +148,16 @@ const themeSelector = document.getElementById('themeSelector');
 /* ==========================================
    LÓGICA DE SUBIR IMAGEN DE PERFIL
    ========================================== */
+    const avatarSelect = document.getElementById('avatarSelect');
+    const profileImage = document.getElementById('profileImage');
 
+    avatarSelect.addEventListener('change', function() {
+        // Cambia la fuente de la imagen según el valor seleccionado en el menú
+        const selectedImage = this.value;
+        profileImage.setAttribute('src', selectedImage);
+    });
 
-         const fileInput = document.getElementById('fileInput');
-        const profileImage = document.getElementById('profileImage');
-
-        fileInput.addEventListener('change', function() {
-            const file = this.files[0];
-            if (file) {
-                // Crea una URL temporal para la imagen seleccionada
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    profileImage.setAttribute('src', e.target.result);
-                }
-                reader.readAsDataURL(file);
-            }
-        });
+       
 
 /* ==========================================
    LÓGICA DE DIRECTORIO Y BUSCADOR
@@ -370,7 +364,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-/* ==========================================
+ /* ==========================================
     LÓGICA DE MODALES (MATERIALES Y DIRECTORIO)
     ========================================== */
         const modal = document.getElementById("modalContainer");
@@ -397,21 +391,21 @@ document.addEventListener('DOMContentLoaded', () => {
         const tabs = document.querySelectorAll('.tab-btn');
         const contents = document.querySelectorAll('.tab-content');
 
-/*  =======================================================
+ /*  =======================================================
     botón de archivos para subir materiales (en desarrollo)
     ======================================================= */   
 
     function actualizarNombre() {
-    const input = document.getElementById('archivo');
-    const display = document.getElementById('fileNameDisplay');
-    
-    if (input.files.length > 0) {
-        display.innerText = "Archivo: " + input.files[0].name;
-        display.style.color = "#34495E"; 
-        display.style.fontWeight = "bold";
-    } else {
+        const input = document.getElementById('archivo');
+        const display = document.getElementById('fileNameDisplay');
         
-        display.innerText = "Seleccionar archivo o PDF 📎";
+        if (input.files.length > 0) {
+            display.innerText = "Archivo: " + input.files[0].name;
+            display.style.color = "#34495E"; 
+            display.style.fontWeight = "bold";
+        } else {
+            
+            display.innerText = "Seleccionar archivo o PDF 📎";
+        }
     }
-}
 
