@@ -1,4 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
+    
+    // ==========================================
+    // 1. Pestañas Principales (Sidebar)
+    // ==========================================
     const navItems = document.querySelectorAll('.nav-item');
     const tabContents = document.querySelectorAll('.tab-content');
     const pageTitle = document.getElementById('pageTitle');
@@ -37,9 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'CONFIGURACIÓN', 
             subtitle: 'Ajustes de accesibilidad y del sistema' 
         }
-  };
+    };
 
-    // --- LÓGICA DE PESTAÑAS ---
     navItems.forEach(item => {
         item.addEventListener('click', () => {
             const tabId = item.getAttribute('data-tab');
@@ -53,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const target = document.getElementById(`${tabId}-content`);
             if (target) target.classList.add('active');
 
-            // Cambiar textos
+            // Cambiar encabezados
             if (sectionData[tabId]) {
                 pageTitle.textContent = sectionData[tabId].title;
                 pageSubtitle.textContent = sectionData[tabId].subtitle;
@@ -61,60 +64,68 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- LÓGICA DEL CARRUSEL (Misión/Visión/Valores) ---
+    // ==========================================
+    // 2. Carrusel de Inicio
+    // ==========================================
     const track = document.getElementById('carouselTrack');
     const slides = document.querySelectorAll('.carousel-slide');
     const nextBtn = document.getElementById('nextBtn');
     const prevBtn = document.getElementById('prevBtn');
-    
     let index = 0;
 
     function moveCarousel() {
+        if (!track || slides.length === 0) return;
         if (index >= slides.length) index = 0;
         if (index < 0) index = slides.length - 1;
         track.style.transform = `translateX(-${index * 100}%)`;
     }
 
-    nextBtn.addEventListener('click', () => {
-        index++;
-        moveCarousel();
-    });
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            index++;
+            moveCarousel();
+        });
+    }
 
-    prevBtn.addEventListener('click', () => {
-        index--;
-        moveCarousel();
-    });
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            index--;
+            moveCarousel();
+        });
+    }
 
-    // --- FECHA ACTUAL ---
+    // ==========================================
+    // 3. Fecha Actual
+    // ==========================================
     function updateDate() {
         const dateElement = document.getElementById('currentDate');
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        dateElement.textContent = new Date().toLocaleDateString('es-ES', options);
+        if (dateElement) {
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            dateElement.textContent = new Date().toLocaleDateString('es-ES', options);
+        }
     }
     updateDate();
 
+    // ==========================================
+    // 4. Sidebar Toggle
+    // ==========================================
     const btnMenu = document.getElementById('btn-menu');
     const sidebar = document.querySelector('.sidebar');
+    if (btnMenu && sidebar) {
+        btnMenu.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+        });
+    }
 
-    btnMenu.addEventListener('click', () => {
-        sidebar.classList.toggle('active'); // Esto "prende y apaga" la visibilidad
-    });
+    // ==========================================
+    // 5. Configuración y Temas
+    // ==========================================
+    const themeSelector = document.getElementById('themeSelector');
+    const body = document.body;
 
-
-});
-
-/* ==========================================
-   LÓGICA DE CONFIGURACIÓN Y TEMAS
-   ========================================== */
-
-        const themeSelector = document.getElementById('themeSelector');
-        const body = document.body;
-
-        // Función para cambiar el tema
+    if (themeSelector) {
         themeSelector.addEventListener('change', function() {
             const selectedTheme = this.value;
-            
-            // Limpiar clases previas
             body.classList.remove('dark-mode', 'high-contrast');
 
             if (selectedTheme === 'dark') {
@@ -124,65 +135,44 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Función para simular guardado y persistencia
-        function saveConfig() {
-            const currentTheme = themeSelector.value;
-            localStorage.setItem('amiztli-theme', currentTheme);
-            alert('Configuración guardada 🐾 - El tema se aplicará en tu próxima sesión.');
+        // Cargar tema guardado
+        const savedTheme = localStorage.getItem('amiztli-theme');
+        if (savedTheme) {
+            themeSelector.value = savedTheme;
+            themeSelector.dispatchEvent(new Event('change'));
         }
+    }
 
-        function logout() {
-              window.location.href = "log_in.html";
-          }
-
-
-        // Cargar tema guardado al iniciar
-        window.onload = () => {
-            const savedTheme = localStorage.getItem('amiztli-theme');
-            if (savedTheme) {
-                themeSelector.value = savedTheme;
-                themeSelector.dispatchEvent(new Event('change'));
-            }
-        };
-
-/* ==========================================
-   LÓGICA DE SUBIR IMAGEN DE PERFIL
-   ========================================== */
+    // ==========================================
+    // 6. Subir / Seleccionar Imagen de Perfil
+    // ==========================================
     const avatarSelect = document.getElementById('avatarSelect');
     const profileImage = document.getElementById('profileImage');
+    const fileInput = document.getElementById('fileInput');
 
-    avatarSelect.addEventListener('change', function() {
-        // Cambia la fuente de la imagen según el valor seleccionado en el menú
-        const selectedImage = this.value;
-        profileImage.setAttribute('src', selectedImage);
-    });
-
-       
-
-/* ==========================================
-   LÓGICA DE DIRECTORIO Y BUSCADOR
-   ========================================== */
-
-
-       document.addEventListener('DOMContentLoaded', () => {
-    // 1. PESTAÑAS PRINCIPALES (Sidebar)
-    const navItems = document.querySelectorAll('.nav-item');
-    const tabContents = document.querySelectorAll('.tab-content');
-
-    navItems.forEach(item => {
-        item.addEventListener('click', () => {
-            const tabId = item.getAttribute('data-tab');
-            navItems.forEach(nav => nav.classList.remove('active'));
-            tabContents.forEach(content => content.classList.remove('active'));
-
-            item.classList.add('active');
-            const target = document.getElementById(`${tabId}-content`);
-            if (target) target.classList.add('active');
+    if (avatarSelect && profileImage) {
+        avatarSelect.addEventListener('change', function() {
+            profileImage.setAttribute('src', this.value);
         });
-    });
+    }
 
-    // 2. SUB-PESTAÑAS DEL DIRECTORIO (Especialistas / Escuelas)
-    const subTabs = document.querySelectorAll('.tab-btn');
+    if (fileInput && profileImage) {
+        fileInput.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    profileImage.setAttribute('src', e.target.result);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+
+    // ==========================================
+    // 7. Directorio (Pestañas y Buscador)
+    // ==========================================
+    const subTabs = document.querySelectorAll('.directory-tabs .tab-btn, .tabs-container .tab-btn');
     const subContents = document.querySelectorAll('.directory-tab');
 
     subTabs.forEach(tab => {
@@ -201,7 +191,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 3. BUSCADOR FILTRADO
     const searchInput = document.getElementById('searchInput');
     if (searchInput) {
         searchInput.addEventListener('keyup', () => {
@@ -216,196 +205,219 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-});
 
-// Función de Ordenar (Fuera del DOMContentLoaded para que sea global)
-function sortAlphabetically(gridId) {
-    const grid = document.getElementById(gridId);
-    if (!grid) return;
-    const cards = Array.from(grid.getElementsByClassName('card'));
-    cards.sort((a, b) => {
-        const titleA = a.querySelector('.card-title').innerText;
-        const titleB = b.querySelector('.card-title').innerText;
-        return titleA.localeCompare(titleB);
-    });
-    cards.forEach(card => grid.appendChild(card));
-}
+    // ==========================================
+    // 8. Modales de Materiales y Directorio
+    // ==========================================
+    const modalMaterials = document.getElementById('modalContainer');
+    const btnOpenMaterials = document.getElementById('btnOpen');
+    const closeMaterialsBtn = modalMaterials?.querySelector('.close-modal');
 
-// Función Logout
-function logout() {
-    window.location.href = "log_in.html";
-}
+    if (btnOpenMaterials && modalMaterials) {
+        btnOpenMaterials.onclick = () => modalMaterials.style.display = "block";
+    }
 
-/* ==========================================
-   LÓGICA DE BUSQUEDA EN MATERIALES
-   ========================================== */
+    if (closeMaterialsBtn && modalMaterials) {
+        closeMaterialsBtn.onclick = () => modalMaterials.style.display = "none";
+    }
 
-document.getElementById('searchInput').addEventListener('keyup', function() {
-            const searchTerm = this.value.toLowerCase();
-            const cards = document.querySelectorAll('.material-card');
-            const noResults = document.getElementById('noResults');
-            let hasVisibleCards = false;
+    // Modal del Directorio
+    const modalDirectory = document.getElementById('contactModal');
+    const btnOpenDirectory = document.getElementById('btnAbrirDirectorio');
+    const closeDirectoryBtn = modalDirectory?.querySelector('.close-btn');
 
-            cards.forEach(card => {
-                const title = card.getAttribute('data-title');
-                const tag = card.getAttribute('data-tag');
+    if (btnOpenDirectory && modalDirectory) {
+        btnOpenDirectory.onclick = () => modalDirectory.style.display = "flex";
+    }
 
-                if (title.includes(searchTerm) || tag.includes(searchTerm)) {
-                    card.style.display = 'flex';
-                    hasVisibleCards = true;
-                } else {
-                    card.style.display = 'none';
-                }
-            });
+    if (closeDirectoryBtn && modalDirectory) {
+        closeDirectoryBtn.onclick = () => modalDirectory.style.display = "none";
+    }
 
-            noResults.style.display = hasVisibleCards ? 'none' : 'block';
-        });
+    // Cierre de ventanas modales haciendo clic afuera
+    window.onclick = (event) => {
+        if (event.target === modalMaterials) {
+            modalMaterials.style.display = "none";
+        }
+        if (event.target === modalDirectory) {
+            modalDirectory.style.display = "none";
+        }
+        const postModal = document.getElementById('modal-post');
+        if (event.target === postModal) {
+            postModal.style.display = "none";
+        }
+    };
 
-/* ==========================================
-   LÓGICA DE CHAT SIMULADO
-   ========================================== */
+    // Formulario de materiales
+    const materialForm = document.getElementById('materialForm');
+    if (materialForm) {
+        materialForm.onsubmit = (e) => {
+            e.preventDefault();
+            alert("¡Material enviado con éxito! (Aquí conectarás tu lógica de Flask)");
+            if (modalMaterials) modalMaterials.style.display = "none";
+        };
+    }
 
- const chatForm = document.getElementById('chatForm');
-        const chatBox = document.getElementById('chatBox');
-        const msgInput = document.getElementById('msgInput');
+    // ==========================================
+    // 9. Chat
+    // ==========================================
+    const chatForm = document.getElementById('chatForm');
+    const chatBox = document.getElementById('chatBox');
+    const msgInput = document.getElementById('msgInput');
 
+    if (chatForm && chatBox && msgInput) {
         chatForm.onsubmit = (e) => {
             e.preventDefault();
-            if(msgInput.value.trim() === "") return;
+            if (msgInput.value.trim() === "") return;
 
-            // Crear burbuja de enviado
             const bubble = document.createElement('div');
             bubble.className = 'bubble sent';
             bubble.innerText = msgInput.value;
             
             chatBox.appendChild(bubble);
-            
-            // Scroll automático al final
             chatBox.scrollTop = chatBox.scrollHeight;
-            
             msgInput.value = "";
         };
+    }
 
-/* ==========================================
-   LÓGICA DE PUBLICACIÓN EN FORO
-   ========================================== */
-
-document.addEventListener('DOMContentLoaded', () => {
-    const modal = document.getElementById('modal-post');
-    const btnOpen = document.querySelector('.btn-post');
-    const btnClose = document.querySelector('.close-modal');
+    // ==========================================
+    // 10. Foro y Publicaciones
+    // ==========================================
+    const forumModal = document.getElementById('modal-post');
+    const btnOpenForum = document.querySelector('.btn-post');
+    const btnCloseForum = forumModal?.querySelector('.close-modal');
     const btnPublish = document.getElementById('btn-publish-final');
-    const forumContainer = document.querySelector('.forum-container');
-    
-    // --- NUEVO: Selección del input de búsqueda ---
-    const searchInput = document.querySelector('.search-forum');
+    const searchInputForum = document.querySelector('.search-forum');
 
-    // Abrir modal
-    btnOpen.onclick = () => modal.style.display = "block";
+    if (btnOpenForum && forumModal) {
+        btnOpenForum.onclick = () => forumModal.style.display = "block";
+    }
 
-    // Cerrar modal
-    btnClose.onclick = () => modal.style.display = "none";
-    window.onclick = (event) => { if (event.target == modal) modal.style.display = "none"; }
+    if (btnCloseForum && forumModal) {
+        btnCloseForum.onclick = () => forumModal.style.display = "none";
+    }
 
-    // Función para publicar
-    btnPublish.onclick = () => {
-        const title = document.getElementById('post-title-input').value;
-        const content = document.getElementById('post-content-input').value;
-
-        if (title && content) {
-            const newCard = document.createElement('article');
-            newCard.classList.add('post-card');
+    if (btnPublish) {
+        btnPublish.onclick = () => {
+            const titleElement = document.getElementById('post-title-input');
+            const contentElement = document.getElementById('post-content-input');
             
-            newCard.innerHTML = `
-                <div class="post-user-info">
-                    <div class="user-avatar">KV</div>
-                    <div>
-                        <span class="post-user-name">Karla Villa</span>
-                        <div class="post-meta">Publicado ahora mismo</div>
+            if (!titleElement || !contentElement) return;
+
+            const title = titleElement.value;
+            const content = contentElement.value;
+
+            if (title && content) {
+                const newCard = document.createElement('article');
+                newCard.classList.add('post-card');
+                
+                newCard.innerHTML = `
+                    <div class="post-user-info">
+                        <div class="user-avatar">KV</div>
+                        <div>
+                            <span class="post-user-name">Karla Villa</span>
+                            <div class="post-meta">Publicado ahora mismo</div>
+                        </div>
                     </div>
-                </div>
-                <h2 class="post-title">${title}</h2>
-                <p class="post-content">${content}</p>
-                <div class="post-actions">
-                    <button class="action-btn like">❤️ 0</button>
-                    <button class="action-btn">💬 0 Comentarios</button>
-                    <button class="action-btn">🔗 Compartir</button>
-                </div>
-            `;
+                    <h2 class="post-title">${title}</h2>
+                    <p class="post-content">${content}</p>
+                    <div class="post-actions">
+                        <button class="action-btn like">❤️ 0</button>
+                        <button class="action-btn">💬 0 Comentarios</button>
+                        <button class="action-btn">🔗 Compartir</button>
+                    </div>
+                `;
 
-            document.querySelector('.forum-header').after(newCard);
+                const forumHeader = document.querySelector('.forum-header');
+                if (forumHeader) {
+                    forumHeader.after(newCard);
+                }
 
-            document.getElementById('post-title-input').value = "";
-            document.getElementById('post-content-input').value = "";
-            modal.style.display = "none";
-        } else {
-            alert("¡Escribe algo primero, Karla! ");
-        }
-    };
-
-    // --- NUEVO: Lógica del Buscador ---
-    searchInput.addEventListener('input', (e) => {
-        const term = e.target.value.toLowerCase(); // Lo que el usuario escribe
-        const allPosts = document.querySelectorAll('.post-card'); // Todas las publicaciones
-
-        allPosts.forEach(post => {
-            // Obtenemos el texto del título y el contenido de esta card específica
-            const titleText = post.querySelector('.post-title').innerText.toLowerCase();
-            const contentText = post.querySelector('.post-content').innerText.toLowerCase();
-
-            // Si el término de búsqueda está en el título o en el contenido...
-            if (titleText.includes(term) || contentText.includes(term)) {
-                post.style.display = "block"; // Se muestra
-                post.style.animation = "fadeIn 0.3s"; // Opcional: un efecto suave
+                titleElement.value = "";
+                contentElement.value = "";
+                if (forumModal) forumModal.style.display = "none";
             } else {
-                post.style.display = "none"; // Se oculta
+                alert("¡Escribe algo primero, Karla! ");
             }
+        };
+    }
+
+    if (searchInputForum) {
+        searchInputForum.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const allPosts = document.querySelectorAll('.post-card');
+
+            allPosts.forEach(post => {
+                const titleText = post.querySelector('.post-title')?.innerText.toLowerCase() || '';
+                const contentText = post.querySelector('.post-content')?.innerText.toLowerCase() || '';
+
+                if (titleText.includes(term) || contentText.includes(term)) {
+                    post.style.display = "block";
+                    post.style.animation = "fadeIn 0.3s";
+                } else {
+                    post.style.display = "none";
+                }
+            });
         });
-    });
+    }
 });
 
- /* ==========================================
-    LÓGICA DE MODALES (MATERIALES Y DIRECTORIO)
-    ========================================== */
-        const modal = document.getElementById("modalContainer");
-        const btnOpen = document.getElementById("btnOpen");
-        const btnClose = document.querySelector(".close-modal");
+// ==========================================
+// 11. Funciones Globales
+// ==========================================
+function sortAlphabetically(gridId) {
+    const grid = document.getElementById(gridId);
+    if (!grid) return;
+    const cards = Array.from(grid.getElementsByClassName('card'));
+    
+    cards.sort((a, b) => {
+        const titleA = a.querySelector('.card-title')?.innerText || '';
+        const titleB = b.querySelector('.card-title')?.innerText || '';
+        return titleA.localeCompare(titleB);
+    });
+    
+    cards.forEach(card => grid.appendChild(card));
+}
 
-        btnOpen.onclick = () => modal.style.display = "block";
+function logout() {
+    window.location.href = "log_in.html";
+}
 
-        // Cerrar ventana
-        btnClose.onclick = () => modal.style.display = "none";
+function saveConfig() {
+    const themeSelector = document.getElementById('themeSelector');
+    if (themeSelector) {
+        localStorage.setItem('amiztli-theme', themeSelector.value);
+        alert('Configuración guardada 🐾 - El tema se aplicará en tu próxima sesión.');
+    }
+}
 
-        // Cerrar si hace clic fuera del cuadro blanco
-        window.onclick = (event) => {
-            if (event.target == modal) modal.style.display = "none";
-        }
+function setMode(mode) {
+    const btnPersonal = document.getElementById('btnPersonal');
+    const btnCompartido = document.getElementById('btnCompartido');
+    const badge = document.getElementById('badge');
 
-        // Manejo del formulario
-        document.getElementById("materialForm").onsubmit = (e) => {
-            e.preventDefault();
-            alert("¡Material enviado con éxito! (Aquí conectarás tu lógica de Flask)");
-            modal.style.display = "none";
-        };
+    if (mode === 'personal') {
+        btnPersonal?.classList.add('active');
+        btnCompartido?.classList.remove('active');
+        if (badge) badge.textContent = '🔒 Solo para mí';
+    } else {
+        btnCompartido?.classList.add('active');
+        btnPersonal?.classList.remove('active');
+        if (badge) badge.textContent = '👥 Compartido';
+    }
+}
 
-        const tabs = document.querySelectorAll('.tab-btn');
-        const contents = document.querySelectorAll('.tab-content');
-
- /*  =======================================================
-    botón de archivos para subir materiales (en desarrollo)
-    ======================================================= */   
-
-    function actualizarNombre() {
-        const input = document.getElementById('archivo');
-        const display = document.getElementById('fileNameDisplay');
-        
-        if (input.files.length > 0) {
+function actualizarNombre() {
+    const input = document.getElementById('archivo');
+    const display = document.getElementById('fileNameDisplay');
+    
+    if (display) {
+        if (input && input.files.length > 0) {
             display.innerText = "Archivo: " + input.files[0].name;
             display.style.color = "#34495E"; 
             display.style.fontWeight = "bold";
         } else {
-            
             display.innerText = "Seleccionar archivo o PDF 📎";
         }
     }
-
+}
