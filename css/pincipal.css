@@ -1724,3 +1724,51 @@ input:focus, textarea:focus {
 .btn-download:hover {
     background: #dcfce7;
 }
+
+/* ==========================================
+   AJUSTE DE LA CABECERA DEL DIRECTORIO
+   ========================================== */
+
+.tabs-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--card-bg, #ffffff);
+    padding: 16px 24px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 8px var(--shadow);
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap; /* Para que sea responsivo en pantallas pequeñas */
+}
+
+.tabs-container .tab-group {
+    display: flex;
+    gap: 10px;
+}
+
+#btnAbrirDirectorio {
+    width: auto !important; /* Quita el estiramiento de la clase btn-submit */
+    margin-bottom: 0 !important;
+    background-color: var(--accent);
+    color: var(--text-primary);
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 6px var(--shadow);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+#btnAbrirDirectorio:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px var(--shadow);
+    filter: brightness(0.95);
+}
