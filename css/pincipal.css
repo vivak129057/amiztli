@@ -1562,12 +1562,14 @@ body {
 /* 2. La "Caja" del formulario con la esencia AMIZTLI ✨ */
 .modal-content {
     background-color: #ffffff; /* Blanco puro, como en tu imagen */
-    margin: 4% auto; /* 4% desde arriba y centrado */
+    margin: 5% auto; /* 4% desde arriba y centrado */
     padding: 40px; /* Más padding para que respire, como en tu login */
     border: none; /* Sin bordes innecesarios, solo la sombra suave */
     border-radius: 20px; /* Bordes redondeados más suaves */
     width: 90%;
     max-width: 600px; 
+    height: auto;
+    max-height: 80vh; /* Para evitar que sea demasiado grande en pantallas pequeñas */
     box-shadow: 0 15px 40px rgba(0,0,0,0.15); /* Sombra suave pero profunda */
     position: relative;
     animation: fadeInSlide 0.5s ease-out; /* Animación más sutil */
