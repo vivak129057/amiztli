@@ -458,58 +458,97 @@ function actualizarNombre() {
     }
 }
 
+let materialesGlobales = [];
+
 async function cargarMateriales() {
     try {
-        // Hacemos la petición a la API de Flask
-        const response = await fetch('https://amiztlibackend.onrender.com/api/materiales_educativos',);
+        const response = await fetch('https://amiztlibackend.onrender.com/api/materiales_educativos');
         
         if (!response.ok) {
             throw new Error('Error al obtener los materiales');
         }
 
-        const materiales = await response.json();
-        const contenedor = document.querySelector('.materials-list');
+        materialesGlobales = await response.json(); // Guardamos los materiales en la variable global
         
-        // Limpiamos el contenedor antes de llenarlo
-        contenedor.innerHTML = '';
-
-        if (materiales.length === 0) {
-            contenedor.innerHTML = `<p class="no-results" style="display: block;">No hay materiales disponibles.</p>`;
-            return;
-        }
-
-        // Recorremos los datos usando los nombres de tus columnas de la base de datos
-            materiales.forEach(mat => {
-            const card = document.createElement('div');
-            card.classList.add('material-card');
-
-            let archivoUrl = mat.enlace_descarga || mat.tipo_archivo; // Usamos el campo correspondiente
-
-            // 1. Creamos un enlace específico para descargar
-            let urlDescarga = archivoUrl;
-            if (urlDescarga && urlDescarga.includes('cloudinary.com')) {
-                // Insertamos 'fl_attachment' en la URL para forzar la descarga
-                urlDescarga = urlDescarga.replace('/upload/', '/upload/fl_attachment/');
-            }
-
-            let categoriaTexto = (mat.categoria && mat.categoria.trim() !== '') ? mat.categoria : 'General';
-
-            card.innerHTML = `
-                <div class="material-info">
-                    <h4>${mat.titulo_recurso || 'Sin título'}</h4>
-                    <p>${mat.descripcion || 'Sin descripción'}</p>
-                    <span class="condition-tag">${categoriaTexto}</span>
-                </div>
-                <div style="display: flex; gap: 10px;">
-                    <a href="${archivoUrl}" target="_blank" class="btn-download">Visualizar 👁️</a>
-                    
-                    <a href="${urlDescarga}" class="btn-download">Descargar 📥</a>
-                </div>
-            `;
-            contenedor.appendChild(card);
-        });
+        // Renderizamos todos los materiales al cargar
+        renderizarMateriales(materialesGlobales);
 
     } catch (error) {
         console.error("Error al cargar los materiales:", error);
+    }
+}
+
+// Función que dibuja las tarjetas en el HTML
+function renderizarMateriales(materiales) {
+    const contenedor = document.querySelector('.materials-list');
+    contenedor.innerHTML = ''; // Limpiamos el contenedor
+
+    if (materiales.length === 0) {
+        contenedor.innerHTML = `<p class="no-results" style="display: block;">No hay materiales disponibles.</p>`;
+        return;
+    }
+
+    materiales.forEach(mat => {
+        const card = document.createElement('div');
+        card.classList.add('material-card');
+
+        let archivoUrl = mat.enlace_descarga || mat.tipo_archivo;
+        let urlDescarga = archivoUrl;
+        
+        if (urlDescarga && urlDescarga.includes('cloudinary.com')) {
+            urlDescarga = urlDescarga.replace('/upload/', '/upload/fl_attachment/');
+        }
+
+        let categoriaTexto = (mat.categoria && mat.categoria.trim() !== '') ? mat.categoria : 'General';
+
+        card.innerHTML = `
+            <div class="material-info">
+                <h4>${mat.titulo_recurso || 'Sin título'}</h4>
+                <p>${mat.descripcion || 'Sin descripción'}</p>
+                <span class="condition-tag">${categoriaTexto}</span>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <a href="${archivoUrl}" target="_blank" class="btn-download">Visualizar 👁️</a>
+                <a href="${urlDescarga}" download class="btn-download">Descargar 📥</a>
+            </div>
+        `;
+        contenedor.appendChild(card);
+    });
+}
+
+// Función para filtrar los materiales según lo que escriba el usuario
+function filtrarMateriales() {
+    const query = document.getElementById('buscadorMateriales').value.toLowerCase();
+    
+    // Filtramos los materiales que coincidan con el título, la descripción o la categoría
+    const materialesFiltrados = materialesGlobales.filter(mat => {
+        const titulo = (mat.titulo_recurso || '').toLowerCase();
+        const descripcion = (mat.descripcion || '').toLowerCase();
+        const categoria = (mat.categoria || '').toLowerCase();
+        
+        return titulo.includes(query) || descripcion.includes(query) || categoria.includes(query);
+    });
+    
+    // Dibujamos solo los filtrados
+    renderizarMateriales(materialesFiltrados);
+}
+
+// Ejecutamos la carga inicial al abrir la página
+document.addEventListener("DOMContentLoaded", cargarMateriales);
+
+function mostrarNombreArchivo() {
+    const inputArchivo = document.getElementById('archivo');
+    const textoArchivo = document.getElementById('nombre-archivo');
+
+    if (inputArchivo.files && inputArchivo.files.length > 0) {
+        const nombre = inputArchivo.files[0].name;
+        // Muestra el nombre del archivo y cambia el color a verde para que resalte
+        textoArchivo.textContent = `Archivo seleccionado: ${nombre}`;
+        textoArchivo.style.color = "#059669"; 
+        textoArchivo.style.fontWeight = "bold";
+    } else {
+        textoArchivo.textContent = 'Ningún archivo seleccionado';
+        textoArchivo.style.color = "#4b5563";
+        textoArchivo.style.fontWeight = "normal";
     }
 }
