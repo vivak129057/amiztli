@@ -213,46 +213,52 @@
       </div>
 
       <div class="tab-content" id="materiales-content">
-            <div class="materials-header">
-                <h2>Materiales Educativos</h2>
-                <div class="search-container">
-                    <span class="search-icon">🔍</span>
-                    <input type="text" id="searchInput" class="search-input" placeholder="Buscar por título o discapacidad...">
-                </div>
-            </div>
-
-            <div class="materials-list" id="materialsList">
-                <div class="material-card" data-title="guía de apoyo visual" data-tag="tea autismo">
-                    <div class="material-info">
-                        <h4>Guía de Apoyo Visual</h4>
-                        <p>Métodos prácticos para la organización diaria en casa.</p>
-                        <span class="condition-tag">TEA (Autismo)</span>
-                    </div>
-                    <button class="btn-download">Descargar 📥</button>
+        
+                <div class="materials-header">
+                        <h2>Materiales y Recursos</h2>
+                        <button id="btnOpen" class="btn-add"><span>+</span> Agregar archivo</button>
                 </div>
 
-                <div class="material-card" data-title="ejercicios de psicomotricidad" data-tag="discapacidad motriz">
-                    <div class="material-info">
-                        <h4>Ejercicios de Psicomotricidad</h4>
-                        <p>Actividades lúdicas para mejorar la coordinación fina.</p>
-                        <span class="condition-tag">Discapacidad Motriz</span>
-                    </div>
-                    <button class="btn-download">Descargar 📥</button>
+                <div class="materials-list">
+                        <div class="material-card">
+                            <div class="material-info">
+                                <h4>Guía de Apoyo Visual</h4>
+                                <p>Métodos prácticos para la organización diaria en casa.</p>
+                                <span class="condition-tag">TEA (Autismo)</span>
+                            </div>
+                            <button class="btn-download">Descargar 📥</button>
+                        </div>
+
+                        <div class="material-card">
+                            <div class="material-info">
+                                <h4>Ejercicios de Psicomotricidad</h4>
+                                <p>Actividades lúdicas para mejorar la coordinación fina.</p>
+                                <span class="condition-tag">Discapacidad Motriz</span>
+                            </div>
+                            <button class="btn-download">Descargar 📥</button>
+                        </div>
                 </div>
 
-                <div class="material-card" data-title="lectura fácil cuentos"        data-tag="discapacidad intelectual">
-                    <div class="material-info">
-                        <h4>Lectura Fácil: Cuentos</h4>
-                        <p>Textos adaptados para facilitar la comprensión lectora.</p>
-                        <span class="condition-tag">Discapacidad Intelectual</span>
-                    </div>
-                    <button class="btn-download">Descargar 📥</button>
-                </div>
-            </div>
+                <div id="modalContainer" class="modal">
+                    <div class="modal-content">
+                                <span class="close-modal">&times;</span>
+                                <h3>Subir Recurso Educativo</h3>
+                                <form id="materialForm">
+                                    <input type="text" id="titulo" placeholder="Título del material" required>
+                                    
+                                    <textarea id="descripcion" placeholder="¿De qué trata este recurso?"></textarea>
+                                    
+                                    <input type="text" id="condicion" placeholder="Trastorno o condición (ej. TDAH, Síndrome de Down)">
+                                    
+                                    <div class="file-input-wrapper" onclick="document.getElementById('archivo').click()">
+                                        <span>Seleccionar archivo o PDF 📎</span>
+                                        <input type="file" id="archivo" name="archivo" style="display: none;">
+                                    </div>
 
-            <div id="noResults" class="no-results">
-                <p>No se encontraron materiales que coincidan con tu búsqueda.</p>
-            </div>
+                                <button type="submit" class="btn-submit">Publicar en Amiztli 🐾</button>
+                            </form>
+                        </div>
+                </div>
       </div>
  
       <div class="tab-content" id="directorio-content">
