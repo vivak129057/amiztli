@@ -276,25 +276,7 @@
                     <input type="text" id="buscadorMateriales" placeholder="Buscar por título, descripción o categoría..." oninput="filtrarMateriales()" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 0.95rem;">
                 </div>
 
-                <div class="materials-list">
-                        <!--div class="material-card">
-                            <div class="material-info">
-                                <h4>Guía de Apoyo Visual</h4>
-                                <p>Métodos prácticos para la organización diaria en casa.</p>
-                                <span class="condition-tag">TEA (Autismo)</span>
-                            </div>
-                            <button class="btn-download">Descargar 📥</button>
-                        </div>
-
-                        <div class="material-card">
-                            <div class="material-info">
-                                <h4>Ejercicios de Psicomotricidad</h4>
-                                <p>Actividades lúdicas para mejorar la coordinación fina.</p>
-                                <span class="condition-tag">Discapacidad Motriz</span>
-                            </div>
-                            <button class="btn-download">Descargar 📥</button>
-                        </div-->
-                </div>
+                <div class="materials-list"></div>
 
                 <div id="modalContainer" class="modal">
                     <div class="modal-content">
@@ -324,101 +306,145 @@
             </div>
 
             <div class="tab-content" id="directorio-content">
+                
+                <div class="tabs-container">
+                    <div class="tab-group">
+                        <button class="tab-btn active" data-tab="especialistas">Especialistas</button>
+                        <button class="tab-btn" data-tab="escuelas">Escuelas / Asociaciones</button>
+                    </div>
+                    
+                    <div style="display: flex; gap: 12px; margin-bottom: 20px;">
+                        <button id="btnAbrirEspecialista" class="btn-submit">
+                            + Agregar Especialista
+                        </button>
+                        <button id="btnAbrirEscuela" class="btn-submit" style="background-color: #4f46e5;">
+                            + Agregar Institución
+                        </button>
+                    </div>
+                </div>
 
-                        <div class="tabs-container">
-                            <div class="tab-group">
-                                <button class="tab-btn active" data-tab="especialistas">Especialistas</button>
-                                <button class="tab-btn" data-tab="escuelas">Escuelas / Asociaciones</button>
-                            </div>
-                            <button id="btnAbrirDirectorio" class="btn-submit" style="margin-bottom: 20px;">
-                                + Registrar Especialista / Institución 🩺
-                            </button>
-                        </div>
+                <div class="search-container">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Buscar por nombre, trastorno o ciudad...">
+                </div>
 
-                        <div class="search-container">
-                        <input type="text" id="searchInput" class="search-input" placeholder="Buscar por nombre, trastorno o ciudad...">
+                <div id="especialistas" class="directory-tab active">
+                    <div class="directory-grid" id="grid-especialistas">
+                        <div class="card">
+                            <div class="card-icon">👨‍⚕️</div>
+                            <p class="card-title">Alonso, Beatriz</p>
+                            <p class="card-sub">Neuropediatra</p>
+                            <span class="card-tag">Epilepsia / Retraso Psicomotriz</span>
+                            <p class="card-location">📍 Ciudad Victoria, Tam.</p>
+                            <button class="btn-view">Ver Detalles 🐾</button>
                         </div>
+                        <div class="card">
+                            <div class="card-icon">👩‍⚕️</div>
+                            <p class="card-title">García, Elena</p>
+                            <p class="card-sub">Terapeuta de Lenguaje</p>
+                            <span class="card-tag">Autismo (TEA)</span>
+                            <p class="card-location">📍 Nuevo Laredo, Tam.</p>
+                            <button class="btn-view">Ver Detalles 🐾</button>
+                        </div>
+                    </div>
+                </div>
 
-                        <div id="especialistas" class="directory-tab active">
-                        <div class="directory-grid" id="grid-especialistas">
-                            <div class="card">
-                                <div class="card-icon">👨‍⚕️</div>
-                                <p class="card-title">Alonso, Beatriz</p>
-                                <p class="card-sub">Neuropediatra</p>
-                                <span class="card-tag">Epilepsia / Retraso Psicomotriz</span>
-                                <p class="card-location">📍 Ciudad Victoria, Tam.</p>
-                                <button class="btn-view">Ver Detalles 🐾</button>
-                            </div>
-                            <div class="card">
-                                <div class="card-icon">👩‍⚕️</div>
-                                <p class="card-title">García, Elena</p>
-                                <p class="card-sub">Terapeuta de Lenguaje</p>
-                                <span class="card-tag">Autismo (TEA)</span>
-                                <p class="card-location">📍 Nuevo Laredo, Tam.</p>
-                                <button class="btn-view">Ver Detalles 🐾</button>
-                            </div>
+                <div id="escuelas" class="directory-tab">
+                    <div class="directory-grid" id="grid-escuelas">
+                        <div class="card">
+                            <div class="card-icon">🏫</div>
+                            <p class="card-title">CAM No. 1</p>
+                            <p class="card-sub">Centro de Atención Múltiple</p>
+                            <span class="card-tag">Discapacidad Múltiple</span>
+                            <p class="card-location">📍 Nuevo Laredo, Tam.</p>
+                            <button class="btn-view">Más información 🐾</button>
                         </div>
-                        </div>
+                    </div>
+                </div>
 
-                        <div id="escuelas" class="directory-tab">
-                            <div class="directory-grid" id="grid-escuelas">
-                                <div class="card">
-                                    <div class="card-icon">🏫</div>
-                                    <p class="card-title">CAM No. 1</p>
-                                    <p class="card-sub">Centro de Atención Múltiple</p>
-                                    <span class="card-tag">Discapacidad Múltiple</span>
-                                    <p class="card-location">📍 Nuevo Laredo, Tam.</p>
-                                    <button class="btn-view">Más información 🐾</button>
+                <div id="especialistaModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-btn" id="closeEsp">&times;</span>
+                        <h2>🐾 Nuevo Especialista</h2>
+                        <form id="formEspecialista">
+                            <div class="form-grid">
+                                <div class="form-group full">
+                                    <label>Nombre Completo</label>
+                                    <input type="text" placeholder="Ej. Dr. Juan Pérez" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Especialidad</label>
+                                    <input type="text" placeholder="Ej. Psicología" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Trastornos que trata</label>
+                                    <input type="text" placeholder="Ej. TDAH, TEA, Down">
+                                </div>
+                                <div class="form-group">
+                                    <label>Ubicación</label>
+                                    <input type="text" placeholder="Ciudad y Estado">
+                                </div>
+                                <div class="form-group">
+                                    <label>Teléfono de Contacto</label>
+                                    <input type="tel" placeholder="867 000 0000">
+                                </div>
+                                <div class="form-group full">
+                                    <label>Correo Electrónico</label>
+                                    <input type="email" placeholder="ejemplo@correo.com">
+                                </div>
+                                <div class="form-group full">
+                                    <label>Descripción / Detalles Adicionales</label>
+                                    <textarea placeholder="Cuéntanos más sobre tu experiencia o servicios..."></textarea>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <div id="contactModal" class="modal">
-                                <div class="modal-content">
-                                    <span class="close-btn">&times;</span>
-                                    <h2>🐾 Nuevo Registro</h2>
-                                    <form id="contactForm">
-                                        <div class="form-grid">
-                                            <div class="form-group full">
-                                                <label>Nombre Completo / Institución</label>
-                                                <input type="text" placeholder="Ej. Dr. Juan Pérez" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Categoría</label>
-                                                <select>
-                                                    <option>Especialista</option>
-                                                    <option>Escuela / Asociación</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Especialidad / Giro</label>
-                                                <input type="text" placeholder="Ej. Psicología">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Trastornos que trata</label>
-                                                <input type="text" placeholder="Ej. TDAH, TEA, Down">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Ubicación</label>
-                                                <input type="text" placeholder="Ciudad y Estado">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Teléfono de Contacto</label>
-                                                <input type="tel" placeholder="867 000 0000">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Correo Electrónico</label>
-                                                <input type="email" placeholder="ejemplo@correo.com">
-                                            </div>
-                                            <div class="form-group full">
-                                                <label>Descripción / Detalles Adicionales</label>
-                                                <textarea placeholder="Cuéntanos más sobre tu experiencia o servicios..."></textarea>
-                                            </div>
-                                        </div>
-                                        <button type="submit" class="btn-submit">Publicar en Amiztli 🐾</button>
-                                    </form>
+                            <button type="submit" class="btn-submit">Publicar Especialista 🐾</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="escuelaModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-btn" id="closeEsc">&times;</span>
+                        <h2>🐾 Nueva Institución o Escuela</h2>
+                        <form id="formEscuela">
+                            <div class="form-grid">
+                                <div class="form-group full">
+                                    <label>Nombre de la Institución</label>
+                                    <input type="text" placeholder="Ej. CAM No. 1" required>
                                 </div>
-                        </div>    
+                                <div class="form-group">
+                                    <label>Tipo de Institución</label>
+                                    <select required>
+                                        <option value="">Selecciona una opción...</option>
+                                        <option value="Centro de Atención">Centro de Atención</option>
+                                        <option value="Escuela de Educación Especial">Escuela de Educación Especial</option>
+                                        <option value="Asociación Civil">Asociación Civil</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Servicios / Giro</label>
+                                    <input type="text" placeholder="Ej. Discapacidad Múltiple, Terapia">
+                                </div>
+                                <div class="form-group">
+                                    <label>Ubicación</label>
+                                    <input type="text" placeholder="Ciudad y Estado">
+                                </div>
+                                <div class="form-group">
+                                    <label>Teléfono de Contacto</label>
+                                    <input type="tel" placeholder="867 000 0000">
+                                </div>
+                                <div class="form-group full">
+                                    <label>Correo Electrónico</label>
+                                    <input type="email" placeholder="ejemplo@escuela.com">
+                                </div>
+                                <div class="form-group full">
+                                    <label>Descripción de Servicios</label>
+                                    <textarea placeholder="Cuéntanos sobre los servicios que ofrecen..."></textarea>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-submit">Publicar Institución 🐾</button>
+                        </form>
+                    </div>
+                </div>    
             </div>
 
             <div class="tab-content" id="perfil-content">
