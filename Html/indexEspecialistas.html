@@ -248,19 +248,24 @@
                                 <span class="close-modal">&times;</span>
                                 <h3>Subir Recurso Educativo</h3>
                                 <form id="materialForm">
-                                    <input type="text" id="titulo" placeholder="Título del material" required>
-                                    
-                                    <textarea id="descripcion" placeholder="¿De qué trata este recurso?"></textarea>
-                                    
-                                    <input type="text" id="condicion" placeholder="Trastorno o condición (ej. TDAH, Síndrome de Down)">
-                                    
-                                    <div class="file-input-wrapper" onclick="document.getElementById('archivo').click()">
-                                        <span>Seleccionar archivo o PDF 📎</span>
-                                        <input type="file" id="archivo" name="archivo" style="display: none;">
-                                    </div>
+                                  <input type="text" id="titulo" placeholder="Título del material" required>
+                                  
+                                  <textarea id="descripcion" placeholder="¿De qué trata este recurso?"></textarea>
+                                  
+                                  <input type="text" id="condicion" placeholder="Trastorno o condición (ej. TDAH, Síndrome de Down)">
+                                  
+                                  <div class="file-input-wrapper">
+                                      <button type="button" class="btn-archivo" onclick="document.getElementById('archivo').click()">
+                                          Seleccionar archivo o PDF 📎
+                                      </button>
+                                      
+                                      <input type="file" id="archivo" name="archivo" accept=".pdf,.doc,.docx,.png,.jpg" style="display: none;" onchange="mostrarNombreArchivo()">
 
-                                <button type="submit" class="btn-submit">Publicar en Amiztli 🐾</button>
-                            </form>
+                                      <span id="nombre-archivo" class="nombre-archivo">Ningún archivo seleccionado</span>
+                                  </div>
+
+                                  <button type="submit" class="btn-submit">Publicar en Amiztli 🐾</button>
+                                </form>
                         </div>
                 </div>
       </div>
