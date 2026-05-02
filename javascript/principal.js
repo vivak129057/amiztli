@@ -135,7 +135,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Cargar tema guardado
         const savedTheme = localStorage.getItem('amiztli-theme');
         if (savedTheme) {
             themeSelector.value = savedTheme;
@@ -234,7 +233,6 @@ document.addEventListener('DOMContentLoaded', () => {
         closeDirectoryBtn.onclick = () => modalDirectory.style.display = "none";
     }
 
-    // Cierre de ventanas modales haciendo clic afuera
     window.onclick = (event) => {
         if (event.target === modalMaterials) {
             modalMaterials.style.display = "none";
@@ -248,18 +246,54 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Formulario de materiales
+    // ==========================================
+    // 9. Integración del Formulario de Materiales (Lógica de subida)
+    // ==========================================
     const materialForm = document.getElementById('materialForm');
     if (materialForm) {
-        materialForm.onsubmit = (e) => {
+        materialForm.addEventListener('submit', async function(e) {
             e.preventDefault();
-            alert("¡Material enviado con éxito! (Aquí conectarás tu lógica de Flask)");
-            if (modalMaterials) modalMaterials.style.display = "none";
-        };
+
+            const formData = new FormData();
+            formData.append('titulo', document.getElementById('titulo').value);
+            formData.append('descripcion', document.getElementById('descripcion').value);
+            formData.append('condicion', document.getElementById('condicion').value);
+
+            const archivoInput = document.getElementById('archivo');
+            if (archivoInput && archivoInput.files.length > 0) {
+                formData.append('archivo', archivoInput.files[0]);
+            } else {
+                alert('Por favor, selecciona un archivo o PDF.');
+                return;
+            }
+
+            try {
+                const response = await fetch('https://amiztlibackend.onrender.com/api/materiales_educativos', {
+                    method: 'POST',
+                    body: formData // Los headers son asignados automáticamente por el navegador
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert('¡Material guardado exitosamente en el equipo!');
+                    if (typeof window.cargarMateriales === 'function') {
+                        cargarMateriales();
+                    }
+                    if (modalMaterials) modalMaterials.style.display = "none";
+                    materialForm.reset(); // Limpiar el formulario
+                } else {
+                    alert('Error: ' + (data.error || 'Ocurrió un error.'));
+                }
+            } catch (error) {
+                console.error('Error de conexión:', error);
+                alert('No se pudo conectar con la base de datos o el servidor local.');
+            }
+        });
     }
 
     // ==========================================
-    // 9. Chat
+    // 10. Chat
     // ==========================================
     const chatForm = document.getElementById('chatForm');
     const chatBox = document.getElementById('chatBox');
@@ -281,7 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
-    // 10. Foro y Publicaciones
+    // 11. Foro y Publicaciones
     // ==========================================
     const forumModal = document.getElementById('modal-post');
     const btnOpenForum = document.querySelector('.btn-post');
@@ -360,10 +394,12 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    cargarMateriales(); // Cargar materiales al iniciar la página
 });
 
 // ==========================================
-// 11. Funciones Globales
+// 12. Funciones Globales
 // ==========================================
 function sortAlphabetically(gridId) {
     const grid = document.getElementById(gridId);
@@ -419,5 +455,61 @@ function actualizarNombre() {
         } else {
             display.innerText = "Seleccionar archivo o PDF 📎";
         }
+    }
+}
+
+async function cargarMateriales() {
+    try {
+        // Hacemos la petición a la API de Flask
+        const response = await fetch('https://amiztlibackend.onrender.com/api/materiales_educativos',);
+        
+        if (!response.ok) {
+            throw new Error('Error al obtener los materiales');
+        }
+
+        const materiales = await response.json();
+        const contenedor = document.querySelector('.materials-list');
+        
+        // Limpiamos el contenedor antes de llenarlo
+        contenedor.innerHTML = '';
+
+        if (materiales.length === 0) {
+            contenedor.innerHTML = `<p class="no-results" style="display: block;">No hay materiales disponibles.</p>`;
+            return;
+        }
+
+        // Recorremos los datos usando los nombres de tus columnas de la base de datos
+            materiales.forEach(mat => {
+            const card = document.createElement('div');
+            card.classList.add('material-card');
+
+            let archivoUrl = mat.enlace_descarga || mat.tipo_archivo; // Usamos el campo correspondiente
+
+            // 1. Creamos un enlace específico para descargar
+            let urlDescarga = archivoUrl;
+            if (urlDescarga && urlDescarga.includes('cloudinary.com')) {
+                // Insertamos 'fl_attachment' en la URL para forzar la descarga
+                urlDescarga = urlDescarga.replace('/upload/', '/upload/fl_attachment/');
+            }
+
+            let categoriaTexto = (mat.categoria && mat.categoria.trim() !== '') ? mat.categoria : 'General';
+
+            card.innerHTML = `
+                <div class="material-info">
+                    <h4>${mat.titulo_recurso || 'Sin título'}</h4>
+                    <p>${mat.descripcion || 'Sin descripción'}</p>
+                    <span class="condition-tag">${categoriaTexto}</span>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <a href="${archivoUrl}" target="_blank" class="btn-download">Visualizar 👁️</a>
+                    
+                    <a href="${urlDescarga}" class="btn-download">Descargar 📥</a>
+                </div>
+            `;
+            contenedor.appendChild(card);
+        });
+
+    } catch (error) {
+        console.error("Error al cargar los materiales:", error);
     }
 }
