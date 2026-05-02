@@ -268,10 +268,10 @@
       <div class="tab-content" id="materiales-content">
             <div class="materials-header">
                 <h2>Materiales Educativos</h2>
-                <div class="search-container">
-                    <span class="search-icon">🔍</span>
-                    <input type="text" id="searchInput" class="search-input" placeholder="Buscar por título o discapacidad...">
-                </div>
+            </div>
+
+            <div class="search-wrapper" style="margin-bottom: 20px;">
+             <input type="text" id="buscadorMateriales" placeholder="Buscar por título, descripción o categoría..." oninput="filtrarMateriales()" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 0.95rem;">
             </div>
 
             <div class="materials-list" id="materialsList">
