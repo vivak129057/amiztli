@@ -553,3 +553,42 @@ function mostrarNombreArchivo() {
     }
 }
 
+// Referencias a los botones y modales
+const btnAbrirEspecialista = document.getElementById('btnAbrirEspecialista');
+const btnAbrirEscuela = document.getElementById('btnAbrirEscuela');
+
+const modalEspecialista = document.getElementById('especialistaModal');
+const modalEscuela = document.getElementById('escuelaModal');
+
+const closeEsp = document.getElementById('closeEsp');
+const closeEsc = document.getElementById('closeEsc');
+
+// Abrir modal de Especialistas
+btnAbrirEspecialista.addEventListener('click', () => {
+    modalEspecialista.style.display = 'block';
+});
+
+// Abrir modal de Escuelas
+btnAbrirEscuela.addEventListener('click', () => {
+    modalEscuela.style.display = 'block';
+});
+
+// Cerrar modal de Especialistas
+closeEsp.addEventListener('click', () => {
+    modalEspecialista.style.display = 'none';
+});
+
+// Cerrar modal de Escuelas
+closeEsc.addEventListener('click', () => {
+    modalEscuela.style.display = 'none';
+});
+
+// Cerrar si se hace clic fuera del contenido del modal
+window.addEventListener('click', (event) => {
+    if (event.target === modalEspecialista) {
+        modalEspecialista.style.display = 'none';
+    }
+    if (event.target === modalEscuela) {
+        modalEscuela.style.display = 'none';
+    }
+});
