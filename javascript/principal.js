@@ -554,41 +554,136 @@ function mostrarNombreArchivo() {
 }
 
 // Referencias a los botones y modales
-const btnAbrirEspecialista = document.getElementById('btnAbrirEspecialista');
-const btnAbrirEscuela = document.getElementById('btnAbrirEscuela');
+document.addEventListener('DOMContentLoaded', () => {
+    // ==========================================
+    // 1. Intercambio de Pestañas (Tabs)
+    // ==========================================
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabs = document.querySelectorAll('.directory-tab');
 
-const modalEspecialista = document.getElementById('especialistaModal');
-const modalEscuela = document.getElementById('escuelaModal');
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            tabBtns.forEach(b => b.classList.remove('active'));
+            tabs.forEach(t => t.classList.remove('active'));
 
-const closeEsp = document.getElementById('closeEsp');
-const closeEsc = document.getElementById('closeEsc');
+            btn.classList.add('active');
+            const tabName = btn.getAttribute('data-tab');
+            document.getElementById(tabName).classList.add('active');
+        });
+    });
 
-// Abrir modal de Especialistas
-btnAbrirEspecialista.addEventListener('click', () => {
-    modalEspecialista.style.display = 'block';
+    // ==========================================
+    // 2. Control de Modales
+    // ==========================================
+    const espModal = document.getElementById('especialistaModal');
+    const escModal = document.getElementById('escuelaModal');
+
+    document.getElementById('btnAbrirEspecialista').addEventListener('click', () => {
+        espModal.style.display = 'block';
+    });
+
+    document.getElementById('btnAbrirEscuela').addEventListener('click', () => {
+        escModal.style.display = 'block';
+    });
+
+    document.getElementById('closeEsp').addEventListener('click', () => {
+        espModal.style.display = 'none';
+    });
+
+    document.getElementById('closeEsc').addEventListener('click', () => {
+        escModal.style.display = 'none';
+    });
+
+    // Cierra el modal si se hace clic fuera del contenido
+    window.addEventListener('click', (event) => {
+        if (event.target === espModal) espModal.style.display = 'none';
+        if (event.target === escModal) escModal.style.display = 'none';
+    });
+
+    // ==========================================
+    // 3. Envío del Formulario de Especialistas
+    // ==========================================
+    const formEspecialista = document.getElementById('formEspecialista');
+    formEspecialista.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // Obtenemos el nombre completo
+        const nombreCompleto = document.getElementById('esp_nombre').value.trim();
+        // Separamos el nombre (primera palabra) y los apellidos (siguientes)
+        const partesNombre = nombreCompleto.split(' ');
+        const nombre = partesNombre[0];
+        const apellido_paterno = partesNombre[1] || '';
+        const apellido_materno = partesNombre[2] || null;
+
+        const formData = new FormData();
+        formData.append('nombre', nombre);
+        formData.append('apellido_paterno', apellido_paterno);
+        formData.append('apellido_materno', apellido_materno);
+        formData.append('especialidad', document.getElementById('esp_especialidad').value);
+        formData.append('trastornos_experiencia', document.getElementById('esp_trastornos').value);
+        formData.append('ubicacion_consultorio', document.getElementById('esp_ubicacion').value);
+        formData.append('telefono', document.getElementById('esp_telefono').value);
+        formData.append('correo_electronico', document.getElementById('esp_correo').value);
+        formData.append('Descripcion', document.getElementById('esp_descripcion').value);
+
+        try {
+            // Cambiar el puerto o la URL según donde esté corriendo el backend de Python
+            const response = await fetch('https://amiztlibackend.onrender.com/api/especialistas', {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                alert('¡Especialista registrado con éxito!');
+                formEspecialista.reset();
+                espModal.style.display = 'none';
+                // Opcional: Actualiza la lista en la página web llamando a obtener_especialistas()
+            } else {
+                alert('Error al registrar especialista: ' + (data.error || ''));
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Error de conexión con el servidor.');
+        }
+    });
+
+    // ==========================================
+    // 4. Envío del Formulario de Instituciones
+    // ==========================================
+    const formEscuela = document.getElementById('formEscuela');
+    formEscuela.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData();
+        // En "direccion" unimos el Tipo de institución y la ubicación ingresada
+        const direccion = document.getElementById('esc_tipo').value + ' | ' + document.getElementById('esc_ubicacion').value;
+        
+        formData.append('nombre_institucion', document.getElementById('esc_nombre').value);
+        formData.append('direccion', direccion);
+        formData.append('telefono', document.getElementById('esc_telefono').value);
+        formData.append('correo_electronico', document.getElementById('esc_correo').value);
+        formData.append('descripcion', document.getElementById('esc_descripcion').value);
+
+        try {
+            const response = await fetch('https://amiztlibackend.onrender.com/api/instituciones', {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                alert('¡Institución registrada con éxito!');
+                formEscuela.reset();
+                escModal.style.display = 'none';
+                // Opcional: Actualiza la lista de instituciones
+            } else {
+                alert('Error al registrar institución: ' + (data.error || ''));
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Error de conexión con el servidor.');
+        }
+    });
 });
 
-// Abrir modal de Escuelas
-btnAbrirEscuela.addEventListener('click', () => {
-    modalEscuela.style.display = 'block';
-});
-
-// Cerrar modal de Especialistas
-closeEsp.addEventListener('click', () => {
-    modalEspecialista.style.display = 'none';
-});
-
-// Cerrar modal de Escuelas
-closeEsc.addEventListener('click', () => {
-    modalEscuela.style.display = 'none';
-});
-
-// Cerrar si se hace clic fuera del contenido del modal
-window.addEventListener('click', (event) => {
-    if (event.target === modalEspecialista) {
-        modalEspecialista.style.display = 'none';
-    }
-    if (event.target === modalEscuela) {
-        modalEscuela.style.display = 'none';
-    }
-});
