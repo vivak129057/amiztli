@@ -692,7 +692,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // ==========================================
 async function obtenerEspecialistas() {
     try {
-        const response = await fetch('http://127.0.0.1:5000/api/especialistas');
+        const response = await fetch('https://amiztlibackend.onrender.com/api/especialistas');
         if (!response.ok) throw new Error('Error al obtener los especialistas');
 
         const especialistas = await response.json();
@@ -729,7 +729,7 @@ async function obtenerEspecialistas() {
 // ==========================================
 async function obtenerInstituciones() {
     try {
-        const response = await fetch('http://127.0.0.1:5000/api/instituciones');
+        const response = await fetch('https://amiztlibackend.onrender.com/api/instituciones');
         if (!response.ok) throw new Error('Error al obtener las instituciones');
 
         const instituciones = await response.json();
