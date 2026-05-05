@@ -687,3 +687,92 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// ==========================================
+// 1. Obtener y mostrar Especialistas
+// ==========================================
+async function obtenerEspecialistas() {
+    try {
+        const response = await fetch('http://127.0.0.1:5000/api/especialistas');
+        if (!response.ok) throw new Error('Error al obtener los especialistas');
+
+        const especialistas = await response.json();
+        const grid = document.getElementById('grid-especialistas');
+        
+        // Limpiamos la cuadrícula antes de rellenarla
+        grid.innerHTML = '';
+
+        especialistas.forEach(esp => {
+            const card = document.createElement('div');
+            card.className = 'card';
+
+            // Formateamos el nombre (Ej. Alonso, Beatriz)
+            const nombreCompleto = `${esp.apellido_paterno || ''}, ${esp.nombre || ''}`;
+
+            card.innerHTML = `
+                <div class="card-icon">👨‍⚕️</div>
+                <p class="card-title">${nombreCompleto}</p>
+                <p class="card-sub">${esp.especialidad || 'Especialista'}</p>
+                <span class="card-tag">${esp.trastornos_experiencia || 'Sin especificar'}</span>
+                <p class="card-location">📍 ${esp.ubicacion_consultorio || 'Ubicación no disponible'}</p>
+                <button class="btn-view" onclick="verDetallesEspecialista(${esp.id_directorio_especialistas})">Ver Detalles 🐾</button>
+            `;
+            
+            grid.appendChild(card);
+        });
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+// ==========================================
+// 2. Obtener y mostrar Instituciones / Escuelas
+// ==========================================
+async function obtenerInstituciones() {
+    try {
+        const response = await fetch('http://127.0.0.1:5000/api/instituciones');
+        if (!response.ok) throw new Error('Error al obtener las instituciones');
+
+        const instituciones = await response.json();
+        const grid = document.getElementById('grid-escuelas');
+        
+        // Limpiamos la cuadrícula antes de rellenarla
+        grid.innerHTML = '';
+
+        instituciones.forEach(inst => {
+            const card = document.createElement('div');
+            card.className = 'card';
+
+            card.innerHTML = `
+                <div class="card-icon">🏫</div>
+                <p class="card-title">${inst.nombre_institucion || 'Institución'}</p>
+                <p class="card-sub">${inst.direccion || 'Sin dirección'}</p>
+                <span class="card-tag">${inst.descripcion || 'Sin descripción'}</span>
+                <p class="card-location">📍 ${inst.telefono || 'Sin teléfono'}</p>
+                <button class="btn-view" onclick="verDetallesInstitucion(${inst.id_institucion})">Más información 🐾</button>
+            `;
+            
+            grid.appendChild(card);
+        });
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+// ==========================================
+// 3. Cargar datos al iniciar la página
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+    obtenerEspecialistas();
+    obtenerInstituciones();
+});
+
+// Funciones para los botones de "Ver Detalles" (puedes personalizarlas después)
+function verDetallesEspecialista(id) {
+    console.log('Ver detalles del especialista:', id);
+    // Aquí puedes abrir un modal con la información completa o redirigir
+}
+
+function verDetallesInstitucion(id) {
+    console.log('Ver detalles de la institución:', id);
+    // Aquí puedes abrir un modal con la información completa o redirigir
+}
