@@ -657,10 +657,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const formData = new FormData();
         // En "direccion" unimos el Tipo de institución y la ubicación ingresada
-        const direccion = document.getElementById('esc_tipo').value + ' | ' + document.getElementById('esc_ubicacion').value;
+        
         
         formData.append('nombre', document.getElementById('esc_nombre').value);
-        formData.append('ubicacion', direccion);
+        formData.append('tipo', document.getElementById('esc_tipo').value);
+        formData.append('ubicacion', document.getElementById('esc_ubicacion').value);
         formData.append('telefono', document.getElementById('esc_telefono').value);
         formData.append('correo_electronico', document.getElementById('esc_correo').value);
         formData.append('Descripcion', document.getElementById('esc_descripcion').value);
