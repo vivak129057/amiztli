@@ -745,9 +745,9 @@ async function obtenerInstituciones() {
             card.innerHTML = `
                 <div class="card-icon">🏫</div>
                 <p class="card-title">${inst.nombre || 'Institución'}</p>
-                <p class="card-sub">${inst.ubicacion || 'Sin dirección'}</p>
-                <span class="card-tag">${inst.Descripcion || 'Sin descripción'}</span>
-                <p class="card-location">📍 ${inst.telefono || 'Sin teléfono'}</p>
+                <p class="card-sub">${inst.tipo || 'Sin especificacion'}</p>
+                <span class="card-tag">${inst.telefono || 'Sin teléfono'}</span>
+                <p class="card-location">📍 ${inst.ubicacion || 'Sin ubicación'}</p>
                 <button class="btn-view" onclick="verDetallesInstitucion(${inst.id_institucion})">Más información 🐾</button>
             `;
             
