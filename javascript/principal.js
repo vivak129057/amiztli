@@ -743,7 +743,7 @@ async function obtenerInstituciones() {
                 <p class="card-sub">${inst.tipo || 'Sin especificacion'}</p>
                 <span class="card-tag">${inst.telefono || 'Sin teléfono'}</span>
                 <p class="card-location">📍 ${inst.ubicacion || 'Sin ubicación'}</p>
-                <button class="btn-view" id="detalleModal"Más información 🐾</button>
+                <button class="btn-view" id="detalleModal" onclick="verDetallesInstitucion(${inst.id_institucion})">Más información 🐾</button>
             `;
             
             grid.appendChild(card);
