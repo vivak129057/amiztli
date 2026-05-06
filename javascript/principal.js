@@ -638,6 +638,14 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error:', error);
             alert('Error de conexión con el servidor.');
         }
+
+        if (response.ok) {
+            alert('¡Especialista registrado con éxito!');
+            formEspecialista.reset();
+            espModal.style.display = 'none';
+            
+            obtenerEspecialistas(); 
+        }
     });
 
     // ==========================================
@@ -828,13 +836,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-if (response.ok) {
-    alert('¡Especialista registrado con éxito!');
-    formEspecialista.reset();
-    espModal.style.display = 'none';
-    
-    obtenerEspecialistas(); 
-}
 
 if (response.ok) {
     alert('¡Institución registrada con éxito!');
