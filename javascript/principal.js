@@ -803,7 +803,9 @@ function verDetallesInstitucion(id) {
         titulo.innerText = `🏫 ${inst.nombre || 'Institución'}`;
         
         contenido.innerHTML = `
-            <p><strong>Dirección / Tipo:</strong> ${inst.ubicacion || 'No especificada'}</p>
+            <p><strong>Dirección:</strong> ${inst.ubicacion || 'No especificada'}</p>
+            <p><strong>Tipo:</strong> ${inst.tipo || 'No especificado'}</p>
+            <p><strong>Trastornos que atiende:</strong> ${inst.trastornos_que_trata || 'Ninguno'}</p>
             <p><strong>Descripción:</strong> ${inst.Descripcion || 'Sin descripción'}</p>
             <p><strong>Teléfono:</strong> ${inst.telefono || 'No disponible'}</p>
             <p><strong>Correo electrónico:</strong> ${inst.correo_electronico || 'No disponible'}</p>
