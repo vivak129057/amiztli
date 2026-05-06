@@ -792,7 +792,7 @@ function verDetallesEspecialista(id) {
 
 function verDetallesInstitucion(id) {
     // Buscamos la institución por su ID
-    const inst = institucionesGlobales.find(item => item.id_institucion === id);
+    const inst = institucionesGlobales.find(item => item.id_directorio_instituciones === id);
     if (!inst) return;
 
     const modal = document.getElementById('detalleModal');
