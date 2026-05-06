@@ -31,8 +31,21 @@ document.addEventListener('DOMContentLoaded', () => {
             // Guardamos el usuario en la sesión para usarlo en la página principal
             sessionStorage.setItem("usuarioLogueado", emailDigitado);
             
-            // Redirección a la página principal
-            window.location.href = "../Html/indexAdmin.html"; 
+            if (emailDigitado === "Astrid@gmail.com") {
+                // Redirección a la página principal
+                window.location.href = "../Html/indexAdmin.html";
+            } if (emailDigitado === "maestro@gmail.com") {  
+                // Redirección a la página principal
+                window.location.href = "../Html/indexMaestros.html";
+            }if (emailDigitado === "especialista@gmail.com") {  
+                // Redirección a la página principal
+                window.location.href = "../Html/indexEspecialistas.html";
+            } else if (emailDigitado === "juan@gmail.com") {
+                // Redirección a la página principal
+                window.location.href = "../Html/indexPadres.html";
+            }
+
+            
         } else {
             console.log("Datos incorrectos");
             
