@@ -689,25 +689,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// ==========================================
-// 1. Obtener y mostrar Especialistas
-// ==========================================
+// Agrega estas variables al inicio de tu archivo JS (fuera del DOMContentLoaded)
+let especialistasGlobales = [];
+let institucionesGlobales = [];
+
 async function obtenerEspecialistas() {
     try {
         const response = await fetch('https://amiztlibackend.onrender.com/api/especialistas');
         if (!response.ok) throw new Error('Error al obtener los especialistas');
 
-        const especialistas = await response.json();
+        especialistasGlobales = await response.json(); // <-- Guardamos en la variable global
         const grid = document.getElementById('grid-especialistas');
         
-        // Limpiamos la cuadrícula antes de rellenarla
         grid.innerHTML = '';
 
-        especialistas.forEach(esp => {
+        especialistasGlobales.forEach(esp => {
             const card = document.createElement('div');
             card.className = 'card';
-
-            // Formateamos el nombre (Ej. Alonso, Beatriz)
             const nombreCompleto = `${esp.apellido_paterno || ''}, ${esp.nombre || ''}`;
 
             card.innerHTML = `
@@ -718,7 +716,6 @@ async function obtenerEspecialistas() {
                 <p class="card-location">📍 ${esp.ubicacion_consultorio || 'Ubicación no disponible'}</p>
                 <button class="btn-view" onclick="verDetallesEspecialista(${esp.id_directorio_especialistas})">Ver Detalles 🐾</button>
             `;
-            
             grid.appendChild(card);
         });
     } catch (error) {
@@ -726,22 +723,18 @@ async function obtenerEspecialistas() {
     }
 }
 
-// ==========================================
-// 2. Obtener y mostrar Instituciones / Escuelas
-// ==========================================
 async function obtenerInstituciones() {
     try {
         const response = await fetch('https://amiztlibackend.onrender.com/api/instituciones');
         if (!response.ok) throw new Error('Error al obtener las instituciones');
 
-        const instituciones = await response.json();
+        institucionesGlobales = await response.json(); // <-- Guardamos en la variable global
         const grid = document.getElementById('grid-escuelas');
         
-        // Limpiamos la cuadrícula antes de rellenarla
         grid.innerHTML = '';
 
-        instituciones.forEach(inst => {
-            const card = document.createElement('div');
+        institucionesGlobales.forEach(inst => {
+             const card = document.createElement('div');
             card.className = 'card';
 
             card.innerHTML = `
@@ -768,13 +761,83 @@ document.addEventListener('DOMContentLoaded', () => {
     obtenerInstituciones();
 });
 
-// Funciones para los botones de "Ver Detalles" (puedes personalizarlas después)
+// ==========================================
+// Funciones para Mostrar Detalles
+// ==========================================
+
 function verDetallesEspecialista(id) {
-    console.log('Ver detalles del especialista:', id);
-    // Aquí puedes abrir un modal con la información completa o redirigir
+    // Buscamos al especialista por su ID
+    const esp = especialistasGlobales.find(item => item.id_directorio_especialistas === id);
+    if (!esp) return;
+
+    const modal = document.getElementById('detalleModal');
+    const titulo = document.getElementById('modal-titulo');
+    const contenido = document.getElementById('modal-contenido');
+
+    if (modal && titulo && contenido) {
+        titulo.innerText = `👨‍⚕️ ${esp.apellido_paterno || ''}, ${esp.nombre || ''}`;
+        
+        contenido.innerHTML = `
+            <p><strong>Especialidad:</strong> ${esp.especialidad || 'No especificada'}</p>
+            <p><strong>Trastornos que atiende:</strong> ${esp.trastornos_experiencia || 'Ninguno'}</p>
+            <p><strong>Ubicación:</strong> ${esp.ubicacion_consultorio || 'No especificada'}</p>
+            <p><strong>Teléfono:</strong> ${esp.telefono || 'No disponible'}</p>
+            <p><strong>Correo electrónico:</strong> ${esp.correo_electronico || 'No disponible'}</p>
+            <p><strong>Descripción / Detalles:</strong> ${esp.Descripcion || 'Sin descripción'}</p>
+        `;
+        
+        modal.style.display = 'flex';
+    }
 }
 
 function verDetallesInstitucion(id) {
-    console.log('Ver detalles de la institución:', id);
-    // Aquí puedes abrir un modal con la información completa o redirigir
+    // Buscamos la institución por su ID
+    const inst = institucionesGlobales.find(item => item.id_institucion === id);
+    if (!inst) return;
+
+    const modal = document.getElementById('detalleModal');
+    const titulo = document.getElementById('modal-titulo');
+    const contenido = document.getElementById('modal-contenido');
+
+    if (modal && titulo && contenido) {
+        titulo.innerText = `🏫 ${inst.nombre_institucion || 'Institución'}`;
+        
+        contenido.innerHTML = `
+            <p><strong>Dirección / Tipo:</strong> ${inst.direccion || 'No especificada'}</p>
+            <p><strong>Descripción:</strong> ${inst.Descripcion || 'Sin descripción'}</p>
+            <p><strong>Teléfono:</strong> ${inst.telefono || 'No disponible'}</p>
+            <p><strong>Correo electrónico:</strong> ${inst.correo_electronico || 'No disponible'}</p>
+        `;
+        
+        modal.style.display = 'flex';
+    }
+}
+
+// ==========================================
+// Lógica para cerrar el Modal de Detalles
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+    const closeDetalle = document.getElementById('closeDetalle');
+    const detalleModal = document.getElementById('detalleModal');
+
+    if (closeDetalle && detalleModal) {
+        closeDetalle.onclick = () => {
+            detalleModal.style.display = 'none';
+        };
+
+        // Cierra si el usuario hace clic fuera del modal
+        window.addEventListener('click', (event) => {
+            if (event.target === detalleModal) {
+                detalleModal.style.display = 'none';
+            }
+        });
+    }
+});
+
+if (response.ok) {
+    alert('¡Especialista registrado con éxito!');
+    formEspecialista.reset();
+    espModal.style.display = 'none';
+    
+    obtenerEspecialistas(); 
 }
