@@ -800,10 +800,10 @@ function verDetallesInstitucion(id) {
     const contenido = document.getElementById('modal-contenido');
 
     if (modal && titulo && contenido) {
-        titulo.innerText = `🏫 ${inst.nombre_institucion || 'Institución'}`;
+        titulo.innerText = `🏫 ${inst.nombre || 'Institución'}`;
         
         contenido.innerHTML = `
-            <p><strong>Dirección / Tipo:</strong> ${inst.direccion || 'No especificada'}</p>
+            <p><strong>Dirección / Tipo:</strong> ${inst.ubicacion || 'No especificada'}</p>
             <p><strong>Descripción:</strong> ${inst.Descripcion || 'Sin descripción'}</p>
             <p><strong>Teléfono:</strong> ${inst.telefono || 'No disponible'}</p>
             <p><strong>Correo electrónico:</strong> ${inst.correo_electronico || 'No disponible'}</p>
