@@ -3,7 +3,7 @@ const usuariosAutorizados = [
     { email: "Astrid@gmail.com", password: "123" },
     { email: "maestro@gmail.com", password: "mtrspro" },
     { email: "especialista@gmail.com", password: "special" },
-    { email: "juan@gmail.com", password: "tanamera" }
+    { email: "juan@gmail.com", password: "569017" }
 ];
 
 // 2. Esperamos a que el DOM cargue para evitar errores de "null"
