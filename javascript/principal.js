@@ -686,6 +686,14 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error:', error);
             alert('Error de conexión con el servidor.');
         }
+
+        if (response.ok) {
+            alert('¡Institución registrada con éxito!');
+            formEscuela.reset();
+            escModal.style.display = 'none';
+            
+            obtenerInstituciones(); 
+        }
     });
 });
 
@@ -835,12 +843,3 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
-
-
-if (response.ok) {
-    alert('¡Institución registrada con éxito!');
-    formEscuela.reset();
-    escModal.style.display = 'none';
-    
-    obtenerInstituciones(); 
-}
