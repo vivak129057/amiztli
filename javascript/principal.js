@@ -661,6 +661,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         formData.append('nombre', document.getElementById('esc_nombre').value);
         formData.append('tipo', document.getElementById('esc_tipo').value);
+        formData.append('trastornos_que_trata', document.getElementById('esc_servicios').value);
         formData.append('ubicacion', document.getElementById('esc_ubicacion').value);
         formData.append('telefono', document.getElementById('esc_telefono').value);
         formData.append('correo_electronico', document.getElementById('esc_correo').value);
