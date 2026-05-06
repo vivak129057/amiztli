@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
             sessionStorage.setItem("usuarioLogueado", emailDigitado);
             
             // Redirección a la página principal
-            window.location.href = "../HTML/principal.html"; 
+            window.location.href = "../HTML/indexAdmin.html"; 
         } else {
             console.log("Datos incorrectos");
             
