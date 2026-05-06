@@ -368,32 +368,40 @@
                         <form id="formEspecialista">
                             <div class="form-grid">
                                 <div class="form-group full">
-                                    <label>Nombre Completo</label>
-                                    <input type="text" placeholder="Ej. Dr. Juan Pérez" required>
+                                    <label>Nombre(s)</label>
+                                    <input type="text" id="esp_nombre" placeholder="Ej. Dr. Juan Pérez" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Apellido Paterno</label>
+                                    <input type="text" id="esp_apellido_paterno" placeholder="Ej. García" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Apellido Materno</label>
+                                    <input type="text" id="esp_apellido_materno" placeholder="Ej. López">
                                 </div>
                                 <div class="form-group">
                                     <label>Especialidad</label>
-                                    <input type="text" placeholder="Ej. Psicología" required>
+                                    <input type="text" id="esp_especialidad" placeholder="Ej. Psicología" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Trastornos que trata</label>
-                                    <input type="text" placeholder="Ej. TDAH, TEA, Down">
+                                    <input type="text" id="esp_trastornos" placeholder="Ej. TDAH, TEA, Down">
                                 </div>
                                 <div class="form-group">
                                     <label>Ubicación</label>
-                                    <input type="text" placeholder="Ciudad y Estado">
+                                    <input type="text" id="esp_ubicacion" placeholder="Ciudad y Estado">
                                 </div>
                                 <div class="form-group">
                                     <label>Teléfono de Contacto</label>
-                                    <input type="tel" placeholder="867 000 0000">
+                                    <input type="tel" id="esp_telefono" placeholder="867 000 0000">
                                 </div>
                                 <div class="form-group full">
                                     <label>Correo Electrónico</label>
-                                    <input type="email" placeholder="ejemplo@correo.com">
+                                    <input type="email" id="esp_correo" placeholder="ejemplo@correo.com">
                                 </div>
                                 <div class="form-group full">
                                     <label>Descripción / Detalles Adicionales</label>
-                                    <textarea placeholder="Cuéntanos más sobre tu experiencia o servicios..."></textarea>
+                                    <textarea id="esp_descripcion" placeholder="Cuéntanos más sobre tu experiencia o servicios..."></textarea>
                                 </div>
                             </div>
                             <button type="submit" class="btn-submit">Publicar Especialista 🐾</button>

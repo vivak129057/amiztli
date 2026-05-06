@@ -607,18 +607,10 @@ document.addEventListener('DOMContentLoaded', () => {
     formEspecialista.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        // Obtenemos el nombre completo
-        const nombreCompleto = document.getElementById('esp_nombre').value.trim();
-        // Separamos el nombre (primera palabra) y los apellidos (siguientes)
-        const partesNombre = nombreCompleto.split(' ');
-        const nombre = partesNombre[0];
-        const apellido_paterno = partesNombre[1] || '';
-        const apellido_materno = partesNombre[2] || null;
-
         const formData = new FormData();
-        formData.append('nombre', nombre);
-        formData.append('apellido_paterno', apellido_paterno);
-        formData.append('apellido_materno', apellido_materno);
+        formData.append('nombre', document.getElementById('esp_nombre').value);
+        formData.append('apellido_paterno', document.getElementById('esp_apellido_paterno').value);
+        formData.append('apellido_materno', document.getElementById('esp_apellido_materno').value);
         formData.append('especialidad', document.getElementById('esp_especialidad').value);
         formData.append('experiencia_trastornos', document.getElementById('esp_trastornos').value);
         formData.append('ubicacion_consultorio', document.getElementById('esp_ubicacion').value);
