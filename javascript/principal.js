@@ -841,3 +841,11 @@ if (response.ok) {
     
     obtenerEspecialistas(); 
 }
+
+if (response.ok) {
+    alert('¡Institución registrada con éxito!');
+    formEscuela.reset();
+    escModal.style.display = 'none';
+    
+    obtenerInstituciones(); 
+}
