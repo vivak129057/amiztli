@@ -659,11 +659,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // En "direccion" unimos el Tipo de institución y la ubicación ingresada
         const direccion = document.getElementById('esc_tipo').value + ' | ' + document.getElementById('esc_ubicacion').value;
         
-        formData.append('nombre_institucion', document.getElementById('esc_nombre').value);
-        formData.append('direccion', direccion);
+        formData.append('nombre', document.getElementById('esc_nombre').value);
+        formData.append('ubicacion', direccion);
         formData.append('telefono', document.getElementById('esc_telefono').value);
         formData.append('correo_electronico', document.getElementById('esc_correo').value);
-        formData.append('descripcion', document.getElementById('esc_descripcion').value);
+        formData.append('Descripcion', document.getElementById('esc_descripcion').value);
 
         try {
             const response = await fetch('https://amiztlibackend.onrender.com/api/instituciones', {
