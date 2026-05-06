@@ -130,50 +130,117 @@
             </div>
       </div>
 
-      <div class="tab-content" id="directorio-content">
-       <div class="tabs-container">
-            <button class="tab-btn active" data-tab="especialistas">Especialistas</button>
-            <button class="tab-btn" data-tab="escuelas">Escuelas / Asociaciones</button>
-        </div>
+            <div class="tab-content" id="directorio-content">
+                
+                <div class="tabs-container">
+                    <div class="tab-group">
+                        <button class="tab-btn active" data-tab="especialistas">Especialistas</button>
+                        <button class="tab-btn" data-tab="escuelas">Escuelas / Asociaciones</button>
+                    </div>
+                    
+                    <div style="display: flex; gap: 12px; margin-bottom: 20px;">
 
-        <div class="search-container">
-            <input type="text" id="searchInput" class="search-input" placeholder="Buscar por nombre, trastorno o ciudad...">
-        </div>
+                        <button id="btnAbrirEscuela" class="btn-submit" style="background-color: #4f46e5;">
+                            + Agregar Institución
+                        </button>
+                    </div>
+                </div>
 
-        <div id="especialistas" class="directory-tab active">
-            <div class="directory-grid" id="grid-especialistas">
-                <div class="card">
-                    <div class="card-icon">👨‍⚕️</div>
-                    <p class="card-title">Alonso, Beatriz</p>
-                    <p class="card-sub">Neuropediatra</p>
-                    <span class="card-tag">Epilepsia / Retraso Psicomotriz</span>
-                    <p class="card-location">📍 Ciudad Victoria, Tam.</p>
-                    <button class="btn-view">Ver Detalles 🐾</button>
+                <div class="search-container">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Buscar por nombre, trastorno o ciudad...">
                 </div>
-                <div class="card">
-                    <div class="card-icon">👩‍⚕️</div>
-                    <p class="card-title">García, Elena</p>
-                    <p class="card-sub">Terapeuta de Lenguaje</p>
-                    <span class="card-tag">Autismo (TEA)</span>
-                    <p class="card-location">📍 Nuevo Laredo, Tam.</p>
-                    <button class="btn-view">Ver Detalles 🐾</button>
+
+                <div id="especialistas" class="directory-tab active">
+                    <div class="directory-grid" id="grid-especialistas">
+                        <div class="card">
+                            <div class="card-icon">👨‍⚕️</div>
+                            <p class="card-title">Alonso, Beatriz</p>
+                            <p class="card-sub">Neuropediatra</p>
+                            <span class="card-tag">Epilepsia / Retraso Psicomotriz</span>
+                            <p class="card-location">📍 Ciudad Victoria, Tam.</p>
+                            <button class="btn-view">Ver Detalles 🐾</button>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">👩‍⚕️</div>
+                            <p class="card-title">García, Elena</p>
+                            <p class="card-sub">Terapeuta de Lenguaje</p>
+                            <span class="card-tag">Autismo (TEA)</span>
+                            <p class="card-location">📍 Nuevo Laredo, Tam.</p>
+                            <button class="btn-view">Ver Detalles 🐾</button>
+                        </div>
+                    </div>
                 </div>
+
+                <div id="escuelas" class="directory-tab">
+                    <div class="directory-grid" id="grid-escuelas">
+                        <div class="card">
+                            <div class="card-icon">🏫</div>
+                            <p class="card-title">CAM No. 1</p>
+                            <p class="card-sub">Centro de Atención Múltiple</p>
+                            <span class="card-tag">Discapacidad Múltiple</span>
+                            <p class="card-location">📍 Nuevo Laredo, Tam.</p>
+                            <button class="btn-view" >Más información 🐾</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div id="escuelaModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-btn" id="closeEsc">&times;</span>
+                        <h2>🐾 Nueva Institución o Escuela</h2>
+                        <form id="formEscuela">
+                            <div class="form-grid">
+                                <div class="form-group full">
+                                    <label>Nombre de la Institución</label>
+                                    <input type="text" id="esc_nombre" placeholder="Ej. CAM No. 1" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Tipo de Institución</label>
+                                    <select id="esc_tipo" required>
+                                        <option value="">Selecciona una opción...</option>
+                                        <option value="Centro de Atención">Centro de Atención</option>
+                                        <option value="Escuela de Educación Especial">Escuela de Educación Especial</option>
+                                        <option value="Asociación Civil">Asociación Civil</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Servicios / Giro</label>
+                                    <input type="text" id="esc_servicios" placeholder="Ej. Discapacidad Múltiple, Terapia">
+                                </div>
+                                <div class="form-group">
+                                    <label>Ubicación</label>
+                                    <input type="text" id="esc_ubicacion" placeholder="Ciudad y Estado">
+                                </div>
+                                <div class="form-group">
+                                    <label>Teléfono de Contacto</label>
+                                    <input type="tel" id="esc_telefono" placeholder="867 000 0000">
+                                </div>
+                                <div class="form-group full">
+                                    <label>Correo Electrónico</label>
+                                    <input type="email" id="esc_correo" placeholder="ejemplo@escuela.com">
+                                </div>
+                                <div class="form-group full">
+                                    <label>Descripción de Servicios</label>
+                                    <textarea id="esc_descripcion" placeholder="Cuéntanos sobre los servicios que ofrecen..."></textarea>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-submit">Publicar Institución 🐾</button>
+                        </form>
+                    </div>
+                </div>   
+
+                <div id="detalleModal" class="modal" style="display: none;">
+                    <div class="modal-content">
+                        <span class="close-btn" id="closeDetalle">&times;</span>
+                        <h2 id="modal-titulo">🐾 Detalles</h2>
+                        <hr>
+                        <div id="modal-contenido" style="margin-top: 15px; line-height: 1.6;"></div>
+                    </div>
+                </div>
+
+
             </div>
-        </div>
-
-        <div id="escuelas" class="directory-tab">
-            <div class="directory-grid" id="grid-escuelas">
-                <div class="card">
-                    <div class="card-icon">🏫</div>
-                    <p class="card-title">CAM No. 1</p>
-                    <p class="card-sub">Centro de Atención Múltiple</p>
-                    <span class="card-tag">Discapacidad Múltiple</span>
-                    <p class="card-location">📍 Nuevo Laredo, Tam.</p>
-                    <button class="btn-view">Más información 🐾</button>
-                </div>
-            </div>
-        </div>
-      </div>
 
       <div class="tab-content" id="perfil-content">
         <div class="profile-card">

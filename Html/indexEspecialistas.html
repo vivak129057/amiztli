@@ -270,50 +270,118 @@
                 </div>
       </div>
  
-      <div class="tab-content" id="directorio-content">
-            <div class="tabs-container">
-              <button class="tab-btn active" data-tab="especialistas">Especialistas</button>
-              <button class="tab-btn" data-tab="escuelas">Escuelas / Asociaciones</button>
-            </div>
-
-            <div class="search-container">
-              <input type="text" id="searchInput" class="search-input" placeholder="Buscar por nombre, trastorno o ciudad...">
-            </div>
-
-            <div id="especialistas" class="directory-tab active">
-              <div class="directory-grid" id="grid-especialistas">
-                  <div class="card">
-                      <div class="card-icon">👨‍⚕️</div>
-                      <p class="card-title">Alonso, Beatriz</p>
-                      <p class="card-sub">Neuropediatra</p>
-                      <span class="card-tag">Epilepsia / Retraso Psicomotriz</span>
-                      <p class="card-location">📍 Ciudad Victoria, Tam.</p>
-                      <button class="btn-view">Ver Detalles 🐾</button>
-                  </div>
-                  <div class="card">
-                      <div class="card-icon">👩‍⚕️</div>
-                      <p class="card-title">García, Elena</p>
-                      <p class="card-sub">Terapeuta de Lenguaje</p>
-                      <span class="card-tag">Autismo (TEA)</span>
-                      <p class="card-location">📍 Nuevo Laredo, Tam.</p>
-                      <button class="btn-view">Ver Detalles 🐾</button>
-                  </div>
-              </div>
-            </div>
-
-            <div id="escuelas" class="directory-tab">
-                <div class="directory-grid" id="grid-escuelas">
-                    <div class="card">
-                        <div class="card-icon">🏫</div>
-                        <p class="card-title">CAM No. 1</p>
-                        <p class="card-sub">Centro de Atención Múltiple</p>
-                        <span class="card-tag">Discapacidad Múltiple</span>
-                        <p class="card-location">📍 Nuevo Laredo, Tam.</p>
-                        <button class="btn-view">Más información 🐾</button>
+            <div class="tab-content" id="directorio-content">
+                
+                <div class="tabs-container">
+                    <div class="tab-group">
+                        <button class="tab-btn active" data-tab="especialistas">Especialistas</button>
+                        <button class="tab-btn" data-tab="escuelas">Escuelas / Asociaciones</button>
+                    </div>
+                    
+                    <div style="display: flex; gap: 12px; margin-bottom: 20px;">
+                        <button id="btnAbrirEspecialista" class="btn-submit">
+                            + Agregar Especialista
+                        </button>
                     </div>
                 </div>
+
+                <div class="search-container">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Buscar por nombre, trastorno o ciudad...">
+                </div>
+
+                <div id="especialistas" class="directory-tab active">
+                    <div class="directory-grid" id="grid-especialistas">
+                        <div class="card">
+                            <div class="card-icon">👨‍⚕️</div>
+                            <p class="card-title">Alonso, Beatriz</p>
+                            <p class="card-sub">Neuropediatra</p>
+                            <span class="card-tag">Epilepsia / Retraso Psicomotriz</span>
+                            <p class="card-location">📍 Ciudad Victoria, Tam.</p>
+                            <button class="btn-view">Ver Detalles 🐾</button>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">👩‍⚕️</div>
+                            <p class="card-title">García, Elena</p>
+                            <p class="card-sub">Terapeuta de Lenguaje</p>
+                            <span class="card-tag">Autismo (TEA)</span>
+                            <p class="card-location">📍 Nuevo Laredo, Tam.</p>
+                            <button class="btn-view">Ver Detalles 🐾</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="escuelas" class="directory-tab">
+                    <div class="directory-grid" id="grid-escuelas">
+                        <div class="card">
+                            <div class="card-icon">🏫</div>
+                            <p class="card-title">CAM No. 1</p>
+                            <p class="card-sub">Centro de Atención Múltiple</p>
+                            <span class="card-tag">Discapacidad Múltiple</span>
+                            <p class="card-location">📍 Nuevo Laredo, Tam.</p>
+                            <button class="btn-view" >Más información 🐾</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="especialistaModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-btn" id="closeEsp">&times;</span>
+                        <h2>🐾 Nuevo Especialista</h2>
+                        <form id="formEspecialista">
+                            <div class="form-grid">
+                                <div class="form-group full">
+                                    <label>Nombre(s)</label>
+                                    <input type="text" id="esp_nombre" placeholder="Ej. Dr. Juan Pérez" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Apellido Paterno</label>
+                                    <input type="text" id="esp_apellido_paterno" placeholder="Ej. García" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Apellido Materno</label>
+                                    <input type="text" id="esp_apellido_materno" placeholder="Ej. López">
+                                </div>
+                                <div class="form-group">
+                                    <label>Especialidad</label>
+                                    <input type="text" id="esp_especialidad" placeholder="Ej. Psicología" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Trastornos que trata</label>
+                                    <input type="text" id="esp_trastornos" placeholder="Ej. TDAH, TEA, Down">
+                                </div>
+                                <div class="form-group">
+                                    <label>Ubicación</label>
+                                    <input type="text" id="esp_ubicacion" placeholder="Ciudad y Estado">
+                                </div>
+                                <div class="form-group">
+                                    <label>Teléfono de Contacto</label>
+                                    <input type="tel" id="esp_telefono" placeholder="867 000 0000">
+                                </div>
+                                <div class="form-group full">
+                                    <label>Correo Electrónico</label>
+                                    <input type="email" id="esp_correo" placeholder="ejemplo@correo.com">
+                                </div>
+                                <div class="form-group full">
+                                    <label>Descripción / Detalles Adicionales</label>
+                                    <textarea id="esp_descripcion" placeholder="Cuéntanos más sobre tu experiencia o servicios..."></textarea>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-submit">Publicar Especialista 🐾</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="detalleModal" class="modal" style="display: none;">
+                    <div class="modal-content">
+                        <span class="close-btn" id="closeDetalle">&times;</span>
+                        <h2 id="modal-titulo">🐾 Detalles</h2>
+                        <hr>
+                        <div id="modal-contenido" style="margin-top: 15px; line-height: 1.6;"></div>
+                    </div>
+                </div>
+
+
             </div>
-      </div>
 
       <div class="tab-content" id="perfil-content">
         <div class="profile-card">
