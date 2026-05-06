@@ -620,7 +620,7 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.append('apellido_paterno', apellido_paterno);
         formData.append('apellido_materno', apellido_materno);
         formData.append('especialidad', document.getElementById('esp_especialidad').value);
-        formData.append('trastornos_experiencia', document.getElementById('esp_trastornos').value);
+        formData.append('experiencia_trastornos', document.getElementById('esp_trastornos').value);
         formData.append('ubicacion_consultorio', document.getElementById('esp_ubicacion').value);
         formData.append('telefono', document.getElementById('esp_telefono').value);
         formData.append('correo_electronico', document.getElementById('esp_correo').value);
@@ -779,7 +779,7 @@ function verDetallesEspecialista(id) {
         
         contenido.innerHTML = `
             <p><strong>Especialidad:</strong> ${esp.especialidad || 'No especificada'}</p>
-            <p><strong>Trastornos que atiende:</strong> ${esp.trastornos_experiencia || 'Ninguno'}</p>
+            <p><strong>Trastornos que atiende:</strong> ${esp.experiencia_trastornos || 'Ninguno'}</p>
             <p><strong>Ubicación:</strong> ${esp.ubicacion_consultorio || 'No especificada'}</p>
             <p><strong>Teléfono:</strong> ${esp.telefono || 'No disponible'}</p>
             <p><strong>Correo electrónico:</strong> ${esp.correo_electronico || 'No disponible'}</p>
