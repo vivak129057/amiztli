@@ -9,87 +9,63 @@
 </head>
 <body>
 
-    <div class="form-container">
-        <div class="form-card">
-            <div class="logo-mini">
-                <img src="../imagenes/logo.jpeg" alt="Amiztli">
+        <form id="formRegistroEspecialista">
+            <div class="input-group">
+                <label>Nombre Completo</label>
+                <input type="text" name="nombre" id="nombre" placeholder="Nombre y apellidos" required>
             </div>
 
-            <h1 class="form-title">Perfil Profesional</h1>
-            <p class="form-subtitle">Únete a nuestra red de especialistas certificados</p>
-
-            <form action="log_in.html" method="GET">
-                
+            <div class="input-row">
                 <div class="input-group">
-                    <label>Nombre Completo</label>
-                    <input type="text" placeholder="Nombre y apellidos" required>
+                    <label>Especialidad</label>
+                    <select name="especialidad" id="especialidad" required>
+                        <option value="">Selecciona...</option>
+                        <option value="psicologia">Psicología</option>
+                        <option value="terapia_lenguaje">Terapia de Lenguaje</option>
+                        <option value="neuropediatria">Neuropediatría</option>
+                        <option value="psicopedagogia">Psicopedagogía</option>
+                        <option value="otro">Otro</option>
+                    </select>
                 </div>
-
-                <div class="input-row">
-                    <div class="input-group">
-                        <label>Especialidad</label>
-                        <select required>
-                            <option value="">Selecciona...</option>
-                            <option value="psicologia">Psicología</option>
-                            <option value="terapia_lenguaje">Terapia de Lenguaje</option>
-                            <option value="neuropediatria">Neuropediatría</option>
-                            <option value="psicopedagogia">Psicopedagogía</option>
-                            <option value="otro">Otro</option>
-                        </select>
-                    </div>
-                    <div class="input-group">
-                        <label>Cédula Profesional</label>
-                        <input type="text" placeholder="Número de cédula" required>
-                    </div>
-                </div>
-
-                <div class="input-row">
-                    <div class="input-group">
-                        <label>Ciudad</label>
-                        <input type="text" placeholder="Ej. Nuevo Laredo" required>
-                    </div>
-                    <div class="input-group">
-                        <label>Teléfono Celular</label>
-                        <input type="tel" placeholder="867..." required>
-                    </div>
-                </div>
-
                 <div class="input-group">
-                    <label>Dirección del Consultorio (Opcional)</label>
-                    <input type="text" placeholder="Calle, número y colonia">
+                    <label>Cédula Profesional</label>
+                    <input type="text" name="cedula" id="cedula" placeholder="Número de cédula" required>
                 </div>
+            </div>
 
+            <div class="input-row">
                 <div class="input-group">
-                    <label>Breve descripción de tu experiencia</label>
-                    <textarea placeholder="Cuéntanos sobre tu enfoque y años de práctica..."></textarea>
+                    <label>Ciudad</label>
+                    <input type="text" name="ciudad" id="ciudad" placeholder="Ej. Nuevo Laredo" required>
                 </div>
-
                 <div class="input-group">
-                    <label>Correo Electrónico Profesional</label>
-                    <input type="email" placeholder="ejemplo@doctor.com" required>
+                    <label>Teléfono Celular</label>
+                    <input type="tel" name="telefono" id="telefono" placeholder="867..." required>
                 </div>
+            </div>
 
-                <div class="input-group">
-                    <label>Contraseña</label>
-                    <input type="password" placeholder="Crea una contraseña segura" required>
-                </div>
+            <div class="input-group">
+                <label>Dirección del Consultorio (Opcional)</label>
+                <input type="text" name="direccion" id="direccion" placeholder="Calle, número y colonia">
+            </div>
 
-                <div style="display: flex; align-items: flex-start; gap: 10px; margin: 20px 0; text-align: left;">
-                    <input type="checkbox" id="privacy" required style="margin-top: 4px; accent-color: #ffbf00;">
-                    <label for="privacy" style="font-size: 12px; color: #4a4a4a;">
-                        He leído y acepto el 
-                        <a href="javascript:void(0)" onclick="openPrivacy()" style="color: #b08d1a; font-weight: bold; text-decoration: underline;">
-                            Aviso de Privacidad
-                        </a> de Amiztli.
-                    </label>
-                </div>
+            <div class="input-group">
+                <label>Breve descripción de tu experiencia</label>
+                <textarea name="descripcion" id="descripcion" placeholder="Cuéntanos sobre tu enfoque y años de práctica..."></textarea>
+            </div>
 
-                <button type="submit" class="btn-entrar">Crear Perfil Profesional 🐾</button>
-            </form>
+            <div class="input-group">
+                <label>Correo Electrónico Profesional</label>
+                <input type="email" name="correo" id="correo" placeholder="ejemplo@doctor.com" required>
+            </div>
 
-            <p class="footer-link"><a href="registro.html">Volver a selección de rol</a></p>
-        </div>
-    </div>
+            <div class="input-group">
+                <label>Contraseña</label>
+                <input type="password" name="password" id="password" placeholder="Crea una contraseña segura" required>
+            </div>
+
+            <button type="submit" class="btn-entrar">Crear Perfil Profesional 🐾</button>
+        </form>
 
     <div id="privacyModal" class="modal-overlay">
         <div class="modal-card">

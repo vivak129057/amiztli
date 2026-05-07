@@ -6,7 +6,7 @@ const usuariosAutorizados = [
     { email: "juan@gmail.com", password: "569017" }
 ];
 
-// 2. Esperamos a que el DOM cargue para evitar errores de "null"
+
 document.addEventListener('DOMContentLoaded', () => {
 
     const loginForm = document.getElementById('login-form');
