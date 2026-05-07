@@ -1,10 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Escucha el formulario del especialista
-    const formEspecialista = document.getElementById('formEspecialista'); // Asegúrate de darle este ID a tu formulario
-    if (formEspecialista) {
-        formEspecialista.addEventListener('submit', async (e) => {
-            e.preventDefault();
 
+    const formEsp = document.getElementById('formEspecialista');
+
+    if (formEsp) {
+        formEsp.addEventListener('submit', async (e) => {
+            e.preventDefault(); // Detiene el envío normal para que JS tome el control
+
+            // Recopilamos los datos usando los IDs que pusimos en el HTML
             const formData = new FormData();
             formData.append('nombre', document.getElementById('esp_nombre').value);
             formData.append('especialidad', document.getElementById('esp_especialidad').value);
@@ -16,7 +18,24 @@ document.addEventListener('DOMContentLoaded', () => {
             formData.append('correo', document.getElementById('esp_correo').value);
             formData.append('password', document.getElementById('esp_password').value);
 
-            await enviarRegistro('https://amiztlibackend.onrender.com/api/registro/especialista', formData);
+            // Enviamos todo a la ruta de registro que creaste en Python
+            try {
+                const response = await fetch('https://amiztlibackend.onrender.com/api/registro/especialista', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert('¡Bienvenido a la comunidad, Especialista! 🐾');
+                    window.location.href = 'log_in.html';
+                } else {
+                    alert('Ups: ' + (data.error || 'Algo salió mal'));
+                }
+            } catch (error) {
+                alert('No pudimos conectar con el servidor. Revisa tu internet.');
+            }
         });
     }
 

@@ -9,63 +9,62 @@
 </head>
 <body>
 
-        <form id="formRegistroEspecialista">
+    <form id="formEspecialista"> <div class="input-group">
+            <label>Nombre Completo</label>
+            <input type="text" id="esp_nombre" name="nombre" placeholder="Nombre y apellidos" required>
+        </div>
+
+        <div class="input-row">
             <div class="input-group">
-                <label>Nombre Completo</label>
-                <input type="text" name="nombre" id="nombre" placeholder="Nombre y apellidos" required>
+                <label>Especialidad</label>
+                <select id="esp_especialidad" name="especialidad" required>
+                    <option value="">Selecciona...</option>
+                    <option value="psicologia">Psicología</option>
+                    <option value="terapia_lenguaje">Terapia de Lenguaje</option>
+                    <option value="neuropediatria">Neuropediatría</option>
+                    <option value="psicopedagogia">Psicopedagogía</option>
+                    <option value="otro">Otro</option>
+                </select>
             </div>
-
-            <div class="input-row">
-                <div class="input-group">
-                    <label>Especialidad</label>
-                    <select name="especialidad" id="especialidad" required>
-                        <option value="">Selecciona...</option>
-                        <option value="psicologia">Psicología</option>
-                        <option value="terapia_lenguaje">Terapia de Lenguaje</option>
-                        <option value="neuropediatria">Neuropediatría</option>
-                        <option value="psicopedagogia">Psicopedagogía</option>
-                        <option value="otro">Otro</option>
-                    </select>
-                </div>
-                <div class="input-group">
-                    <label>Cédula Profesional</label>
-                    <input type="text" name="cedula" id="cedula" placeholder="Número de cédula" required>
-                </div>
-            </div>
-
-            <div class="input-row">
-                <div class="input-group">
-                    <label>Ciudad</label>
-                    <input type="text" name="ciudad" id="ciudad" placeholder="Ej. Nuevo Laredo" required>
-                </div>
-                <div class="input-group">
-                    <label>Teléfono Celular</label>
-                    <input type="tel" name="telefono" id="telefono" placeholder="867..." required>
-                </div>
-            </div>
-
             <div class="input-group">
-                <label>Dirección del Consultorio (Opcional)</label>
-                <input type="text" name="direccion" id="direccion" placeholder="Calle, número y colonia">
+                <label>Cédula Profesional</label>
+                <input type="text" id="esp_cedula" name="cedula" placeholder="Número de cédula" required>
             </div>
+        </div>
 
+        <div class="input-row">
             <div class="input-group">
-                <label>Breve descripción de tu experiencia</label>
-                <textarea name="descripcion" id="descripcion" placeholder="Cuéntanos sobre tu enfoque y años de práctica..."></textarea>
+                <label>Ciudad</label>
+                <input type="text" id="esp_ciudad" name="ciudad" placeholder="Ej. Nuevo Laredo" required>
             </div>
-
             <div class="input-group">
-                <label>Correo Electrónico Profesional</label>
-                <input type="email" name="correo" id="correo" placeholder="ejemplo@doctor.com" required>
+                <label>Teléfono Celular</label>
+                <input type="tel" id="esp_telefono" name="telefono" placeholder="867..." required>
             </div>
+        </div>
 
-            <div class="input-group">
-                <label>Contraseña</label>
-                <input type="password" name="password" id="password" placeholder="Crea una contraseña segura" required>
-            </div>
+        <div class="input-group">
+            <label>Dirección del Consultorio (Opcional)</label>
+            <input type="text" id="esp_direccion" name="direccion" placeholder="Calle, número y colonia">
+        </div>
 
-            <button type="submit" class="btn-entrar">Crear Perfil Profesional 🐾</button>
-        </form>
+        <div class="input-group">
+            <label>Breve descripción de tu experiencia</label>
+            <textarea id="esp_descripcion" name="descripcion" placeholder="Cuéntanos sobre tu enfoque y años de práctica..."></textarea>
+        </div>
+
+        <div class="input-group">
+            <label>Correo Electrónico Profesional</label>
+            <input type="email" id="esp_correo" name="correo" placeholder="ejemplo@doctor.com" required>
+        </div>
+
+        <div class="input-group">
+            <label>Contraseña</label>
+            <input type="password" id="esp_password" name="password" placeholder="Crea una contraseña segura" required>
+        </div>
+
+        <button type="submit" class="btn-entrar">Crear Perfil Profesional 🐾</button>
+    </form>
 
     <div id="privacyModal" class="modal-overlay">
         <div class="modal-card">
